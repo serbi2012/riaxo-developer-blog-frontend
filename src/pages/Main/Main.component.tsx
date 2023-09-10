@@ -1,13 +1,15 @@
 import * as S from "./Main.styles";
 import IntroBox from "./components/IntroBox/IntroBox.component";
+import PostCardList from "./components/PostCardList/PostCardList.component";
+import PostList from "./components/PostList/PostList.component";
 
 const Main: React.FC = () => {
     return (
-        <S.BackGroundWrapper>
-            <S.ContentWrapper>
-                <IntroBox />
-            </S.ContentWrapper>
-        </S.BackGroundWrapper>
+        <S.MainWrapper>
+            <IntroBox />
+            <PostCardList />
+            <PostList />
+        </S.MainWrapper>
     );
 };
 

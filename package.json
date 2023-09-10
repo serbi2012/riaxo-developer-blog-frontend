@@ -10,7 +10,8 @@
         "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
         "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
         "type-check": "tsc",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "mock-server": "json-server --watch ./db.json --port 4000"
     },
     "dependencies": {
         "@amcharts/amcharts5": "^5.4.0",

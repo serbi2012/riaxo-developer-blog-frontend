@@ -7,10 +7,16 @@ export const MainWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0px 10px;
     height: 60px;
     width: 100%;
     max-width: 1024px;
     background-color: #ffffff;
+    z-index: 100;
+
+    & > a {
+        height: 100%;
+    }
 `;
 
 export const LogoImage = styled.img`

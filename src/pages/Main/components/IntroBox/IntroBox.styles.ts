@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import { T } from "../../../../styles/TextGuide.styles";
 
 export const MainWrapper = styled.div`
     display: flex;
@@ -13,8 +12,7 @@ export const ProfileImageBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    height: 250px;
+    height: 200px;
 
     & > img {
         height: 100%;
@@ -29,12 +27,6 @@ export const ContentWrapper = styled.div`
     flex-direction: column;
     height: 100%;
     gap: 10px;
-`;
-
-export const TextTitle = styled(T.Subtitle1)`
-    font-size: 30px;
-    line-height: 24px;
-    margin-bottom: 20px;
 `;
 
 export const TextItem = styled.div`

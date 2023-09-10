@@ -1,20 +1,13 @@
 import { styled } from "styled-components";
 
-export const BackGroundWrapper = styled.div`
+export const MainWrapper = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    padding: 50px 20px;
     width: 100%;
-`;
-
-export const ContentWrapper = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    max-width: 1024px;
+    gap: 100px;
 `;
 
 export const IntroContainer = styled.div`
