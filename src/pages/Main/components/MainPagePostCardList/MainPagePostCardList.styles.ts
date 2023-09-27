@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+import { T } from "../../../../styles/TextGuide.styles";
 
 export const MainWrapper = styled.div`
     display: flex;
@@ -15,7 +16,7 @@ export const PostCardWrapper = styled.div`
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
-    height: 60vmin;
+    height: 62vmin;
     width: 100%;
 `;
 
@@ -48,7 +49,7 @@ export const SmallPostCardWrapper = styled.div`
     width: 50%;
     gap: 20px;
 
-    @media (max-height: 60vmin) {
+    @media (max-height: 62vmin) {
         & > :nth-child(n + 3) {
             display: none;
         }
@@ -70,5 +71,11 @@ export const SmallPostCard = styled(Link)`
     &:hover {
         border: 3px solid #dadada;
         scale: 1.03;
+    }
+
+    & > ${T.Body2} {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 4.3em;
     }
 `;

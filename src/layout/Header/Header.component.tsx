@@ -18,7 +18,9 @@ const Header: React.FC = () => {
                 >
                     <S.HamburgerIcon />
                 </S.HamburgerButton>
-                <T.Subtitle1>Posts</T.Subtitle1>
+                <Link to="/post-list">
+                    <T.Subtitle1>Posts</T.Subtitle1>
+                </Link>
                 <T.Subtitle1>Tags</T.Subtitle1>
             </S.MenuContainer>
             <Link to="/">

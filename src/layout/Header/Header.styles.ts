@@ -32,11 +32,13 @@ export const MenuContainer = styled.div`
     height: 80%;
     gap: 30px;
 
-    & > p {
+    & > p,
+    & > a {
         padding: 1px 5px;
         border-radius: 5px;
         user-select: none;
         cursor: pointer;
+        transition: all 0.1s ease;
 
         &:hover {
             background-color: #dadada;

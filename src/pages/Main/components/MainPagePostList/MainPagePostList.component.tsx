@@ -1,5 +1,5 @@
 import { T } from "../../../../styles/TextGuide.styles";
-import * as S from "./PostList.styles";
+import * as S from "./MainPagePostList.styles";
 
 const POST_MOCK = [
     {
@@ -24,7 +24,7 @@ const POST_MOCK = [
     },
 ];
 
-const PostList: React.FC = () => {
+const MainPagePostList: React.FC = () => {
     return (
         <S.MainWrapper>
             <T.Title1>Post List</T.Title1>
@@ -41,4 +41,4 @@ const PostList: React.FC = () => {
     );
 };
 
-export default PostList;
+export default MainPagePostList;
