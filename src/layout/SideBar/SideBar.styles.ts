@@ -14,7 +14,7 @@ export const MainWrapper = styled.div<{ isSideBarOpen?: boolean }>`
     width: 30vw;
     max-width: 320px;
     background-color: #ffffff;
-    transform: ${({ isSideBarOpen }) => (isSideBarOpen ? "translateX(0px)" : "translateX(-30vw)")};
+    transform: ${({ isSideBarOpen }) => (isSideBarOpen ? "translateX(0px)" : "translateX(-100vw)")};
     transition: all 0.3s ease;
     z-index: 99999;
 `;
