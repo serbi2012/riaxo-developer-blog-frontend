@@ -33,7 +33,7 @@ const PostList: React.FC = () => {
                         </S.PostTagBox>
                         <T.Title1>{item?.title}</T.Title1>
                         <T.Subtitle2>{formatDateFromAPIToYYYYMMDD(item.createdAt)}</T.Subtitle2>
-                        <T.Subtitle2>{item?.content?.[0]?.paragraphContent}</T.Subtitle2>
+                        <T.Subtitle2>{item?.summaryContent}</T.Subtitle2>
                     </S.PostDetail>
                 </S.PostListWrapper>
             ))}

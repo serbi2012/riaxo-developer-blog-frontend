@@ -33,13 +33,24 @@ export const Content = styled.div`
     gap: 50px;
 `;
 
+export const TextContent = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+
+    div {
+        margin: 5px 0px;
+    }
+`;
+
 export const ContentBox = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
     width: 100%;
-    gap: 10px;
 `;
 
 export const PostTagBox = styled.div`
@@ -54,5 +65,6 @@ export const Footer = styled.div`
     justify-content: center;
     align-items: center;
     padding-top: 50px;
+    gap: 10px;
     width: 100%;
 `;

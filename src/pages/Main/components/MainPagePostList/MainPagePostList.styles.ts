@@ -28,4 +28,13 @@ export const PostItem = styled.div`
     gap: 5px;
     border-radius: 10px;
     border: 1px solid #dadada;
+
+    p > {
+        max-width: 100%;
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        text-align: start;
+    }
 `;

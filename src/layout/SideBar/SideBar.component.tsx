@@ -4,12 +4,10 @@ import * as S from "./SideBar.styles";
 import HeaderLogo from "../../assets/image/riaxo-logo.png";
 import { isSideBarOpenState } from "../../recoil/atoms";
 import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SideBar: React.FC = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useRecoilState(isSideBarOpenState);
-
-    const navigate = useNavigate();
 
     return (
         <S.MainWrapper isSideBarOpen={isSideBarOpen}>
@@ -23,15 +21,16 @@ const SideBar: React.FC = () => {
                 <T.Subtitle1>3. Hello</T.Subtitle1>
                 <T.Subtitle1>4. Hello</T.Subtitle1>
             </S.MenuContainer>
-            <Button
-                variant="contained"
-                onClick={() => {
-                    navigate("/post-create");
-                    setIsSideBarOpen(false);
-                }}
-            >
-                포스트 작성
-            </Button>
+            <Link to="/post/create">
+                <Button
+                    variant="contained"
+                    onClick={() => {
+                        setIsSideBarOpen(false);
+                    }}
+                >
+                    포스트 작성
+                </Button>
+            </Link>
         </S.MainWrapper>
     );
 };

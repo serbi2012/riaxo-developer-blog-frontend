@@ -26,14 +26,14 @@ const MainPagePostCardList: React.FC = () => {
                 <S.LargePostCard to={`/post?_id=${postData?.[0]?._id}`}>
                     <T.Subtitle1>{postData?.[0]?.title}</T.Subtitle1>
                     <T.Body4>{formatDateFromAPIToYYYYMMDD(postData?.[0]?.createdAt)}</T.Body4>
-                    <T.Body2>{postData?.[0]?.content?.[0]?.paragraphContent}</T.Body2>
+                    <T.Body2 dangerouslySetInnerHTML={{ __html: String(postData?.[0]?.summaryContent) }}></T.Body2>
                 </S.LargePostCard>
                 <S.SmallPostCardWrapper>
                     {postData.slice(1, 4).map((item, index) => (
                         <S.SmallPostCard to={`/post?_id=${item?._id}`} key={index}>
                             <T.Subtitle1>{item?.title}</T.Subtitle1>
                             <T.Body4>{formatDateFromAPIToYYYYMMDD(item?.createdAt)}</T.Body4>
-                            <T.Body2>{item?.content?.[0]?.paragraphContent}</T.Body2>
+                            <T.Body2 dangerouslySetInnerHTML={{ __html: String(item?.summaryContent) }}></T.Body2>
                         </S.SmallPostCard>
                     ))}
                 </S.SmallPostCardWrapper>

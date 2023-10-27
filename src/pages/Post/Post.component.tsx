@@ -2,17 +2,18 @@ import { T } from "../../styles/TextGuide.styles";
 import * as S from "./Post.styles";
 import ThumbNailSample from "./../../assets/image/post_thumb_nail_sample.png";
 import PostTag from "../../components/@shared/PostTag/PostTag.component";
-import PostContent from "./components/PostContent/PostContent.component";
 import { useEffect, useState } from "react";
-import { fetchPostList } from "../../api/post.queries";
-import { IPost, IPostParagraph } from "../../types/post.types";
+import { deletePost, fetchPostList } from "../../api/post.queries";
+import { IPost } from "../../types/post.types";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Button } from "@mui/material";
 import { getQueryString } from "../../utils/getQueryString";
 import { formatDateFromAPIToYYYYMMDD } from "../../utils/formatDate";
+import { Link, useNavigate } from "react-router-dom";
 
 const Post: React.FC = () => {
     const [postData, setPostData] = useState<IPost>({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         (async () => {
@@ -22,6 +23,14 @@ const Post: React.FC = () => {
             setPostData(response[0]);
         })();
     }, []);
+
+    const onDeleteHandler = () => {
+        (async () => {
+            const queryString = getQueryString();
+            await deletePost(queryString);
+            navigate("/post/list");
+        })();
+    };
 
     return (
         <S.MainWrapper>
@@ -34,15 +43,19 @@ const Post: React.FC = () => {
                 </S.PostTagBox>
             </S.Header>
             <S.Content>
-                {postData?.content?.map((item: IPostParagraph, index) => (
-                    <PostContent key={index} title={String(item?.paragraphTitle)}>
-                        <T.Subtitle2>{item?.paragraphContent}</T.Subtitle2>
-                    </PostContent>
-                ))}
+                <S.TextContent dangerouslySetInnerHTML={{ __html: String(postData?.content) }} />
             </S.Content>
             <S.Footer>
                 <Button variant="outlined" size="large" startIcon={<FavoriteIcon />}>
                     좋아요
+                </Button>
+                <Link to={`/post/edit?_id=${postData?._id}`}>
+                    <Button variant="contained" size="large">
+                        수정하기
+                    </Button>
+                </Link>
+                <Button variant="contained" size="large" onClick={onDeleteHandler}>
+                    삭제하기
                 </Button>
             </S.Footer>
         </S.MainWrapper>

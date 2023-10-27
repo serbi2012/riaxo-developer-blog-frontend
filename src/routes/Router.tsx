@@ -8,9 +8,12 @@ const Router = () => {
     return (
         <Routes>
             <Route path={"/"} element={<Main />} />
-            <Route path={"/post"} element={<Post />} />
-            <Route path={"/post-list"} element={<PostList />} />
-            <Route path={"/post-create"} element={<PostCreate />} />
+            <Route path={"/post"}>
+                <Route path={""} element={<Post />} />
+                <Route path={"list"} element={<PostList />} />
+                <Route path={"create"} element={<PostCreate />} />
+                <Route path={"edit"} element={<PostCreate />} />
+            </Route>
 
             {/* 모든 경로에 대한 리디렉션 */}
             <Route path="*" element={<Navigate to="/" />} />
