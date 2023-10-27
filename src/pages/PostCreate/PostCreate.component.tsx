@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// import { T } from "../../styles/TextGuide.styles";
+/* eslint-disable react/jsx-key */
 import * as S from "./PostCreate.styles";
 import { Autocomplete, Button, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
@@ -10,6 +9,7 @@ import { createPost, fetchPostList, updatePost } from "../../api/post.queries";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IPost } from "../../types/post.types";
 import { getQueryString } from "../../utils/getQueryString";
+import ProfileImgUpload from "./components/ImageUpload/ImageUpload.component";
 
 const TAG_ITEMS = [
     { label: "Dev", value: "Dev" },
@@ -20,6 +20,7 @@ const TAG_ITEMS = [
 const PostCreate: React.FC = () => {
     const editorRef = useRef<any>(null);
 
+    const [image, setImage] = useState<string>("");
     const [pathname, setPathname] = useState<string>("");
     const [defaultPost, setDefaultPost] = useState<IPost>({});
     const [title, setTitle] = useState<string>("");
@@ -44,50 +45,42 @@ const PostCreate: React.FC = () => {
         }
     }, [location]);
 
+    useEffect(() => {
+        console.log("useEffect ~ image:", image);
+    }, [image]);
+
     const onSubmitHandler = async (event: any) => {
         event?.preventDefault();
 
         if (editorRef.current) {
-            switch (pathname) {
-                case "/post/create":
-                    try {
-                        const content = editorRef.current.getContent();
-                        const parsedTags = tags?.map((item) => item?.value);
+            const content = editorRef.current.getContent();
+            const parsedTags = tags?.map((item) => item?.value);
+            const queryString = getQueryString();
 
-                        const body = {
-                            title: title,
-                            content: content,
-                            tags: parsedTags,
-                        };
+            const body = {
+                id: queryString?._id,
+                title: title,
+                content: content,
+                tags: parsedTags,
+            };
 
+            try {
+                switch (pathname) {
+                    case "/post/create":
                         await createPost(body);
                         navigate("/");
-                    } catch (error) {
-                        console.error(error);
-                    }
-                    break;
-                case "/post/edit":
-                    try {
-                        const content = editorRef.current.getContent();
-                        const parsedTags = tags?.map((item) => item?.value);
-                        const queryString = getQueryString();
-
-                        const body = {
-                            id: queryString?._id,
-                            title: title,
-                            content: content,
-                            tags: parsedTags,
-                        };
-
+                        break;
+                    case "/post/edit":
                         await updatePost(body);
                         navigate(`/post?_id=${queryString?._id}`);
-                    } catch (error) {
-                        console.error(error);
-                    }
-                    break;
 
-                default:
-                    break;
+                        break;
+
+                    default:
+                        break;
+                }
+            } catch (error) {
+                console.error(error);
             }
         }
     };
@@ -106,6 +99,7 @@ const PostCreate: React.FC = () => {
                 <Autocomplete
                     multiple
                     filterSelectedOptions
+                    freeSolo
                     value={tags}
                     onChange={(event: any, newValue: any) => {
                         setTags(newValue);
@@ -118,6 +112,7 @@ const PostCreate: React.FC = () => {
                     )}
                 />
             </S.Header>
+            <ProfileImgUpload aspectRatio={2} setImage={setImage} />
             <S.Content>
                 <Editor
                     apiKey={TINY_MCE_API_KEY}

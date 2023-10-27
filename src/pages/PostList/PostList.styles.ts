@@ -45,6 +45,16 @@ export const PostDetail = styled.div`
     flex-direction: column;
     width: 100%;
     gap: 10px;
+
+    .last-child {
+        max-width: 100%;
+        width: 100%;
+        height: 4.3em;
+        text-overflow: ellipsis;
+        white-space: normal;
+        overflow: hidden;
+        text-align: start;
+    }
 `;
 
 export const PostTagBox = styled.div`
