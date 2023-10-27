@@ -5,4 +5,5 @@ export interface IPost {
     createdAt?: string;
     content?: string;
     summaryContent?: string;
+    thumbnailURL?: string;
 }

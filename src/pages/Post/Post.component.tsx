@@ -21,6 +21,7 @@ const Post: React.FC = () => {
 
             const response = await fetchPostList(queryString);
             setPostData(response[0]);
+            console.log("response[0]:", response[0]);
         })();
     }, []);
 
@@ -35,7 +36,7 @@ const Post: React.FC = () => {
     return (
         <S.MainWrapper>
             <S.Header>
-                <S.ThumbNailImage src={ThumbNailSample} />
+                <S.ThumbNailImage src={postData?.thumbnailURL || ThumbNailSample} />
                 <T.Title3>{postData?.title}</T.Title3>
                 <T.Subtitle2>{formatDateFromAPIToYYYYMMDD(postData.createdAt)}</T.Subtitle2>
                 <S.PostTagBox>

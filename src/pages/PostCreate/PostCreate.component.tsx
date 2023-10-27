@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import * as S from "./PostCreate.styles";
 import { Autocomplete, Button, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
@@ -10,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { IPost } from "../../types/post.types";
 import { getQueryString } from "../../utils/getQueryString";
 import ProfileImgUpload from "./components/ImageUpload/ImageUpload.component";
+import { createImageUpload } from "../../api/resource.queries";
 
 const TAG_ITEMS = [
     { label: "Dev", value: "Dev" },
@@ -45,10 +45,6 @@ const PostCreate: React.FC = () => {
         }
     }, [location]);
 
-    useEffect(() => {
-        console.log("useEffect ~ image:", image);
-    }, [image]);
-
     const onSubmitHandler = async (event: any) => {
         event?.preventDefault();
 
@@ -57,11 +53,14 @@ const PostCreate: React.FC = () => {
             const parsedTags = tags?.map((item) => item?.value);
             const queryString = getQueryString();
 
+            const uploadedImage = await createImageUpload(image);
+
             const body = {
                 id: queryString?._id,
                 title: title,
                 content: content,
                 tags: parsedTags,
+                thumbnailURL: uploadedImage?.data?.path,
             };
 
             try {

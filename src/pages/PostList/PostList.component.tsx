@@ -26,7 +26,7 @@ const PostList: React.FC = () => {
             <PostListSearchBar />
             {postData?.map((item, index) => (
                 <S.PostListWrapper key={index} to={`/post?_id=${item?._id}`}>
-                    <img src={ThumbNailSample} />
+                    <img src={item?.thumbnailURL || ThumbNailSample} />
                     <S.PostDetail>
                         <S.PostTagBox>
                             {item?.tags?.map((item: string, index) => <PostTag key={index} name={item} size="small" />)}
