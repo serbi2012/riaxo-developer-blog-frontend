@@ -10,6 +10,8 @@ import { IPost } from "../../types/post.types";
 import { getQueryString } from "../../utils/getQueryString";
 import ProfileImgUpload from "./components/ImageUpload/ImageUpload.component";
 import { createImageUpload } from "../../api/resource.queries";
+import { useRecoilState } from "recoil";
+import { isLoadingState } from "../../recoil/atoms";
 
 const TAG_ITEMS = [
     { label: "Dev", value: "Dev" },
@@ -19,6 +21,8 @@ const TAG_ITEMS = [
 
 const PostCreate: React.FC = () => {
     const editorRef = useRef<any>(null);
+
+    const [, setIsLoading] = useRecoilState<boolean>(isLoadingState);
 
     const [image, setImage] = useState<string>("");
     const [pathname, setPathname] = useState<string>("");
@@ -41,6 +45,7 @@ const PostCreate: React.FC = () => {
                 setDefaultPost(response[0]);
                 setTitle(String(response[0]?.title));
                 setTags(parsedTags);
+                setImage(response[0]?.thumbnailURL ? String(response[0]?.thumbnailURL) : "");
             })();
         }
     }, [location]);
@@ -53,17 +58,22 @@ const PostCreate: React.FC = () => {
             const parsedTags = tags?.map((item) => item?.value);
             const queryString = getQueryString();
 
-            const uploadedImage = await createImageUpload(image);
-
-            const body = {
-                id: queryString?._id,
-                title: title,
-                content: content,
-                tags: parsedTags,
-                thumbnailURL: uploadedImage?.data?.path,
-            };
-
             try {
+                setIsLoading(true);
+                let thumbnailURL: any = "";
+
+                if (image && image !== "deleted" && defaultPost?.thumbnailURL !== String(image)) {
+                    thumbnailURL = await createImageUpload(image);
+                }
+
+                const body = {
+                    id: queryString?._id,
+                    title: title,
+                    content: content,
+                    tags: parsedTags,
+                    thumbnailURL: thumbnailURL?.data?.path,
+                };
+
                 switch (pathname) {
                     case "/post/create":
                         await createPost(body);
@@ -80,6 +90,8 @@ const PostCreate: React.FC = () => {
                 }
             } catch (error) {
                 console.error(error);
+            } finally {
+                setIsLoading(false);
             }
         }
     };
@@ -103,7 +115,7 @@ const PostCreate: React.FC = () => {
                     onChange={(event: any, newValue: any) => {
                         setTags(newValue);
                     }}
-                    sx={{ maxWidth: "512px", width: "100%" }}
+                    sx={{ width: "100%" }}
                     options={TAG_ITEMS}
                     getOptionLabel={(option) => option.label}
                     renderInput={(params) => (
@@ -111,7 +123,7 @@ const PostCreate: React.FC = () => {
                     )}
                 />
             </S.Header>
-            <ProfileImgUpload aspectRatio={2} setImage={setImage} />
+            <ProfileImgUpload aspectRatio={2} setImage={setImage} defaultImage={image || ""} />
             <S.Content>
                 <Editor
                     apiKey={TINY_MCE_API_KEY}
@@ -128,7 +140,14 @@ const PostCreate: React.FC = () => {
                 />
             </S.Content>
             <S.Footer>
-                <Button variant="outlined" size="large" type="button">
+                <Button
+                    variant="outlined"
+                    size="large"
+                    type="button"
+                    onClick={() => {
+                        navigate(-1);
+                    }}
+                >
                     취소
                 </Button>
                 <Button variant="contained" size="large" type="submit">

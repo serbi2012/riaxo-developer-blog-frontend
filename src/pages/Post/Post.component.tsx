@@ -16,12 +16,13 @@ const Post: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+
         (async () => {
             const queryString = getQueryString();
 
             const response = await fetchPostList(queryString);
             setPostData(response[0]);
-            console.log("response[0]:", response[0]);
         })();
     }, []);
 

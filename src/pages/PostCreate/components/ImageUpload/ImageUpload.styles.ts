@@ -13,7 +13,17 @@ const slideDown = keyframes`
   }
 `;
 
-export const MainContainer = styled.div`
+export const MainWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    gap: 10px;
+`;
+
+export const ImageContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,12 +36,10 @@ export const MainContainer = styled.div`
 `;
 
 export const ImageControlBox = styled.div`
-    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
-    transform: translateY(270px);
 
     & > p {
         user-select: none;

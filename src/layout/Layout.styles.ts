@@ -31,3 +31,14 @@ export const ContentWrapper = styled.div`
     width: 100%;
     max-width: 1024px;
 `;
+
+export const LoadingContainer = styled.div`
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #00000020;
+    z-index: 100000;
+`;

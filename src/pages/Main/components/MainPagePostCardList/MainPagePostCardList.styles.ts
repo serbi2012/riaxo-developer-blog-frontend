@@ -62,6 +62,7 @@ export const SmallPostCard = styled(Link)`
     align-items: flex-start;
     flex-direction: column;
     padding: 2vmin;
+    width: 100%;
     flex: 1;
     gap: 5px;
     border-radius: 10px;

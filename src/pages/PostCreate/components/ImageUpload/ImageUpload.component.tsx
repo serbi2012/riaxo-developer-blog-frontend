@@ -57,7 +57,7 @@ const ProfileImgUpload: React.FC<PropsType> = ({ aspectRatio = 1, setImage, defa
 
     useEffect(() => {
         setCompressedImage(defaultImage);
-    }, []);
+    }, [defaultImage]);
 
     const handleChildrenClick = () => {
         if (inputRef.current) {
@@ -86,7 +86,7 @@ const ProfileImgUpload: React.FC<PropsType> = ({ aspectRatio = 1, setImage, defa
     };
 
     const getCropData = () => {
-        void (async () => {
+        (async () => {
             if (typeof cropperRef.current?.cropper !== "undefined") {
                 const imageToUpload = cropperRef.current?.cropper.getCroppedCanvas().toDataURL();
                 const parsedImage = dataURItoFile(imageToUpload);
@@ -98,13 +98,55 @@ const ProfileImgUpload: React.FC<PropsType> = ({ aspectRatio = 1, setImage, defa
     };
 
     return (
-        <S.MainContainer>
-            <input type="file" ref={inputRef} style={{ display: "none" }} onChange={handleFileChange} />
-            {compressedImage ? (
-                <S.ProfileImg src={compressedImage} />
-            ) : (
-                <div className="cover">{isCompressLoading ? "이미지 압축 중.." : "이미지가 없습니다."}</div>
-            )}
+        <S.MainWrapper>
+            <S.ImageContainer>
+                <input type="file" ref={inputRef} style={{ display: "none" }} onChange={handleFileChange} />
+                {compressedImage && compressedImage !== "deleted" ? (
+                    <S.ProfileImg src={compressedImage} />
+                ) : (
+                    <div className="cover">{isCompressLoading ? "이미지 압축 중.." : "이미지가 없습니다."}</div>
+                )}
+
+                {uploadImage && (
+                    <S.ModalBox
+                        isOpen={modalIsOpen}
+                        onRequestClose={closeModal}
+                        appElement={document.body}
+                        style={{ overlay: { zIndex: 10000 } }}
+                    >
+                        <S.ModalCloseButton onClick={closeModal}>
+                            <T.Subtitle1>&times;</T.Subtitle1>
+                        </S.ModalCloseButton>
+                        <S.ModalContent>
+                            <h1>이미지 편집</h1>
+                            <Cropper
+                                ref={cropperRef}
+                                aspectRatio={aspectRatio}
+                                src={uploadImage ?? ""}
+                                viewMode={1}
+                                width={708}
+                                height={500}
+                                background={false}
+                                responsive
+                                autoCropArea={1}
+                                checkOrientation={true}
+                                guides
+                            />
+                            <S.ModalFooter>
+                                <Button onClick={getCropData}>자르기</Button>
+                                <Button
+                                    onClick={() => {
+                                        getCropData();
+                                        closeModal();
+                                    }}
+                                >
+                                    확인
+                                </Button>
+                            </S.ModalFooter>
+                        </S.ModalContent>
+                    </S.ModalBox>
+                )}
+            </S.ImageContainer>
             <S.ImageControlBox>
                 <T.Body2 onClick={handleChildrenClick}>이미지 업로드</T.Body2>
                 <T.Body2
@@ -117,46 +159,7 @@ const ProfileImgUpload: React.FC<PropsType> = ({ aspectRatio = 1, setImage, defa
                     이미지 삭제
                 </T.Body2>
             </S.ImageControlBox>
-            {uploadImage && (
-                <S.ModalBox
-                    isOpen={modalIsOpen}
-                    onRequestClose={closeModal}
-                    appElement={document.body}
-                    style={{ overlay: { zIndex: 10000 } }}
-                >
-                    <S.ModalCloseButton onClick={closeModal}>
-                        <T.Subtitle1>&times;</T.Subtitle1>
-                    </S.ModalCloseButton>
-                    <S.ModalContent>
-                        <h1>이미지 편집</h1>
-                        <Cropper
-                            ref={cropperRef}
-                            aspectRatio={aspectRatio}
-                            src={uploadImage ?? ""}
-                            viewMode={1}
-                            width={708}
-                            height={500}
-                            background={false}
-                            responsive
-                            autoCropArea={1}
-                            checkOrientation={true}
-                            guides
-                        />
-                        <S.ModalFooter>
-                            <Button onClick={getCropData}>자르기</Button>
-                            <Button
-                                onClick={() => {
-                                    getCropData();
-                                    closeModal();
-                                }}
-                            >
-                                확인
-                            </Button>
-                        </S.ModalFooter>
-                    </S.ModalContent>
-                </S.ModalBox>
-            )}
-        </S.MainContainer>
+        </S.MainWrapper>
     );
 };
 

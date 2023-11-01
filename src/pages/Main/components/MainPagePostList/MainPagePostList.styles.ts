@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
 export const MainWrapper = styled.div`
@@ -18,7 +19,7 @@ export const PostWrapper = styled.div`
     width: 100%;
 `;
 
-export const PostItem = styled.div`
+export const PostItem = styled(Link)`
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -28,6 +29,7 @@ export const PostItem = styled.div`
     gap: 5px;
     border-radius: 10px;
     border: 1px solid #dadada;
+    transition: all ease 0.2s;
 
     p > {
         max-width: 100%;
@@ -36,5 +38,15 @@ export const PostItem = styled.div`
         white-space: nowrap;
         overflow: hidden;
         text-align: start;
+    }
+
+    &:hover {
+        background-color: #dadada40;
+        scale: 1.02;
+        cursor: pointer;
+    }
+
+    &:active {
+        filter: brightness(0.8);
     }
 `;
