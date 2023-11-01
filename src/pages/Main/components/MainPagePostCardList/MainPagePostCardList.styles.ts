@@ -37,6 +37,16 @@ export const LargePostCard = styled(Link)`
         scale: 1.03;
         border: 3px solid #dadada;
     }
+
+    & > img {
+        width: 100%;
+        height: 50%;
+        border-radius: 10px;
+    }
+
+    & > ${T.Subtitle1} {
+        margin-top: 10px;
+    }
 `;
 
 export const SmallPostCardWrapper = styled.div`

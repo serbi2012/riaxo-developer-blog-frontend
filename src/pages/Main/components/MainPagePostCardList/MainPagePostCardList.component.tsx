@@ -25,10 +25,7 @@ const MainPagePostCardList: React.FC = () => {
             <T.Title1>Recent Posts</T.Title1>
             <S.PostCardWrapper>
                 <S.LargePostCard to={`/post?_id=${postData?.[0]?._id}`}>
-                    <img
-                        style={{ width: "100%", height: "50%", borderRadius: "10px" }}
-                        src={postData?.[0]?.thumbnailURL || ThumbNailSample}
-                    />
+                    <img src={postData?.[0]?.thumbnailURL || ThumbNailSample} />
                     <T.Subtitle1>{postData?.[0]?.title}</T.Subtitle1>
                     <T.Body4>{formatDateFromAPIToYYYYMMDD(postData?.[0]?.createdAt)}</T.Body4>
                     <T.Body2 dangerouslySetInnerHTML={{ __html: String(postData?.[0]?.summaryContent) }}></T.Body2>

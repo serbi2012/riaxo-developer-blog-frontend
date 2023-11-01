@@ -8,7 +8,7 @@ export const MainWrapper = styled.div<{ isSideBarOpen?: boolean }>`
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    padding: 20px 30px;
+    padding: 20px 25px;
     gap: 50px;
     height: 100vh;
     width: 30vw;
@@ -36,6 +36,22 @@ export const MenuContainer = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
+    height: 70vh;
     width: 100%;
-    gap: 20px;
+    gap: 5px;
+
+    & > a {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        transition: all ease 0.2s;
+
+        &:hover {
+            background-color: #dadada80;
+        }
+
+        &:active {
+            background-color: #dadada;
+        }
+    }
 `;

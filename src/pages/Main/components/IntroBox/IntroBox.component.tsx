@@ -1,6 +1,7 @@
 import * as S from "./IntroBox.styles";
 import ProfileImage from "../../../../assets/image/profile-image.png";
 import { T } from "../../../../styles/TextGuide.styles";
+import { Link } from "react-router-dom";
 
 const DETAILS_ARRAY = [
     {
@@ -14,6 +15,7 @@ const DETAILS_ARRAY = [
     {
         title: "GitHub:",
         value: "https://github.com/serbi2012",
+        isLink: true,
     },
 ];
 
@@ -30,7 +32,13 @@ const IntroBox: React.FC = () => {
                         <T.Subtitle1>
                             {item.title} <span>&nbsp;</span>
                         </T.Subtitle1>
-                        <T.Body3>{item.value}</T.Body3>
+                        {item?.isLink ? (
+                            <Link to={item.value}>
+                                <T.Body2>{item.value}</T.Body2>
+                            </Link>
+                        ) : (
+                            <T.Body2>{item.value}</T.Body2>
+                        )}
                     </S.TextItem>
                 ))}
             </S.ContentWrapper>
