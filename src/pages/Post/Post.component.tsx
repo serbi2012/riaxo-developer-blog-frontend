@@ -5,32 +5,46 @@ import PostTag from "../../components/@shared/PostTag/PostTag.component";
 import { useEffect, useState } from "react";
 import { deletePost, fetchPostList } from "../../api/post.queries";
 import { IPost } from "../../types/post.types";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Button } from "@mui/material";
 import { getQueryString } from "../../utils/getQueryString";
 import { formatDateFromAPIToYYYYMMDD } from "../../utils/formatDate";
 import { Link, useNavigate } from "react-router-dom";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import { useSnackbar } from "notistack";
 
 const Post: React.FC = () => {
     const [postData, setPostData] = useState<IPost>({});
+
     const navigate = useNavigate();
+    const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         window.scrollTo(0, 0);
 
         (async () => {
-            const queryString = getQueryString();
+            try {
+                const queryString = getQueryString();
 
-            const response = await fetchPostList(queryString);
-            setPostData(response[0]);
+                const response = await fetchPostList(queryString);
+                setPostData(response[0]);
+            } catch (error: any) {
+                enqueueSnackbar(error.message, { variant: "error", persist: true });
+                console.error(error);
+            }
         })();
     }, []);
 
     const onDeleteHandler = () => {
         (async () => {
-            const queryString = getQueryString();
-            await deletePost(queryString);
-            navigate("/post/list");
+            try {
+                const queryString = getQueryString();
+                await deletePost(queryString);
+                navigate("/post/list");
+            } catch (error: any) {
+                enqueueSnackbar(error.message, { variant: "error", persist: true });
+                console.error(error);
+            }
         })();
     };
 
@@ -48,15 +62,18 @@ const Post: React.FC = () => {
                 <S.TextContent dangerouslySetInnerHTML={{ __html: String(postData?.content) }} />
             </S.Content>
             <S.Footer>
-                <Button variant="outlined" size="large" startIcon={<FavoriteIcon />}>
-                    좋아요
-                </Button>
                 <Link to={`/post/edit?_id=${postData?._id}`}>
-                    <Button variant="contained" size="large">
+                    <Button variant="contained" size="large" startIcon={<EditNoteIcon />}>
                         수정하기
                     </Button>
                 </Link>
-                <Button variant="contained" size="large" onClick={onDeleteHandler}>
+                <Button
+                    variant="contained"
+                    size="large"
+                    color="error"
+                    startIcon={<DeleteForeverIcon />}
+                    onClick={onDeleteHandler}
+                >
                     삭제하기
                 </Button>
             </S.Footer>

@@ -12,6 +12,7 @@ import ProfileImgUpload from "./components/ImageUpload/ImageUpload.component";
 import { createImageUpload } from "../../api/resource.queries";
 import { useRecoilState } from "recoil";
 import { isLoadingState } from "../../recoil/atoms";
+import { useSnackbar } from "notistack";
 
 const TAG_ITEMS = [
     { label: "Dev", value: "Dev" },
@@ -32,6 +33,7 @@ const PostCreate: React.FC = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         setPathname(location?.pathname);
@@ -60,6 +62,7 @@ const PostCreate: React.FC = () => {
 
             try {
                 setIsLoading(true);
+
                 let thumbnailURL: any = "";
 
                 if (image && image !== "deleted" && defaultPost?.thumbnailURL !== String(image)) {
@@ -88,7 +91,8 @@ const PostCreate: React.FC = () => {
                     default:
                         break;
                 }
-            } catch (error) {
+            } catch (error: any) {
+                enqueueSnackbar(error.message, { variant: "error", persist: true });
                 console.error(error);
             } finally {
                 setIsLoading(false);
