@@ -25,6 +25,9 @@ const SideBar: React.FC = () => {
                 <Link to="/tag/list">
                     <T.Subtitle1>2. Tags</T.Subtitle1>
                 </Link>
+                <Link to="/tag/list">
+                    <T.Subtitle1>3. Portfolio</T.Subtitle1>
+                </Link>
             </S.MenuContainer>
             <Link to="/post/create">
                 <Button

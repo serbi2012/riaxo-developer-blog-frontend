@@ -22,6 +22,9 @@ const Header: React.FC = () => {
                     <T.Subtitle1>Posts</T.Subtitle1>
                 </Link>
                 <T.Subtitle1>Tags</T.Subtitle1>
+                <Link to="/portfolio/list">
+                    <T.Subtitle1>Portfolio</T.Subtitle1>
+                </Link>
             </S.MenuContainer>
             <Link to="/">
                 <S.LogoImage src={HeaderLogo} />
