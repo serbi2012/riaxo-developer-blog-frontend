@@ -30,11 +30,11 @@ export const MenuContainer = styled.div`
     justify-content: flex-start;
     align-items: center;
     height: 80%;
-    gap: 30px;
+    gap: 10px;
 
     & > p,
     & > a {
-        padding: 1px 5px;
+        padding: 5px 10px;
         border-radius: 5px;
         user-select: none;
         cursor: pointer;
