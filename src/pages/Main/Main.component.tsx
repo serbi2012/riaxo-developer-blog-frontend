@@ -8,6 +8,7 @@ const Main: React.FC = () => {
     return (
         <S.MainWrapper>
             <IntroBox />
+            <div>hello</div>
             <MainPagePostCardList />
             <MainPagePostList />
         </S.MainWrapper>
