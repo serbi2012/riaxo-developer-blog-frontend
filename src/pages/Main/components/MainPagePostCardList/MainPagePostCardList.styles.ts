@@ -59,8 +59,14 @@ export const SmallPostCardWrapper = styled.div`
     width: 50%;
     gap: 20px;
 
-    @media (max-height: 62vmin) {
+    @media (max-width: 768px) {
         & > :nth-child(n + 3) {
+            display: none;
+        }
+    }
+
+    @media (max-width: 500px) {
+        & > :nth-child(n + 2) {
             display: none;
         }
     }

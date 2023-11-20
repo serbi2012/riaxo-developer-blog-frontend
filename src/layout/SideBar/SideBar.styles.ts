@@ -17,6 +17,10 @@ export const MainWrapper = styled.div<{ isSideBarOpen?: boolean }>`
     transform: ${({ isSideBarOpen }) => (isSideBarOpen ? "translateX(0px)" : "translateX(-100vw)")};
     transition: all 0.3s ease;
     z-index: 99999;
+
+    @media (max-width: 768px) {
+        width: 70vw;
+    }
 `;
 
 export const Header = styled.div`
