@@ -15,6 +15,9 @@ export const MainWrapper = styled.div`
     z-index: 100;
 
     & > a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         height: 100%;
     }
 `;
@@ -23,6 +26,12 @@ export const LogoImage = styled.img`
     height: 100%;
     user-select: none;
     cursor: pointer;
+
+    @media (max-width: 500px) {
+        aspect-ratio: 0.92;
+        object-fit: cover;
+        object-position: 0 0;
+    }
 `;
 
 export const MenuContainer = styled.div`
@@ -47,6 +56,16 @@ export const MenuContainer = styled.div`
         &:active {
             background-color: #dadada;
             filter: brightness(1.05);
+        }
+
+        @media (max-width: 768px) {
+            font-size: 14px;
+            line-height: 20px;
+
+            & > p {
+                font-size: 14px;
+                line-height: 20px;
+            }
         }
     }
 `;

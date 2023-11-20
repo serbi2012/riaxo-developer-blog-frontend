@@ -6,6 +6,10 @@ export const MainWrapper = styled.div`
     align-items: center;
     gap: 20px;
     width: 100%;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 `;
 
 export const ProfileImageBox = styled.div`
