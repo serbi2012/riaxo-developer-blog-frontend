@@ -51,6 +51,49 @@ export const TitleInput = styled.input`
     }
 `;
 
+export const ImageContent = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+
+    & > .vertical-line {
+        height: 180px;
+        border-right: 1px solid #00000040;
+    }
+`;
+
+export const ImageGenerateBox = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    height: 100%;
+    width: 64%;
+    gap: 5px;
+`;
+
+export const GeneratedImageBox = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 10px 0px;
+    gap: 10px;
+    overflow-x: scroll;
+`;
+
+export const AiImage = styled.img`
+    min-height: 100px;
+    max-height: 100px;
+    min-width: 200px;
+    max-width: 200px;
+    object-fit: cover;
+    cursor: pointer;
+`;
+
 export const Content = styled.div`
     display: flex;
     justify-content: flex-start;

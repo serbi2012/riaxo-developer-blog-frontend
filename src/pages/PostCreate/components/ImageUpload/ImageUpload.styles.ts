@@ -18,7 +18,7 @@ export const MainWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 30%;
     height: auto;
     gap: 10px;
 `;
@@ -31,7 +31,7 @@ export const ImageContainer = styled.div`
     height: auto;
     aspect-ratio: 2;
     background-color: #ffffff;
-    border-radius: 30px;
+    border-radius: clamp(5px, 2vmin, 30px);
     box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.25);
 `;
 
@@ -52,7 +52,7 @@ export const ProfileImg = styled.img`
     height: auto;
     object-fit: cover;
     overflow: hidden;
-    border-radius: 30px;
+    border-radius: clamp(5px, 2vmin, 30px);
 `;
 
 export const ProfileDelete = styled.img`
