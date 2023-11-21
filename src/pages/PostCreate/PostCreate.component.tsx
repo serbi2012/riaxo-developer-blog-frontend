@@ -1,5 +1,5 @@
 import * as S from "./PostCreate.styles";
-import { Autocomplete, Button, TextField } from "@mui/material";
+import { Autocomplete, Button, IconButton, InputBase, Paper, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { TINY_MCE_API_KEY } from "../../constants/API";
@@ -9,10 +9,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { IPost } from "../../types/post.types";
 import { getQueryString } from "../../utils/getQueryString";
 import ProfileImgUpload from "./components/ImageUpload/ImageUpload.component";
-import { createImageUpload } from "../../api/resource.queries";
+import { createAiImage, createImageUpload } from "../../api/resource.queries";
 import { useRecoilState } from "recoil";
 import { isLoadingState } from "../../recoil/atoms";
 import { useSnackbar } from "notistack";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import { T } from "../../styles/TextGuide.styles";
 
 const TAG_ITEMS = [
     { label: "Dev", value: "Dev" },
@@ -26,6 +28,9 @@ const PostCreate: React.FC = () => {
     const [, setIsLoading] = useRecoilState<boolean>(isLoadingState);
 
     const [image, setImage] = useState<string>("");
+    const [aiImages, setAiImages] = useState<any[]>([]);
+    const [aiImageInput, setAiImageInput] = useState<string>("");
+    const [isAiLoading, setIsAiLoading] = useState<boolean>(false);
     const [pathname, setPathname] = useState<string>("");
     const [defaultPost, setDefaultPost] = useState<IPost>({});
     const [title, setTitle] = useState<string>("");
@@ -65,7 +70,14 @@ const PostCreate: React.FC = () => {
 
                 let thumbnailURL: any = "";
 
-                if (image && image !== "deleted" && defaultPost?.thumbnailURL !== String(image)) {
+                if (image.includes("https://oaidalleapiprodscus.blob.core.windows.net/")) {
+                    thumbnailURL = image;
+                } else if (
+                    image &&
+                    image !== "deleted" &&
+                    defaultPost?.thumbnailURL !== String(image) &&
+                    !image.includes("https://oaidalleapiprodscus.blob.core.windows.net/")
+                ) {
                     thumbnailURL = await createImageUpload(image);
                 }
 
@@ -74,7 +86,7 @@ const PostCreate: React.FC = () => {
                     title: title,
                     content: content,
                     tags: parsedTags,
-                    thumbnailURL: thumbnailURL?.data?.path,
+                    thumbnailURL: typeof thumbnailURL === "string" ? thumbnailURL : thumbnailURL?.data?.path,
                 };
 
                 switch (pathname) {
@@ -127,7 +139,72 @@ const PostCreate: React.FC = () => {
                     )}
                 />
             </S.Header>
-            <ProfileImgUpload aspectRatio={2} setImage={setImage} defaultImage={image || ""} />
+            <S.ImageContent>
+                <ProfileImgUpload aspectRatio={2} setImage={setImage} defaultImage={image || ""} />
+                <div className="vertical-line" />
+                <S.ImageGenerateBox>
+                    <Paper component="form" sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: "100%" }}>
+                        <InputBase
+                            sx={{ ml: 1, flex: 1 }}
+                            placeholder="검색어를 입력해주세요."
+                            value={aiImageInput}
+                            onChange={(event) => {
+                                setAiImageInput(event?.target.value);
+                            }}
+                        />
+                        <IconButton
+                            type="button"
+                            sx={{ p: "10px" }}
+                            aria-label="search"
+                            disabled={isAiLoading}
+                            onClick={() => {
+                                (async () => {
+                                    try {
+                                        setIsAiLoading(true);
+
+                                        const response = await createAiImage({
+                                            content: aiImageInput,
+                                        });
+
+                                        setAiImages([...aiImages, ...(response?.imageUrl || [])]);
+                                    } catch (error: any) {
+                                        enqueueSnackbar(error.message, { variant: "error", persist: true });
+                                        console.error(error);
+                                    } finally {
+                                        setIsAiLoading(false);
+                                    }
+                                })();
+                            }}
+                        >
+                            <AddBoxIcon />
+                        </IconButton>
+                    </Paper>
+                    <S.GeneratedImageBox>
+                        {aiImages?.length <= 0 && (
+                            <T.Title1
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    height: "100px",
+                                    width: "100%",
+                                }}
+                            >
+                                생성된 이미지가 없습니다.
+                            </T.Title1>
+                        )}
+                        {aiImages?.map((item, index) => (
+                            <S.AiImage
+                                key={index}
+                                src={item?.url || ""}
+                                onClick={() => {
+                                    setImage(item?.url || "");
+                                }}
+                            />
+                        ))}
+                    </S.GeneratedImageBox>
+                </S.ImageGenerateBox>
+            </S.ImageContent>
             <S.Content>
                 <Editor
                     apiKey={TINY_MCE_API_KEY}

@@ -7,3 +7,9 @@ export const createImageUpload = async (image?: any) => {
 
     return response?.data;
 };
+
+export const createAiImage = async (params?: any) => {
+    const response = await axios.post(`${BASE_URL}/image/ai-image`, { params });
+
+    return response?.data;
+};
