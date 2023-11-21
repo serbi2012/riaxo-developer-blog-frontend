@@ -3,11 +3,11 @@ import * as S from "./PostList.styles";
 import { useEffect, useState } from "react";
 import { fetchPostList } from "../../api/post.queries";
 import { IPost } from "../../types/post.types";
-import ThumbNailSample from "./../../assets/image/post_thumb_nail_sample.png";
 import { getQueryString } from "../../utils/getQueryString";
 import PostListSearchBar from "./components/PostListSearchBar/PostListSearchBar.component";
 import { formatDateFromAPIToYYYYMMDD } from "../../utils/formatDate";
 import PostTag from "../../components/@shared/PostTag/PostTag.component";
+import Skeleton from "@mui/material/Skeleton";
 
 const PostList: React.FC = () => {
     const [postData, setPostData] = useState<IPost[]>([]);
@@ -26,7 +26,11 @@ const PostList: React.FC = () => {
             <PostListSearchBar />
             {postData?.map((item, index) => (
                 <S.PostListWrapper key={index} to={`/post?_id=${item?._id}`}>
-                    <img src={item?.thumbnailURL || ThumbNailSample} />
+                    {item?.thumbnailURL ? (
+                        <img src={item?.thumbnailURL} />
+                    ) : (
+                        <Skeleton variant="rounded" style={{ width: "100%", height: "auto", aspectRatio: "1" }} />
+                    )}
                     <S.PostDetail>
                         <S.PostTagBox>
                             {item?.tags?.map((item: string, index) => <PostTag key={index} name={item} size="small" />)}

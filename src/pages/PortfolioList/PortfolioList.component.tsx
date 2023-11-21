@@ -1,11 +1,11 @@
 import { T } from "../../styles/TextGuide.styles";
 import * as S from "./PortfolioList.styles";
-import ThumbNailSample from "./../../assets/image/post_thumb_nail_sample.png";
 import PostListSearchBar from "./components/PortfolioListSearchBar/PortfolioListSearchBar.component";
 import PostTag from "../../components/@shared/PostTag/PostTag.component";
 import portfolioImage1 from "./../../assets/image/portfolio_img1.jpg";
 import portfolioImage2 from "./../../assets/image/portfolio_img2.jpg";
 import portfolioImage3 from "./../../assets/image/portfolio_img3.jpg";
+import Skeleton from "@mui/material/Skeleton";
 
 const PORTFOLIO_ITEMS = [
     {
@@ -40,7 +40,12 @@ const PortfolioList: React.FC = () => {
             <PostListSearchBar />
             {PORTFOLIO_ITEMS?.map((item, index) => (
                 <S.PostListWrapper key={index} to={item?.link}>
-                    <img src={item?.image || ThumbNailSample} />
+                    {item?.image ? (
+                        <img src={item?.image} />
+                    ) : (
+                        <Skeleton variant="rounded" style={{ width: "100%", height: "auto", aspectRatio: "1" }} />
+                    )}
+
                     <S.PostDetail>
                         <T.Title1>{item?.title}</T.Title1>
                         <S.PostTagBox>

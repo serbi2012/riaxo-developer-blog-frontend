@@ -1,6 +1,5 @@
 import { T } from "../../styles/TextGuide.styles";
 import * as S from "./Post.styles";
-import ThumbNailSample from "./../../assets/image/post_thumb_nail_sample.png";
 import PostTag from "../../components/@shared/PostTag/PostTag.component";
 import { useEffect, useState } from "react";
 import { deletePost, fetchPostList } from "../../api/post.queries";
@@ -12,9 +11,11 @@ import { Link, useNavigate } from "react-router-dom";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import { useSnackbar } from "notistack";
+import Skeleton from "@mui/material/Skeleton";
 
 const Post: React.FC = () => {
     const [postData, setPostData] = useState<IPost>({});
+    const [isImageLoaded, setImageLoaded] = useState(false);
 
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
@@ -35,6 +36,10 @@ const Post: React.FC = () => {
         })();
     }, []);
 
+    const handleImageLoad = () => {
+        setImageLoaded(true);
+    };
+
     const onDeleteHandler = () => {
         (async () => {
             try {
@@ -51,7 +56,20 @@ const Post: React.FC = () => {
     return (
         <S.MainWrapper>
             <S.Header>
-                <S.ThumbNailImage src={postData?.thumbnailURL || ThumbNailSample} />
+                <S.ThumbNailImage
+                    src={postData?.thumbnailURL}
+                    onLoad={handleImageLoad}
+                    style={{ display: postData?.thumbnailURL && isImageLoaded ? "flex" : "none" }}
+                />
+                <Skeleton
+                    variant="rounded"
+                    style={{
+                        display: postData?.thumbnailURL && isImageLoaded ? "none" : "flex",
+                        width: "100%",
+                        height: "auto",
+                        aspectRatio: "2",
+                    }}
+                />
                 <T.Title3>{postData?.title}</T.Title3>
                 <T.Subtitle2>{formatDateFromAPIToYYYYMMDD(postData.createdAt)}</T.Subtitle2>
                 <S.PostTagBox>

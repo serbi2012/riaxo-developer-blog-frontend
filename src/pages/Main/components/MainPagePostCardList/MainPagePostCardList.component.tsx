@@ -5,7 +5,7 @@ import { IPost } from "../../../../types/post.types";
 import { getQueryString } from "../../../../utils/getQueryString";
 import { fetchPostList } from "../../../../api/post.queries";
 import { formatDateFromAPIToYYYYMMDD } from "../../../../utils/formatDate";
-import ThumbNailSample from "./../../../../assets/image/post_thumb_nail_sample.png";
+import Skeleton from "@mui/material/Skeleton";
 
 const MainPagePostCardList: React.FC = () => {
     const [postData, setPostData] = useState<IPost[]>([]);
@@ -25,7 +25,12 @@ const MainPagePostCardList: React.FC = () => {
             <T.Title1>Recent Posts</T.Title1>
             <S.PostCardWrapper>
                 <S.LargePostCard to={`/post?_id=${postData?.[0]?._id}`}>
-                    <img src={postData?.[0]?.thumbnailURL || ThumbNailSample} />
+                    {postData?.[0]?.thumbnailURL ? (
+                        <img src={postData?.[0]?.thumbnailURL} />
+                    ) : (
+                        <Skeleton variant="rounded" style={{ width: "100%", height: "auto", aspectRatio: "2" }} />
+                    )}
+
                     <T.Subtitle1>{postData?.[0]?.title}</T.Subtitle1>
                     <T.Body4>{formatDateFromAPIToYYYYMMDD(postData?.[0]?.createdAt)}</T.Body4>
                     <T.Body2 dangerouslySetInnerHTML={{ __html: String(postData?.[0]?.summaryContent) }}></T.Body2>
