@@ -70,14 +70,11 @@ const PostCreate: React.FC = () => {
 
                 let thumbnailURL: any = "";
 
-                if (image.includes("https://oaidalleapiprodscus.blob.core.windows.net/")) {
-                    thumbnailURL = image;
-                } else if (
-                    image &&
-                    image !== "deleted" &&
-                    defaultPost?.thumbnailURL !== String(image) &&
-                    !image.includes("https://oaidalleapiprodscus.blob.core.windows.net/")
-                ) {
+                if (typeof image === "string") {
+                    if (image?.includes("https://")) {
+                        thumbnailURL = image;
+                    }
+                } else if (image && image !== "deleted" && defaultPost?.thumbnailURL !== String(image)) {
                     thumbnailURL = await createImageUpload(image);
                 }
 
@@ -165,8 +162,9 @@ const PostCreate: React.FC = () => {
                                         const response = await createAiImage({
                                             content: aiImageInput,
                                         });
+                                        console.log("response:", response);
 
-                                        setAiImages([...aiImages, ...(response?.imageUrl || [])]);
+                                        setAiImages([...aiImages, response?.imageUrl]);
                                     } catch (error: any) {
                                         enqueueSnackbar(error.message, { variant: "error", persist: true });
                                         console.error(error);
@@ -196,9 +194,9 @@ const PostCreate: React.FC = () => {
                         {aiImages?.map((item, index) => (
                             <S.AiImage
                                 key={index}
-                                src={item?.url || ""}
+                                src={item || ""}
                                 onClick={() => {
-                                    setImage(item?.url || "");
+                                    setImage(item || "");
                                 }}
                             />
                         ))}
