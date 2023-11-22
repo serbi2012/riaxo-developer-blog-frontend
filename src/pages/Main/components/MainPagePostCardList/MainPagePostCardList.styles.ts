@@ -30,12 +30,12 @@ export const LargePostCard = styled(Link)`
     min-height: 100%;
     gap: 5px;
     border-radius: 10px;
-    border: 2px solid #dadada;
+    border: 2px solid var(--color-border-gray2);
     transition: all 0.2s ease;
 
     &:hover {
         scale: 1.03;
-        border: 3px solid #dadada;
+        border: 3px solid var(--color-border-gray2);
     }
 
     & > img {
@@ -82,11 +82,11 @@ export const SmallPostCard = styled(Link)`
     flex: 1;
     gap: 5px;
     border-radius: 10px;
-    border: 2px solid #dadada;
+    border: 2px solid var(--color-border-gray2);
     transition: all 0.2s ease;
 
     &:hover {
-        border: 3px solid #dadada;
+        border: 3px solid var(--color-border-gray2);
         scale: 1.03;
     }
 

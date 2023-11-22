@@ -29,7 +29,7 @@ export const PostListWrapper = styled(Link)`
     transition: all 0.1s ease;
 
     &:hover {
-        background-color: #dadada40;
+        background-color: var(--color-border-gray2) 40;
     }
 
     &:active {

@@ -39,9 +39,9 @@ export const filterTheme = createTheme({
         MuiFormLabel: {
             styleOverrides: {
                 root: {
-                    color: "#fff",
+                    color: "#ffffff",
                     "&.Mui-focused": {
-                        color: "#fff",
+                        color: "#ffffff",
                     },
                 },
             },
@@ -49,7 +49,7 @@ export const filterTheme = createTheme({
         MuiOutlinedInput: {
             styleOverrides: {
                 root: {
-                    color: "#fff",
+                    color: "#ffffff",
                     "&fieldset": { borderColor: "#ffffff" },
                     "&:hover fieldset": { borderColor: "#ffffff !important" },
                     "&.Mui-focused fieldset": { borderColor: "#ffffff" },

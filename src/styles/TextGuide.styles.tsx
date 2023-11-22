@@ -58,7 +58,7 @@ const Text = styled.p<TextComponentProps>`
     ${baseTextStyle}
     ${({ size }) => size && sizes[size]}
     font-weight: ${({ fontWeight }) => fontWeight};
-    color: ${({ color }) => color ?? "var(--brand-primary-darknavy)"};
+    color: ${({ color }) => color ?? "var(--color-font-darknavy)"};
     margin: 0;
     padding: 0;
 `;

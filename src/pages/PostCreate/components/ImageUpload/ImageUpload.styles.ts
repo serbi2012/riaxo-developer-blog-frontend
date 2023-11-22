@@ -30,7 +30,7 @@ export const ImageContainer = styled.div`
     width: 100%;
     height: auto;
     aspect-ratio: 2;
-    background-color: #ffffff;
+    background-color: var(--color-white);
     border-radius: clamp(5px, 2vmin, 30px);
     box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.25);
 `;
@@ -44,6 +44,10 @@ export const ImageControlBox = styled.div`
     & > p {
         user-select: none;
         cursor: pointer;
+        font-size: clamp(5px, 2vmin, 14px);
+        line-height: clamp(8px, 2vmin, 20px);
+        text-align: center;
+        word-break: keep-all;
     }
 `;
 
@@ -53,6 +57,15 @@ export const ProfileImg = styled.img`
     object-fit: cover;
     overflow: hidden;
     border-radius: clamp(5px, 2vmin, 30px);
+`;
+
+export const LoadingText = styled(T.Body4)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: clamp(5px, 2.5vmin, 13px);
+    line-height: clamp(11px, 4vmin, 19px);
 `;
 
 export const ProfileDelete = styled.img`
@@ -81,8 +94,8 @@ export const ModalBox = styled(ReactModal)`
     min-width: 526px;
     min-height: 313px;
     height: auto;
-    background: #ffffff;
-    border: 0.7px solid #dadada;
+    background: var(--color-white);
+    border: 0.7px solid var(--color-border-gray2);
     box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.14);
     border-radius: 10px;
     animation: ${slideDown} 0.3s ease-in-out forwards;
@@ -126,6 +139,6 @@ export const ModalCloseButton = styled.button`
 
     & > ${T.Subtitle1} {
         font-size: 40px;
-        color: #1d2d5a;
+        color: var(--color-font-darknavy);
     }
 `;

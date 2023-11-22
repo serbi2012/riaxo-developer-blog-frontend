@@ -15,7 +15,7 @@ const SideBar: React.FC = () => {
             <Link to="/">
                 <S.Header>
                     <img src={HeaderLogo} />
-                    <T.Body4>FE 개발자 김태섭입니다.</T.Body4>
+                    <T.Body4>개발자 김태섭</T.Body4>
                 </S.Header>
             </Link>
             <S.MenuContainer>

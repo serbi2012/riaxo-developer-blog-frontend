@@ -13,7 +13,7 @@ export const MainWrapper = styled.div<{ isSideBarOpen?: boolean }>`
     height: 100vh;
     width: 30vw;
     max-width: 320px;
-    background-color: #ffffff;
+    background-color: var(--color-white);
     transform: ${({ isSideBarOpen }) => (isSideBarOpen ? "translateX(0px)" : "translateX(-100vw)")};
     transition: all 0.3s ease;
     z-index: 99999;
@@ -51,11 +51,11 @@ export const MenuContainer = styled.div`
         transition: all ease 0.2s;
 
         &:hover {
-            background-color: #dadada80;
+            background-color: var(--color-border-gray2) 80;
         }
 
         &:active {
-            background-color: #dadada;
+            background-color: var(--color-border-gray2);
         }
     }
 `;

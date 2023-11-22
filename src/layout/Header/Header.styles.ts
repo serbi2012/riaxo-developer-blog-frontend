@@ -11,7 +11,7 @@ export const MainWrapper = styled.div`
     height: 60px;
     width: 100%;
     max-width: 1024px;
-    background-color: #ffffff;
+    background-color: var(--color-white);
     z-index: 100;
 
     & > a {
@@ -50,11 +50,11 @@ export const MenuContainer = styled.div`
         transition: all 0.1s ease;
 
         &:hover {
-            background-color: #dadada;
+            background-color: var(--color-border-gray2);
         }
 
         &:active {
-            background-color: #dadada;
+            background-color: var(--color-border-gray2);
             filter: brightness(1.05);
         }
 
@@ -83,11 +83,11 @@ export const HamburgerButton = styled.div`
     transition: all 0.1s ease;
 
     &:hover {
-        background-color: #dadada;
+        background-color: var(--color-border-gray2);
     }
 
     &:active {
-        background-color: #dadada;
+        background-color: var(--color-border-gray2);
         filter: brightness(1.05);
     }
 `;
