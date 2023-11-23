@@ -90,9 +90,26 @@ export const SmallPostCard = styled(Link)`
         scale: 1.03;
     }
 
+    & > img {
+        display: none;
+    }
+
+    & > ${T.Subtitle1} {
+        margin-top: 10px;
+    }
+
     & > ${T.Body2} {
         overflow: hidden;
         text-overflow: ellipsis;
         max-height: 4.3em;
+    }
+
+    @media (max-width: 500px) {
+        img {
+            display: flex;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
     }
 `;

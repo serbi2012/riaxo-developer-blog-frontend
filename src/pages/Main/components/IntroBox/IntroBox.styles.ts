@@ -38,4 +38,14 @@ export const TextItem = styled.div`
     justify-content: flex-start;
     align-items: center;
     text-align: start;
+
+    & > a {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        svg {
+            scale: 0.8;
+        }
+    }
 `;

@@ -8,7 +8,7 @@ export const MainWrapper = styled.div`
     flex-direction: column;
     padding: 50px 20px;
     width: 100%;
-    gap: 20px;
+    gap: 10px;
 
     @media (max-width: 768px) {
         align-items: flex-start;
@@ -46,7 +46,6 @@ export const PostListWrapper = styled(Link)`
     @media (max-width: 768px) {
         flex-direction: column;
         height: auto;
-        /* width: 482px; */
         width: 47.7%;
         border-radius: 20px;
         box-shadow:

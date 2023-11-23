@@ -38,6 +38,7 @@ const MainPagePostCardList: React.FC = () => {
                 <S.SmallPostCardWrapper>
                     {postData.slice(1, 4).map((item, index) => (
                         <S.SmallPostCard to={`/post?_id=${item?._id}`} key={index}>
+                            <img src={item?.thumbnailURL} />
                             <T.Subtitle1>{item?.title}</T.Subtitle1>
                             <T.Body4>{formatDateFromAPIToYYYYMMDD(item?.createdAt)}</T.Body4>
                             <T.Body2 dangerouslySetInnerHTML={{ __html: String(item?.summaryContent) }} />

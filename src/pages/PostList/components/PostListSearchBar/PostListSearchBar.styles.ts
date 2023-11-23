@@ -6,4 +6,5 @@ export const MainWrapper = styled.div`
     align-items: center;
     width: 100%;
     gap: 10px;
+    margin-bottom: 10px;
 `;
