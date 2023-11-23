@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Link } from "react-router-dom";
 
 export const MainWrapper = styled.div`
     position: fixed;
@@ -41,32 +42,38 @@ export const MenuContainer = styled.div`
     height: 80%;
     flex: 1;
     gap: 10px;
+    transition: all 0.1s ease;
+`;
 
-    & > p,
-    & > a {
-        padding: 5px 10px;
-        border-radius: 5px;
-        user-select: none;
-        cursor: pointer;
-        transition: all 0.1s ease;
+export const MenuTag = styled(Link)<{ isActive?: boolean }>`
+    padding: 5px 10px;
+    border-radius: 5px;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    background-color: ${({ isActive }) => (isActive ? "var(--color-font-darknavy)" : "transparent")};
 
-        &:hover {
-            background-color: var(--color-border-gray2);
+    & > p {
+        transition: all 0.2s ease;
+        color: ${({ isActive }) => (isActive ? "var(--color-white)" : "var(--color-font-darknavy)")};
+    }
+
+    &:hover {
+        & > p {
+            color: var(--color-font-darknavy);
         }
+        background-color: var(--color-border-gray2);
+    }
 
-        &:active {
-            background-color: var(--color-border-gray2);
-            filter: brightness(1.05);
-        }
+    &:active {
+        background-color: var(--color-border-gray2);
+        filter: brightness(1.05);
+    }
 
-        @media (max-width: 768px) {
+    @media (max-width: 768px) {
+        & > p {
             font-size: 14px;
             line-height: 20px;
-
-            & > p {
-                font-size: 14px;
-                line-height: 20px;
-            }
         }
     }
 `;

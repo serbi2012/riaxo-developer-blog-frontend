@@ -6,6 +6,7 @@ import PostCreate from "../pages/PostCreate/PostCreate.component";
 import PortfolioList from "../pages/PortfolioList/PortfolioList.component";
 import Login from "../pages/Login/Login.component";
 import { AdminOnly } from "./AccountChecker";
+import TagList from "../pages/TagList/TagList.component";
 
 const Router = () => {
     return (
@@ -23,6 +24,9 @@ const Router = () => {
             <Route path={"/portfolio"}>
                 <Route path={""} element={<Post />} />
                 <Route path={"list"} element={<PortfolioList />} />
+            </Route>
+            <Route path={"/tag"}>
+                <Route path={"list"} element={<TagList />} />
             </Route>
 
             {/* 모든 경로에 대한 리디렉션 */}
