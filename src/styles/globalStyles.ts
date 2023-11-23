@@ -82,4 +82,45 @@ export const GlobalStyle = styled.createGlobalStyle`
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
+
+    // SECTION - sweetalert
+    .swal-confirm {
+        .swal-text {
+            text-align: center;
+        }
+
+        .swal-footer {
+            .swal-button-container {
+                margin: 0;
+                padding: 0;
+                width: 50%;
+
+                .swal-button {
+                    border-radius: 0px;
+
+                    :hover {
+                        filter: brightness(0.9);
+                    }
+                }
+
+                :first-child {
+                    .swal-button {
+                        background-color: #dadada;
+                        border-bottom-left-radius: 10px;
+                    }
+                }
+
+                :last-child {
+                    .swal-button {
+                        border-bottom-right-radius: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    .swal-modal {
+        transform: translateZ(0) scale(1) !important;
+        -webkit-transform: translateZ(0) scale(1) !important;
+    }
 `;

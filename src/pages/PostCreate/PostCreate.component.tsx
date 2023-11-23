@@ -97,7 +97,7 @@ const PostCreate: React.FC = () => {
                         break;
                 }
             } catch (error: any) {
-                enqueueSnackbar(error.message, { variant: "error", persist: true });
+                enqueueSnackbar(error.message, { variant: "error" });
                 console.error(error);
             } finally {
                 setIsLoading(false);

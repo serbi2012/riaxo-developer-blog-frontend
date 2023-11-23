@@ -7,9 +7,15 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import { GITHUB_CLIENT_ID } from "../../constants/API";
+import { isAdminModeState } from "../../recoil/atoms/isAdminModeState";
+import { useLogout } from "../../hooks/useAuth";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 const SideBar: React.FC = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useRecoilState(isSideBarOpenState);
+    const [adminMode] = useRecoilState(isAdminModeState);
+
+    const { handleLogout } = useLogout();
 
     return (
         <S.MainWrapper isSideBarOpen={isSideBarOpen}>
@@ -32,28 +38,35 @@ const SideBar: React.FC = () => {
             </S.MenuContainer>
             <Button
                 variant="contained"
-                startIcon={<HistoryEduIcon />}
+                color="inherit"
+                startIcon={<AdminPanelSettingsIcon />}
                 onClick={() => {
-                    window.open(
-                        `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}`,
-                        "",
-                        "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=700, height=700, left=0, top=0",
-                    );
+                    if (adminMode) {
+                        handleLogout();
+                    } else {
+                        window.open(
+                            `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}`,
+                            "",
+                            "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=700, height=700, left=0, top=0",
+                        );
+                    }
                 }}
             >
-                로그인
+                {adminMode ? "관리자 모드 해제" : "관리자 모드"}
             </Button>
-            <Link to="/post/create">
-                <Button
-                    variant="contained"
-                    startIcon={<HistoryEduIcon />}
-                    onClick={() => {
-                        setIsSideBarOpen(false);
-                    }}
-                >
-                    게시글 작성
-                </Button>
-            </Link>
+            {adminMode && (
+                <Link to="/post/create">
+                    <Button
+                        variant="contained"
+                        startIcon={<HistoryEduIcon />}
+                        onClick={() => {
+                            setIsSideBarOpen(false);
+                        }}
+                    >
+                        게시글 작성
+                    </Button>
+                </Link>
+            )}
         </S.MainWrapper>
     );
 };

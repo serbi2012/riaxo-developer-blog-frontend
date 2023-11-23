@@ -27,7 +27,7 @@ export const LogoImage = styled.img`
     user-select: none;
     cursor: pointer;
 
-    @media (max-width: 500px) {
+    @media (max-width: 768px) {
         aspect-ratio: 0.92;
         object-fit: cover;
         object-position: 0 0;
@@ -39,6 +39,7 @@ export const MenuContainer = styled.div`
     justify-content: flex-start;
     align-items: center;
     height: 80%;
+    flex: 1;
     gap: 10px;
 
     & > p,

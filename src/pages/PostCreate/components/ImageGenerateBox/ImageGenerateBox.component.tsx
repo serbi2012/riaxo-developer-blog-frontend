@@ -24,7 +24,7 @@ const ImageGenerateBox = ({ setImage }: PropsType) => {
 
             setAiImages([...aiImages, response?.imageUrl]);
         } catch (error: any) {
-            enqueueSnackbar(error.message, { variant: "error", persist: true });
+            enqueueSnackbar(error.message, { variant: "error" });
             console.error(error);
         } finally {
             setIsAiLoading(false);
