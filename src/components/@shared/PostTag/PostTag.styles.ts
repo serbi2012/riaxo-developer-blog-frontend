@@ -5,6 +5,6 @@ export const MainWrapper = styled.div`
     justify-content: center;
     align-items: center;
     padding: 5px 10px;
-    background-color: var(--color-border-gray2) 40;
+    background-color: var(--color-border-gray3);
     border-radius: 20px;
 `;

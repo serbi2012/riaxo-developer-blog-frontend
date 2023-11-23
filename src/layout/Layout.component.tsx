@@ -42,7 +42,7 @@ const Layout: React.FC<IProps> = (props: IProps) => {
             ref={notistackRef}
             anchorOrigin={{ vertical: "top", horizontal: "center" }}
             maxSnack={3}
-            autoHideDuration={3000}
+            autoHideDuration={2000}
             action={action}
         >
             <S.MainWrapper>

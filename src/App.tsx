@@ -3,10 +3,11 @@ import Router from "./routes/Router";
 import { useEffect } from "react";
 import { isSideBarOpenState } from "./recoil/atoms";
 import { useRecoilState } from "recoil";
-import { fetchLogin } from "./api/login.queries";
+import { fetchLogin, fetchUserInfo } from "./api/login.queries";
 import { useSnackbar } from "notistack";
 import { isAdminModeState } from "./recoil/atoms/isAdminModeState";
 import { useLogin, useLogout } from "./hooks/useAuth";
+import { getCookie } from "./utils/cookieUtils";
 
 const App = () => {
     const [, setIsSideBarOpen] = useRecoilState(isSideBarOpenState);
@@ -22,6 +23,25 @@ const App = () => {
     }, [location, adminMode]);
 
     useEffect(() => {
+        const riaxoBlogAuthToken = getCookie("riaxo-blog-auth-token");
+
+        if (riaxoBlogAuthToken) {
+            (async () => {
+                try {
+                    const response = await fetchUserInfo({ accessToken: riaxoBlogAuthToken });
+                    const userRole = response?.user?.role;
+
+                    if (userRole === "admin") {
+                        setAdminMode(true);
+                    } else {
+                        handleLogout();
+                    }
+                } catch (error: any) {
+                    handleLogout();
+                }
+            })();
+        }
+
         const handleEvent = async (event: any) => {
             try {
                 if (event.data.type === "github_login") {
