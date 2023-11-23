@@ -123,4 +123,11 @@ export const GlobalStyle = styled.createGlobalStyle`
         transform: translateZ(0) scale(1) !important;
         -webkit-transform: translateZ(0) scale(1) !important;
     }
+
+    // !SECTION - notistack
+    #notistack-snackbar {
+        & > svg {
+            margin-right: 10px;
+        }
+    }
 `;

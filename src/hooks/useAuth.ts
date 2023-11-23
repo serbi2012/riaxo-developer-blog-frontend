@@ -22,10 +22,13 @@ export const useLogout = () => {
 export const useLogin = () => {
     const [, setAdminMode] = useRecoilState(isAdminModeState);
 
+    const { enqueueSnackbar } = useSnackbar();
+
     const handleLogin = (token: string) => {
         setAdminMode(true);
-
         setCookie("riaxo-blog-auth-token", token);
+
+        enqueueSnackbar("관리자 모드로 설정되었습니다.", { variant: "success" });
     };
 
     return { handleLogin };

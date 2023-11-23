@@ -41,7 +41,7 @@ export const PostItem = styled(Link)`
     }
 
     &:hover {
-        background-color: var(--color-border-gray2) 40;
+        background-color: var(--color-border-gray3);
         scale: 1.02;
         cursor: pointer;
     }

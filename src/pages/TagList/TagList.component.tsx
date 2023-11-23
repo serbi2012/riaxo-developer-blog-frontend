@@ -1,52 +1,40 @@
 import { T } from "../../styles/TextGuide.styles";
-import * as S from "./PostList.styles";
-import { useCallback, useEffect, useState } from "react";
+import * as S from "./TagList.styles";
+import { useEffect, useState } from "react";
 import { fetchPostList } from "../../api/post.queries";
 import { IPost } from "../../types/post.types";
 import { getQueryString } from "../../utils/getQueryString";
-import PostListSearchBar from "./components/PostListSearchBar/PostListSearchBar.component";
+import TagListSearchBar from "./components/TagListSearchBar/TagListSearchBar.component";
 import { formatDateFromAPIToYYYYMMDD } from "../../utils/formatDate";
 import PostTag from "../../components/@shared/PostTag/PostTag.component";
 import Skeleton from "@mui/material/Skeleton";
-import { debounce } from "lodash";
 
-const PostList: React.FC = () => {
+const TagList: React.FC = () => {
     const [postData, setPostData] = useState<IPost[]>([]);
-    const [searchInput, setSearchInput] = useState<string>("");
-
-    const fetchPostsWithDebounce = useCallback(
-        debounce(async (search) => {
-            const queryString = getQueryString();
-            const body = search ? { ...queryString, title: search } : queryString;
-            const response = await fetchPostList(body);
-
-            setPostData(response);
-        }, 50),
-        [],
-    );
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
     useEffect(() => {
-        (async () => {
-            const queryString = getQueryString();
-            const response = await fetchPostList(queryString);
+        if (selectedTags?.length > 0) {
+            (async () => {
+                const queryString = getQueryString();
+                const tagString = selectedTags.join(",");
 
-            setPostData(response);
-        })();
-    }, []);
-
-    useEffect(() => {
-        fetchPostsWithDebounce(searchInput);
-
-        return () => {
-            fetchPostsWithDebounce.cancel();
-        };
-    }, [searchInput, fetchPostsWithDebounce]);
+                const response = await fetchPostList({
+                    ...queryString,
+                    ...(tagString !== "" && { tags: tagString }),
+                });
+                setPostData(response);
+            })();
+        } else {
+            setPostData([]);
+        }
+    }, [selectedTags]);
 
     return (
         <S.MainWrapper>
-            <PostListSearchBar setSearchInput={setSearchInput} />
+            <TagListSearchBar setSelectedTags={setSelectedTags} />
             {postData?.map((item, index) => (
-                <S.PostListWrapper key={index} to={`/post?_id=${item?._id}`}>
+                <S.TagListWrapper key={index} to={`/post?_id=${item?._id}`}>
                     {item?.thumbnailURL ? (
                         <img src={item?.thumbnailURL} />
                     ) : (
@@ -60,10 +48,10 @@ const PostList: React.FC = () => {
                         <T.Subtitle2>{formatDateFromAPIToYYYYMMDD(item.createdAt)}</T.Subtitle2>
                         <T.Subtitle2 className="last-child">{item?.summaryContent}</T.Subtitle2>
                     </S.PostDetail>
-                </S.PostListWrapper>
+                </S.TagListWrapper>
             ))}
         </S.MainWrapper>
     );
 };
 
-export default PostList;
+export default TagList;

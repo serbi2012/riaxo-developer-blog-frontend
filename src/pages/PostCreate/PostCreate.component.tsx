@@ -1,5 +1,5 @@
 import * as S from "./PostCreate.styles";
-import { Autocomplete, Button, TextField } from "@mui/material";
+import { Autocomplete, Button, Chip, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { TINY_MCE_API_KEY } from "../../constants/API";
@@ -14,12 +14,7 @@ import { useRecoilState } from "recoil";
 import { isLoadingState } from "../../recoil/atoms";
 import { useSnackbar } from "notistack";
 import ImageGenerateBox from "./components/ImageGenerateBox/ImageGenerateBox.component";
-
-const TAG_ITEMS = [
-    { label: "Dev", value: "Dev" },
-    { label: "React", value: "React" },
-    { label: "NodeJS", value: "NodeJS" },
-];
+import { fetchTagList } from "../../api/tag.queries";
 
 const PostCreate: React.FC = () => {
     const editorRef = useRef<any>(null);
@@ -30,7 +25,8 @@ const PostCreate: React.FC = () => {
     const [pathname, setPathname] = useState<string>("");
     const [defaultPost, setDefaultPost] = useState<IPost>({});
     const [title, setTitle] = useState<string>("");
-    const [tags, setTags] = useState<any[]>([]);
+    const [tags, setTags] = useState<any[] | undefined>([]);
+    const [tagOptions, setTagOptions] = useState<any[]>([]);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -39,15 +35,22 @@ const PostCreate: React.FC = () => {
     useEffect(() => {
         setPathname(location?.pathname);
 
+        (async () => {
+            const tagRes = await fetchTagList();
+            const parsedTagOption = tagRes?.map((item) => item?.value);
+
+            setTagOptions(parsedTagOption);
+        })();
+
         if (location?.pathname === "/post/edit") {
             (async () => {
                 const queryString = getQueryString();
 
                 const response = await fetchPostList(queryString);
-                const parsedTags: any = response[0]?.tags?.map((item) => ({ label: item, value: item }));
+
                 setDefaultPost(response[0]);
                 setTitle(String(response[0]?.title));
-                setTags(parsedTags);
+                setTags(response[0]?.tags);
                 setImage(response[0]?.thumbnailURL ? String(response[0]?.thumbnailURL) : "");
             })();
         }
@@ -58,7 +61,6 @@ const PostCreate: React.FC = () => {
 
         if (editorRef.current) {
             const content = editorRef.current.getContent();
-            const parsedTags = tags?.map((item) => item?.value);
             const queryString = getQueryString();
 
             try {
@@ -78,7 +80,7 @@ const PostCreate: React.FC = () => {
                     id: queryString?._id,
                     title: title,
                     content: content,
-                    tags: parsedTags,
+                    tags: tags,
                     thumbnailURL: typeof thumbnailURL === "string" ? thumbnailURL : thumbnailURL?.data?.path,
                 };
 
@@ -125,8 +127,13 @@ const PostCreate: React.FC = () => {
                         setTags(newValue);
                     }}
                     sx={{ width: "100%" }}
-                    options={TAG_ITEMS}
-                    getOptionLabel={(option) => option.label}
+                    options={tagOptions}
+                    getOptionLabel={(option) => option}
+                    renderTags={(value: readonly string[], getTagProps) =>
+                        value.map((option: string, index: number) => (
+                            <Chip variant="outlined" label={option} {...getTagProps({ index })} key={index} />
+                        ))
+                    }
                     renderInput={(params) => (
                         <TextField {...params} label="관련 태그" placeholder="게시글과 관련된 태그를 추가해보세요!" />
                     )}
