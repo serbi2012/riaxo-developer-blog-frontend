@@ -15,5 +15,5 @@ export const IntroContainer = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
-    border-bottom: 2px solid #dadada;
+    border-bottom: 2px solid var(--color-border-gray2);
 `;

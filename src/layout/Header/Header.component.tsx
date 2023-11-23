@@ -4,9 +4,11 @@ import HeaderLogo from "../../assets/image/riaxo-logo.png";
 import { useRecoilState } from "recoil";
 import { isSideBarOpenState } from "../../recoil/atoms";
 import { Link } from "react-router-dom";
+import { isAdminModeState } from "../../recoil/atoms/isAdminModeState";
 
 const Header: React.FC = () => {
     const [, setIsSideBarOpen] = useRecoilState(isSideBarOpenState);
+    const [adminMode] = useRecoilState(isAdminModeState);
 
     return (
         <S.MainWrapper>
@@ -26,6 +28,7 @@ const Header: React.FC = () => {
                     <T.Subtitle1>Portfolio</T.Subtitle1>
                 </Link>
             </S.MenuContainer>
+            {adminMode && <T.Body3>Admin Mode</T.Body3>}
             <Link to="/">
                 <S.LogoImage src={HeaderLogo} />
             </Link>

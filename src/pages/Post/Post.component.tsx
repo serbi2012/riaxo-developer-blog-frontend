@@ -12,8 +12,12 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import { useSnackbar } from "notistack";
 import Skeleton from "@mui/material/Skeleton";
+import { isAdminModeState } from "../../recoil/atoms/isAdminModeState";
+import { useRecoilState } from "recoil";
 
 const Post: React.FC = () => {
+    const [adminMode] = useRecoilState(isAdminModeState);
+
     const [postData, setPostData] = useState<IPost>({});
     const [isImageLoaded, setImageLoaded] = useState(false);
 
@@ -30,7 +34,7 @@ const Post: React.FC = () => {
                 const response = await fetchPostList(queryString);
                 setPostData(response[0]);
             } catch (error: any) {
-                enqueueSnackbar(error.message, { variant: "error", persist: true });
+                enqueueSnackbar(error.message, { variant: "error" });
                 console.error(error);
             }
         })();
@@ -47,7 +51,7 @@ const Post: React.FC = () => {
                 await deletePost(queryString);
                 navigate("/post/list");
             } catch (error: any) {
-                enqueueSnackbar(error.message, { variant: "error", persist: true });
+                enqueueSnackbar(error.message, { variant: "error" });
                 console.error(error);
             }
         })();
@@ -80,20 +84,24 @@ const Post: React.FC = () => {
                 <S.TextContent dangerouslySetInnerHTML={{ __html: String(postData?.content) }} />
             </S.Content>
             <S.Footer>
-                <Link to={`/post/edit?_id=${postData?._id}`}>
-                    <Button variant="contained" size="large" startIcon={<EditNoteIcon />}>
-                        수정하기
-                    </Button>
-                </Link>
-                <Button
-                    variant="contained"
-                    size="large"
-                    color="error"
-                    startIcon={<DeleteForeverIcon />}
-                    onClick={onDeleteHandler}
-                >
-                    삭제하기
-                </Button>
+                {adminMode && (
+                    <>
+                        <Link to={`/post/edit?_id=${postData?._id}`}>
+                            <Button variant="contained" size="large" startIcon={<EditNoteIcon />}>
+                                수정하기
+                            </Button>
+                        </Link>
+                        <Button
+                            variant="contained"
+                            size="large"
+                            color="error"
+                            startIcon={<DeleteForeverIcon />}
+                            onClick={onDeleteHandler}
+                        >
+                            삭제하기
+                        </Button>
+                    </>
+                )}
             </S.Footer>
         </S.MainWrapper>
     );

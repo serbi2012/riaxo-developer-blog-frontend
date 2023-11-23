@@ -39,6 +39,6 @@ export const LoadingContainer = styled.div`
     align-items: center;
     height: 100vh;
     width: 100vw;
-    background-color: #00000020;
+    background-color: var(--color-border-gray1);
     z-index: 100000;
 `;

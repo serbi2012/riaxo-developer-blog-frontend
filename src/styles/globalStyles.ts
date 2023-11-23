@@ -11,24 +11,18 @@ export const GlobalStyle = styled.createGlobalStyle`
     }
 
     :root {
-        --brand-secondary-white: #fff;
-        --grayscale-gray1: #777;
-        --grayscale-gray2: #dadada;
-        --grayscale-gray3: #f9f9f9;
-        --grayscale-gray4: #999;
-        --color-whitesmoke-100: #f6f6f6;
-        --color-whitesmoke-200: #f3f3f3;
-        --color-gainsboro-100: #d9d9d9;
-        --color-gainsboro-200: #e4e4e4;
-        --color-silver: #bdbbbb;
-        --color-black: #000;
-        --color-firebrick: #d64242;
-        --color-mistyrose: #fedfdf;
-        --brand-secondary-bggray: #f3f3f6;
-        --brand-primary-skyblue: #1ea2d9;
-        --brand-primary-darknavy: #3e414a;
-        --brand-primary-navy: #1d2d5a;
-        --brand-secondary-light-sky-blue: #f1f8fc;
+        --color-font-darknavy: #333333;
+        --color-font-placeholder-darknavy: #c8c8c8;
+        --color-border-gray1: #00000040;
+        --color-border-gray2: #dadada;
+        --color-border-gray3: #dadada40;
+        --color-white: #ffffff;
+        --color-black: #000000;
+    }
+
+    p {
+        font-family: "Noto Sans KR";
+        color: var(--color-font-darknavy);
     }
 
     h1,
@@ -36,7 +30,7 @@ export const GlobalStyle = styled.createGlobalStyle`
     h3,
     h4 {
         font-family: "Noto Sans KR";
-        color: #000000;
+        color: var(--color-font-darknavy);
     }
 
     h1,
@@ -63,7 +57,7 @@ export const GlobalStyle = styled.createGlobalStyle`
 
     a {
         text-decoration: none;
-        color: black;
+        color: var(--color-black);
     }
 
     .center-align {
@@ -87,5 +81,46 @@ export const GlobalStyle = styled.createGlobalStyle`
 
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
+    }
+
+    // SECTION - sweetalert
+    .swal-confirm {
+        .swal-text {
+            text-align: center;
+        }
+
+        .swal-footer {
+            .swal-button-container {
+                margin: 0;
+                padding: 0;
+                width: 50%;
+
+                .swal-button {
+                    border-radius: 0px;
+
+                    :hover {
+                        filter: brightness(0.9);
+                    }
+                }
+
+                :first-child {
+                    .swal-button {
+                        background-color: #dadada;
+                        border-bottom-left-radius: 10px;
+                    }
+                }
+
+                :last-child {
+                    .swal-button {
+                        border-bottom-right-radius: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    .swal-modal {
+        transform: translateZ(0) scale(1) !important;
+        -webkit-transform: translateZ(0) scale(1) !important;
     }
 `;

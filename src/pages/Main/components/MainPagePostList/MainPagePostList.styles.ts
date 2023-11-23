@@ -28,7 +28,7 @@ export const PostItem = styled(Link)`
     width: 100%;
     gap: 5px;
     border-radius: 10px;
-    border: 1px solid #dadada;
+    border: 1px solid var(--color-border-gray2);
     transition: all ease 0.2s;
 
     p > {
@@ -41,7 +41,7 @@ export const PostItem = styled(Link)`
     }
 
     &:hover {
-        background-color: #dadada40;
+        background-color: var(--color-border-gray2) 40;
         scale: 1.02;
         cursor: pointer;
     }

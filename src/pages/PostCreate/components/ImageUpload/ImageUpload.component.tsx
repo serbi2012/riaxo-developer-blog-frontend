@@ -104,7 +104,7 @@ const ProfileImgUpload: React.FC<PropsType> = ({ aspectRatio = 1, setImage, defa
                 {compressedImage && compressedImage !== "deleted" ? (
                     <S.ProfileImg src={compressedImage} />
                 ) : (
-                    <div className="cover">{isCompressLoading ? "이미지 압축 중.." : "이미지가 없습니다."}</div>
+                    <S.LoadingText>{isCompressLoading ? "이미지 압축 중.." : "이미지가 없습니다."}</S.LoadingText>
                 )}
 
                 {uploadImage && (

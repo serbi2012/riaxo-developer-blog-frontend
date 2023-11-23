@@ -28,7 +28,7 @@ export const TitleInput = styled.input`
     width: 100%;
     text-align: left;
     padding: 10px;
-    color: var(--brand-primary-darknavy);
+    color: var(--color-font-darknavy);
     font-size: 48px;
     line-height: 60px;
     font-weight: 700;
@@ -39,7 +39,7 @@ export const TitleInput = styled.input`
     transition: all ease 0.1s;
 
     &:hover {
-        border: 2px solid #c8c8c8;
+        border: 2px solid var(--color-font-placeholder-darknavy);
     }
 
     &:focus {
@@ -47,7 +47,7 @@ export const TitleInput = styled.input`
     }
 
     &::placeholder {
-        color: #c8c8c8;
+        color: var(--color-font-placeholder-darknavy);
     }
 `;
 
@@ -60,38 +60,8 @@ export const ImageContent = styled.div`
 
     & > .vertical-line {
         height: 180px;
-        border-right: 1px solid #00000040;
+        border-right: 1px solid var(--color-border-gray1);
     }
-`;
-
-export const ImageGenerateBox = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    height: 100%;
-    width: 64%;
-    gap: 5px;
-`;
-
-export const GeneratedImageBox = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    padding: 10px 0px;
-    gap: 10px;
-    overflow-x: scroll;
-`;
-
-export const AiImage = styled.img`
-    min-height: 100px;
-    max-height: 100px;
-    min-width: 200px;
-    max-width: 200px;
-    object-fit: cover;
-    cursor: pointer;
 `;
 
 export const Content = styled.div`

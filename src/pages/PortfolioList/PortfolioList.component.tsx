@@ -1,6 +1,5 @@
 import { T } from "../../styles/TextGuide.styles";
 import * as S from "./PortfolioList.styles";
-import PostListSearchBar from "./components/PortfolioListSearchBar/PortfolioListSearchBar.component";
 import PostTag from "../../components/@shared/PostTag/PostTag.component";
 import portfolioImage1 from "./../../assets/image/portfolio_img1.jpg";
 import portfolioImage2 from "./../../assets/image/portfolio_img2.jpg";
@@ -37,7 +36,6 @@ const PORTFOLIO_ITEMS = [
 const PortfolioList: React.FC = () => {
     return (
         <S.MainWrapper>
-            <PostListSearchBar />
             {PORTFOLIO_ITEMS?.map((item, index) => (
                 <S.PostListWrapper key={index} to={item?.link}>
                     {item?.image ? (

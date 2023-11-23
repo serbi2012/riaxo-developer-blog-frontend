@@ -2,6 +2,7 @@ import * as S from "./IntroBox.styles";
 import ProfileImage from "../../../../assets/image/profile-image.png";
 import { T } from "../../../../styles/TextGuide.styles";
 import { Link } from "react-router-dom";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 const DETAILS_ARRAY = [
     {
@@ -33,8 +34,9 @@ const IntroBox: React.FC = () => {
                             {item.title} <span>&nbsp;</span>
                         </T.Subtitle1>
                         {item?.isLink ? (
-                            <Link to={item.value}>
+                            <Link to={item.value} target="_blank">
                                 <T.Body2>{item.value}</T.Body2>
+                                <LaunchIcon />
                             </Link>
                         ) : (
                             <T.Body2>{item.value}</T.Body2>
