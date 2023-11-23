@@ -54,7 +54,7 @@ const PostListSearchBar = ({ setSelectedTags }: PropsType) => {
                 sx={{ width: "100%" }}
                 options={tagOptions}
                 getOptionLabel={(option) => option}
-                renderInput={(params) => <TextField {...params} placeholder="태그를 입력해주세요." />}
+                renderInput={(params) => <TextField {...params} placeholder="태그를 선택해주세요." />}
             />
             <S.TagsWrapper>
                 <Button

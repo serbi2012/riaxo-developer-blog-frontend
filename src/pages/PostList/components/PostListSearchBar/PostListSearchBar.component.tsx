@@ -2,7 +2,11 @@ import * as S from "./PostListSearchBar.styles";
 import { IconButton, InputBase, Paper } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-const PostListSearchBar: React.FC = () => {
+interface PropsType {
+    setSearchInput: (value: any) => void;
+}
+
+const PostListSearchBar = ({ setSearchInput }: PropsType) => {
     return (
         <S.MainWrapper>
             <Paper
@@ -20,6 +24,9 @@ const PostListSearchBar: React.FC = () => {
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="검색어를 입력해주세요."
                     inputProps={{ "aria-label": "search google maps" }}
+                    onChange={(event: any) => {
+                        setSearchInput(event?.target?.value);
+                    }}
                 />
                 <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
                     <SearchIcon />
