@@ -11,19 +11,28 @@ import Skeleton from "@mui/material/Skeleton";
 
 const TagList: React.FC = () => {
     const [postData, setPostData] = useState<IPost[]>([]);
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
     useEffect(() => {
-        (async () => {
-            const queryString = getQueryString();
+        if (selectedTags?.length > 0) {
+            (async () => {
+                const queryString = getQueryString();
+                const tagString = selectedTags.join(",");
 
-            const response = await fetchPostList(queryString);
-            setPostData(response);
-        })();
-    }, []);
+                const response = await fetchPostList({
+                    ...queryString,
+                    ...(tagString !== "" && { tags: tagString }),
+                });
+                setPostData(response);
+            })();
+        } else {
+            setPostData([]);
+        }
+    }, [selectedTags]);
 
     return (
         <S.MainWrapper>
-            <TagListSearchBar />
+            <TagListSearchBar setSelectedTags={setSelectedTags} />
             {postData?.map((item, index) => (
                 <S.TagListWrapper key={index} to={`/post?_id=${item?._id}`}>
                     {item?.thumbnailURL ? (

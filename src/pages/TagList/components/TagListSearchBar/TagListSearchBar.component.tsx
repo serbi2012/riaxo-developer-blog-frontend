@@ -1,18 +1,37 @@
 import * as S from "./TagListSearchBar.styles";
 import { Autocomplete, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PostTag from "../../../../components/@shared/PostTag/PostTag.component";
+import { fetchTagList } from "../../../../api/tag.queries";
 
-const TAG_ITEMS = ["Dev", "React", "NodeJS"];
+interface PropsType {
+    setSelectedTags: (value: any) => void;
+}
 
-const PostListSearchBar: React.FC = () => {
+const PostListSearchBar = ({ setSelectedTags }: PropsType) => {
     const [tags, setTags] = useState<any[]>([]);
+    const [tagOptions, setTagOptions] = useState<any[]>([]);
 
     const handleOnTagClick = (item: any) => {
         if (!tags.includes(item)) {
-            setTags((prev) => [...prev, item]);
+            let newValue;
+
+            setTags((prev) => {
+                newValue = [...prev, item];
+                return [...prev, item];
+            });
+            setSelectedTags(newValue);
         }
     };
+
+    useEffect(() => {
+        (async () => {
+            const tagRes = await fetchTagList();
+            const parsedTagOption = tagRes?.map((item) => item?.value);
+
+            setTagOptions(parsedTagOption);
+        })();
+    }, []);
 
     return (
         <S.MainWrapper>
@@ -23,14 +42,15 @@ const PostListSearchBar: React.FC = () => {
                 value={tags}
                 onChange={(event: any, newValue: any) => {
                     setTags(newValue);
+                    setSelectedTags(newValue);
                 }}
                 sx={{ width: "100%" }}
-                options={TAG_ITEMS}
+                options={tagOptions}
                 getOptionLabel={(option) => option}
                 renderInput={(params) => <TextField {...params} placeholder="태그를 입력해주세요." />}
             />
             <S.TagsWrapper>
-                {TAG_ITEMS?.map((item, index) => (
+                {tagOptions?.map((item, index) => (
                     <PostTag
                         key={index}
                         name={item}
