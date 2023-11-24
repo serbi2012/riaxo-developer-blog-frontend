@@ -33,7 +33,9 @@ const PostCreate: React.FC = () => {
     const location = useLocation();
     const { enqueueSnackbar } = useSnackbar();
 
-    const { data: tagOptions } = useCustomQuery("tags", fetchTagList);
+    const { data: tagOptions } = useCustomQuery("tags", fetchTagList, {
+        select: (data) => data.map((tag) => tag.value),
+    });
 
     useCustomQuery(["postToEdit", getQueryString()], () => fetchPostList(getQueryString()), {
         enabled: location.pathname === "/post/edit",
@@ -133,7 +135,7 @@ const PostCreate: React.FC = () => {
                         setTags(newValue);
                     }}
                     sx={{ width: "100%" }}
-                    options={tagOptions?.map((item) => item?.value) || []}
+                    options={tagOptions || []}
                     getOptionLabel={(option) => option}
                     renderTags={(value: readonly string[], getTagProps) =>
                         value.map((option: string, index: number) => (

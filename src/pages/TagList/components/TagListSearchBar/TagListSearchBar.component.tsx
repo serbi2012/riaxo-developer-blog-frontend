@@ -15,7 +15,9 @@ const PostListSearchBar = ({ selectedTags, setSelectedTags }: PropsType) => {
     const [tags, setTags] = useState<any[]>([]);
     const [isFoldMode, setIsFoldMode] = useState<boolean>(false);
 
-    const { data: tagOptions } = useCustomQuery("tags", fetchTagList);
+    const { data: tagOptions } = useCustomQuery("tags", fetchTagList, {
+        select: (data) => data.map((tag) => tag.value),
+    });
 
     const handleOnTagClick = (item: any) => {
         if (tags.includes(item)) {
@@ -45,7 +47,7 @@ const PostListSearchBar = ({ selectedTags, setSelectedTags }: PropsType) => {
                     setSelectedTags(newValue);
                 }}
                 sx={{ width: "100%" }}
-                options={tagOptions?.map((item) => item?.value) || []}
+                options={tagOptions || []}
                 getOptionLabel={(option) => option}
                 renderInput={(params) => <TextField {...params} placeholder="태그를 선택해주세요." />}
             />
@@ -65,7 +67,7 @@ const PostListSearchBar = ({ selectedTags, setSelectedTags }: PropsType) => {
                     />
                 </Button>
                 <S.TagsBox isFoldMode={isFoldMode}>
-                    {tagOptions?.map((item, index) => (
+                    {(tagOptions || [])?.map((item, index) => (
                         <PostTag
                             key={index}
                             name={item}
