@@ -6,11 +6,13 @@ import { RecoilRoot } from "recoil";
 import Layout from "./layout/Layout.component";
 import { globalTheme } from "./styles/theme.styles";
 import { ThemeProvider } from "@mui/material";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+const queryClient = new QueryClient();
 
 root.render(
-    <>
+    <QueryClientProvider client={queryClient}>
         <BrowserRouter>
             <RecoilRoot>
                 <ThemeProvider theme={globalTheme}>
@@ -21,5 +23,5 @@ root.render(
                 </ThemeProvider>
             </RecoilRoot>
         </BrowserRouter>
-    </>,
+    </QueryClientProvider>,
 );

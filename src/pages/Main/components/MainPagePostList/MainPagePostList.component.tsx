@@ -1,29 +1,24 @@
-import { useEffect, useState } from "react";
 import { T } from "../../../../styles/TextGuide.styles";
 import * as S from "./MainPagePostList.styles";
 import { IPost } from "../../../../types/post.types";
 import { getQueryString } from "../../../../utils/getQueryString";
 import { fetchPostList } from "../../../../api/post.queries";
 import { formatDateFromAPIToYYYYMMDD } from "../../../../utils/formatDate";
+import { useCustomQuery } from "../../../../hooks/useCustomQuery";
 
 const MainPagePostList: React.FC = () => {
-    const [postData, setPostData] = useState<IPost[]>([]);
+    const queryString = getQueryString();
+    const postListQueryKey = ["mainPagePostList", queryString];
 
-    useEffect(() => {
-        (async () => {
-            const queryString = getQueryString();
-
-            const response = await fetchPostList(queryString);
-            const firstTenItems = response.slice(0, 10);
-            setPostData(firstTenItems);
-        })();
-    }, []);
+    const { data: postData } = useCustomQuery<IPost[]>(postListQueryKey, () => fetchPostList(queryString), {
+        select: (data) => data.slice(0, 10),
+    });
 
     return (
         <S.MainWrapper>
             <T.Title1>Post List</T.Title1>
             <S.PostWrapper>
-                {postData.map((item, index) => (
+                {postData?.map((item, index) => (
                     <S.PostItem key={index} to={`/post?_id=${item?._id}`}>
                         <T.Subtitle1>{item.title}</T.Subtitle1>
                         <T.Body4>{formatDateFromAPIToYYYYMMDD(item?.createdAt)}</T.Body4>
