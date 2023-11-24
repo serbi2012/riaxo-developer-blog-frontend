@@ -9,6 +9,10 @@ export const MainWrapper = styled.div`
     height: 100%;
     width: 64%;
     gap: 5px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `;
 
 export const GeneratedImageBox = styled.div`
