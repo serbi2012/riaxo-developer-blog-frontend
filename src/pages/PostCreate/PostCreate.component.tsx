@@ -1,5 +1,5 @@
 import * as S from "./PostCreate.styles";
-import { Autocomplete, Button, Chip, TextField } from "@mui/material";
+import { Autocomplete, Button, Chip, Skeleton, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { TINY_MCE_API_KEY } from "../../constants/API";
@@ -23,6 +23,7 @@ const PostCreate: React.FC = () => {
 
     const [, setIsLoading] = useRecoilState<boolean>(isLoadingState);
 
+    const [isEditorLoad, setIsEditorLoad] = useState<boolean>(false);
     const [image, setImage] = useState<string>("");
     const [pathname, setPathname] = useState<string>("");
     const [defaultPost, setDefaultPost] = useState<IPost>({});
@@ -60,10 +61,6 @@ const PostCreate: React.FC = () => {
             navigate(`/post?_id=${getQueryString()?._id}`);
         },
     });
-
-    useEffect(() => {
-        setPathname(location.pathname);
-    }, [location.pathname]);
 
     const onSubmitHandler = async (event: any) => {
         event?.preventDefault();
@@ -115,6 +112,10 @@ const PostCreate: React.FC = () => {
         }
     };
 
+    useEffect(() => {
+        setPathname(location.pathname);
+    }, [location.pathname]);
+
     return (
         <S.MainWrapper onSubmit={onSubmitHandler}>
             <S.Header>
@@ -156,6 +157,9 @@ const PostCreate: React.FC = () => {
                 <Editor
                     apiKey={TINY_MCE_API_KEY}
                     onInit={(evt, editor) => (editorRef.current = editor)}
+                    onScriptsLoad={() => {
+                        setIsEditorLoad(true);
+                    }}
                     initialValue={pathname === "/post/edit" ? defaultPost?.content : ""}
                     init={{
                         height: 500,
@@ -166,6 +170,7 @@ const PostCreate: React.FC = () => {
                         content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
                     }}
                 />
+                {!isEditorLoad && <Skeleton variant="rounded" style={{ height: "300px", width: "100%" }} />}
             </S.Content>
             <S.Footer>
                 <Button

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import { T } from "../../../../styles/TextGuide.styles";
+import { fadeInKeyframes } from "../../../../styles/animationStyles";
 
 export const MainWrapper = styled.div`
     display: flex;
@@ -9,6 +10,7 @@ export const MainWrapper = styled.div`
     flex-direction: column;
     gap: 20px;
     width: 100%;
+    animation: ${fadeInKeyframes} 0.3s ease forwards;
 `;
 
 export const PostCardWrapper = styled.div`

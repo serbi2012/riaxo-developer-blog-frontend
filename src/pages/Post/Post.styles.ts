@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { fadeInKeyframes } from "../../styles/animationStyles";
 
 export const MainWrapper = styled.div`
     display: flex;
@@ -8,6 +9,7 @@ export const MainWrapper = styled.div`
     padding: 50px 20px;
     width: 100%;
     gap: 100px;
+    animation: ${fadeInKeyframes} 0.5s ease forwards;
 `;
 
 export const ThumbNailImage = styled.img`

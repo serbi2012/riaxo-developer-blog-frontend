@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+import { fadeInKeyframes } from "../../styles/animationStyles";
 
 export const MainWrapper = styled.div`
     display: flex;
@@ -27,6 +28,7 @@ export const PostListWrapper = styled(Link)`
     gap: 20px;
     transition: all 0.1s ease;
     cursor: pointer;
+    animation: ${fadeInKeyframes} 0.3s ease forwards;
 
     &:hover {
         background-color: var(--color-border-gray3);
