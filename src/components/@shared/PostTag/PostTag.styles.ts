@@ -1,11 +1,11 @@
 import { styled } from "styled-components";
 
-export const MainWrapper = styled.div<{ isAnimation?: boolean }>`
+export const MainWrapper = styled.div<{ isAnimation?: boolean; isActive?: boolean }>`
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 5px 10px;
-    background-color: var(--color-border-gray3);
+    background-color: ${({ isActive }) => (isActive ? "var(--color-border-gray1)" : "var(--color-border-gray3)")};
     border-radius: 20px;
 
     ${({ isAnimation }) =>

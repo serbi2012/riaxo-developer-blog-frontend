@@ -32,7 +32,7 @@ const TagList: React.FC = () => {
 
     return (
         <S.MainWrapper>
-            <TagListSearchBar setSelectedTags={setSelectedTags} />
+            <TagListSearchBar selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
             {postData?.map((item, index) => (
                 <S.TagListWrapper key={index} to={`/post?_id=${item?._id}`}>
                     {item?.thumbnailURL ? (
