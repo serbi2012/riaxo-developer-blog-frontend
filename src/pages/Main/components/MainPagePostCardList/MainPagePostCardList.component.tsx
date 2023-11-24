@@ -20,22 +20,40 @@ const MainPagePostCardList: React.FC = () => {
             <S.PostCardWrapper>
                 <S.LargePostCard to={`/post?_id=${processedPostData?.[0]?._id}`}>
                     {isLoading ? (
-                        <Skeleton variant="rounded" style={{ width: "100%", height: "auto", aspectRatio: "2" }} />
+                        <>
+                            <Skeleton variant="rounded" style={{ width: "100%", height: "auto", aspectRatio: "2" }} />
+                            <Skeleton variant="rounded" style={{ width: "60%", height: "30px" }} />
+                            <Skeleton variant="rounded" style={{ width: "30%", height: "30px" }} />
+                            <Skeleton variant="rounded" style={{ width: "100%", height: "100px" }} />
+                        </>
                     ) : (
-                        <img src={processedPostData?.[0]?.thumbnailURL} />
+                        <>
+                            <img src={processedPostData?.[0]?.thumbnailURL} />
+                            <T.Subtitle1>{processedPostData?.[0]?.title}</T.Subtitle1>
+                            <T.Body4>{formatDateFromAPIToYYYYMMDD(processedPostData?.[0]?.createdAt)}</T.Body4>
+                            <T.Body2
+                                dangerouslySetInnerHTML={{ __html: String(processedPostData?.[0]?.summaryContent) }}
+                            />
+                        </>
                     )}
-
-                    <T.Subtitle1>{processedPostData?.[0]?.title}</T.Subtitle1>
-                    <T.Body4>{formatDateFromAPIToYYYYMMDD(processedPostData?.[0]?.createdAt)}</T.Body4>
-                    <T.Body2 dangerouslySetInnerHTML={{ __html: String(processedPostData?.[0]?.summaryContent) }} />
                 </S.LargePostCard>
                 <S.SmallPostCardWrapper>
                     {processedPostData?.slice(1, 4).map((item, index) => (
                         <S.SmallPostCard to={`/post?_id=${item?._id}`} key={index}>
-                            <img src={item?.thumbnailURL} />
-                            <T.Subtitle1>{item?.title}</T.Subtitle1>
-                            <T.Body4>{formatDateFromAPIToYYYYMMDD(item?.createdAt)}</T.Body4>
-                            <T.Body2 dangerouslySetInnerHTML={{ __html: String(item?.summaryContent) }} />
+                            {isLoading ? (
+                                <>
+                                    <Skeleton variant="rounded" style={{ width: "60%", height: "30px" }} />
+                                    <Skeleton variant="rounded" style={{ width: "30%", height: "30px" }} />
+                                    <Skeleton variant="rounded" style={{ width: "100%", height: "auto", flex: "1" }} />
+                                </>
+                            ) : (
+                                <>
+                                    <img src={item?.thumbnailURL} />
+                                    <T.Subtitle1>{item?.title}</T.Subtitle1>
+                                    <T.Body4>{formatDateFromAPIToYYYYMMDD(item?.createdAt)}</T.Body4>
+                                    <T.Body2 dangerouslySetInnerHTML={{ __html: String(item?.summaryContent) }} />
+                                </>
+                            )}
                         </S.SmallPostCard>
                     ))}
                 </S.SmallPostCardWrapper>

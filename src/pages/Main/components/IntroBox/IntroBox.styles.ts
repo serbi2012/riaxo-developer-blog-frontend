@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { fadeInKeyframes } from "../../../../styles/animationStyles";
 
 export const MainWrapper = styled.div`
     display: flex;
@@ -6,6 +7,7 @@ export const MainWrapper = styled.div`
     align-items: center;
     gap: 20px;
     width: 100%;
+    animation: ${fadeInKeyframes} 0.3s ease forwards;
 
     @media (max-width: 768px) {
         flex-direction: column;

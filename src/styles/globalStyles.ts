@@ -10,6 +10,10 @@ export const GlobalStyle = styled.createGlobalStyle`
         appearance: none;
     }
 
+    body {
+        overflow-y: scroll;
+    }
+
     :root {
         --color-font-darknavy: #333333;
         --color-font-placeholder-darknavy: #c8c8c8;
@@ -67,7 +71,7 @@ export const GlobalStyle = styled.createGlobalStyle`
     }
 
     ::-webkit-scrollbar {
-        width: 16px;
+        width: 12px;
     }
 
     ::-webkit-scrollbar-track {
