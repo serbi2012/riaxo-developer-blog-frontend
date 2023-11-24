@@ -15,6 +15,8 @@ import { isLoadingState } from "../../recoil/atoms";
 import { useSnackbar } from "notistack";
 import ImageGenerateBox from "./components/ImageGenerateBox/ImageGenerateBox.component";
 import { fetchTagList } from "../../api/tag.queries";
+import { useCustomQuery } from "../../hooks/useCustomQuery";
+import { useCustomMutation } from "../../hooks/useCustomMutation";
 
 const PostCreate: React.FC = () => {
     const editorRef = useRef<any>(null);
@@ -26,35 +28,42 @@ const PostCreate: React.FC = () => {
     const [defaultPost, setDefaultPost] = useState<IPost>({});
     const [title, setTitle] = useState<string>("");
     const [tags, setTags] = useState<any[] | undefined>([]);
-    const [tagOptions, setTagOptions] = useState<any[]>([]);
 
     const navigate = useNavigate();
     const location = useLocation();
     const { enqueueSnackbar } = useSnackbar();
 
+    const { data: tagOptions } = useCustomQuery("tags", fetchTagList, {
+        select: (data) => data.map((tag) => tag.value),
+    });
+
+    useCustomQuery(["postToEdit", getQueryString()], () => fetchPostList(getQueryString()), {
+        enabled: location.pathname === "/post/edit",
+        onSuccess: (data) => {
+            const post = data[0] || {};
+
+            setDefaultPost(post);
+            setTitle(String(post.title));
+            setTags(post.tags);
+            setImage(post.thumbnailURL || "");
+        },
+    });
+
+    const { mutate: createPostMutation } = useCustomMutation(createPost, {
+        onSuccess: () => {
+            navigate("/");
+        },
+    });
+
+    const { mutate: updatePostMutation } = useCustomMutation(updatePost, {
+        onSuccess: () => {
+            navigate(`/post?_id=${getQueryString()?._id}`);
+        },
+    });
+
     useEffect(() => {
-        setPathname(location?.pathname);
-
-        (async () => {
-            const tagRes = await fetchTagList();
-            const parsedTagOption = tagRes?.map((item) => item?.value);
-
-            setTagOptions(parsedTagOption);
-        })();
-
-        if (location?.pathname === "/post/edit") {
-            (async () => {
-                const queryString = getQueryString();
-
-                const response = await fetchPostList(queryString);
-
-                setDefaultPost(response[0]);
-                setTitle(String(response[0]?.title));
-                setTags(response[0]?.tags);
-                setImage(response[0]?.thumbnailURL ? String(response[0]?.thumbnailURL) : "");
-            })();
-        }
-    }, [location]);
+        setPathname(location.pathname);
+    }, [location.pathname]);
 
     const onSubmitHandler = async (event: any) => {
         event?.preventDefault();
@@ -63,16 +72,18 @@ const PostCreate: React.FC = () => {
             const content = editorRef.current.getContent();
             const queryString = getQueryString();
 
+            setIsLoading(true);
+
             try {
-                setIsLoading(true);
+                const imageType = typeof image;
 
                 let thumbnailURL: any = "";
 
-                if (typeof image === "string") {
+                if (imageType === "string") {
                     if (image?.includes("https://")) {
                         thumbnailURL = image;
                     }
-                } else if (image && image !== "deleted" && defaultPost?.thumbnailURL !== String(image)) {
+                } else if (imageType === "object") {
                     thumbnailURL = await createImageUpload(image);
                 }
 
@@ -86,13 +97,10 @@ const PostCreate: React.FC = () => {
 
                 switch (pathname) {
                     case "/post/create":
-                        await createPost(body);
-                        navigate("/");
+                        createPostMutation(body);
                         break;
                     case "/post/edit":
-                        await updatePost(body);
-                        navigate(`/post?_id=${queryString?._id}`);
-
+                        updatePostMutation(body);
                         break;
 
                     default:
@@ -127,7 +135,7 @@ const PostCreate: React.FC = () => {
                         setTags(newValue);
                     }}
                     sx={{ width: "100%" }}
-                    options={tagOptions}
+                    options={tagOptions || []}
                     getOptionLabel={(option) => option}
                     renderTags={(value: readonly string[], getTagProps) =>
                         value.map((option: string, index: number) => (

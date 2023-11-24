@@ -4,65 +4,58 @@ import { useEffect } from "react";
 import { isSideBarOpenState } from "./recoil/atoms";
 import { useRecoilState } from "recoil";
 import { fetchLogin, fetchUserInfo } from "./api/login.queries";
-import { useSnackbar } from "notistack";
 import { isAdminModeState } from "./recoil/atoms/isAdminModeState";
 import { useLogin, useLogout } from "./hooks/useAuth";
 import { getCookie } from "./utils/cookieUtils";
+import { useCustomQuery } from "./hooks/useCustomQuery";
+import { useCustomMutation } from "./hooks/useCustomMutation";
 
 const App = () => {
     const [, setIsSideBarOpen] = useRecoilState(isSideBarOpenState);
     const [adminMode, setAdminMode] = useRecoilState(isAdminModeState);
 
     const location = useLocation();
-    const { enqueueSnackbar } = useSnackbar();
     const { handleLogin } = useLogin();
     const { handleLogout } = useLogout();
+
+    const riaxoBlogAuthToken = getCookie("riaxo-blog-auth-token");
+
+    useCustomQuery(["userInfo", riaxoBlogAuthToken], () => fetchUserInfo({ accessToken: riaxoBlogAuthToken }), {
+        onSuccess: (data) => {
+            if (data?.user?.role === "admin") {
+                setAdminMode(true);
+            } else {
+                handleLogout();
+            }
+        },
+        onError: () => {
+            handleLogout();
+        },
+        enabled: !!riaxoBlogAuthToken,
+    });
+
+    const { mutate: handleGithubLogin } = useCustomMutation(fetchLogin, {
+        onSuccess: (data) => {
+            setAdminMode(data?.role === "admin");
+            if (data?.role === "admin") {
+                handleLogin(data?.token);
+            } else {
+                handleLogout();
+            }
+        },
+    });
 
     useEffect(() => {
         setIsSideBarOpen(false);
     }, [location, adminMode]);
 
     useEffect(() => {
-        const riaxoBlogAuthToken = getCookie("riaxo-blog-auth-token");
-
-        if (riaxoBlogAuthToken) {
-            (async () => {
-                try {
-                    const response = await fetchUserInfo({ accessToken: riaxoBlogAuthToken });
-                    const userRole = response?.user?.role;
-
-                    if (userRole === "admin") {
-                        setAdminMode(true);
-                    } else {
-                        handleLogout();
-                    }
-                } catch (error: any) {
-                    handleLogout();
+        const handleEvent = (event: any) => {
+            if (event.data.type === "github_login") {
+                const code = event.data.code;
+                if (code) {
+                    handleGithubLogin({ code });
                 }
-            })();
-        }
-
-        const handleEvent = async (event: any) => {
-            try {
-                if (event.data.type === "github_login") {
-                    const code = event?.data?.code;
-
-                    if (code) {
-                        const response = await fetchLogin({ code });
-
-                        setAdminMode(response.role === "admin");
-                        if (response.role === "admin") {
-                            handleLogin(response?.token);
-                        } else {
-                            handleLogout();
-
-                            throw Error("해당 계정은 관리자 계정이 아닙니다.");
-                        }
-                    }
-                }
-            } catch (error: any) {
-                enqueueSnackbar(error.message, { variant: "error" });
-                console.error(error);
             }
         };
 
@@ -71,7 +64,7 @@ const App = () => {
         return () => {
             window.removeEventListener("message", handleEvent);
         };
-    }, []);
+    }, [handleGithubLogin]);
 
     return (
         <>
