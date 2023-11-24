@@ -6,28 +6,28 @@ import { fetchTagList } from "../../../../api/tag.queries";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 interface PropsType {
+    selectedTags: string[];
     setSelectedTags: (value: any) => void;
 }
 
-const PostListSearchBar = ({ setSelectedTags }: PropsType) => {
+const PostListSearchBar = ({ selectedTags, setSelectedTags }: PropsType) => {
     const [tags, setTags] = useState<any[]>([]);
     const [tagOptions, setTagOptions] = useState<any[]>([]);
     const [isFoldMode, setIsFoldMode] = useState<boolean>(false);
 
     const handleOnTagClick = (item: any) => {
-        let newValue;
-
-        if (!tags.includes(item)) {
+        if (tags.includes(item)) {
             setTags((prev) => {
-                newValue = [...prev, item];
-                return [...prev, item];
-            });
-
-            if (tags.length === 0) {
-                setSelectedTags([...tags, item]);
-            } else {
+                const newValue = prev.filter((tag) => tag !== item);
                 setSelectedTags(newValue);
-            }
+                return newValue;
+            });
+        } else {
+            setTags((prev) => {
+                const newValue = [...prev, item];
+                setSelectedTags(newValue);
+                return newValue;
+            });
         }
     };
 
@@ -78,6 +78,7 @@ const PostListSearchBar = ({ setSelectedTags }: PropsType) => {
                             name={item}
                             size="small"
                             isAnimation
+                            isActive={selectedTags?.includes(item)}
                             onClick={() => {
                                 handleOnTagClick(item);
                             }}
