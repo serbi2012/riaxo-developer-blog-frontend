@@ -21,6 +21,10 @@ export const MainWrapper = styled.div`
     width: 30%;
     height: auto;
     gap: 10px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `;
 
 export const ImageContainer = styled.div`
@@ -64,8 +68,8 @@ export const LoadingText = styled(T.Body4)`
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: clamp(5px, 2.5vmin, 13px);
-    line-height: clamp(11px, 4vmin, 19px);
+    font-size: clamp(8px, 3vmin, 13px);
+    line-height: clamp(14px, 4vmin, 19px);
 `;
 
 export const ProfileDelete = styled.img`

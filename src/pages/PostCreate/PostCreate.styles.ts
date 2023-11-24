@@ -62,6 +62,14 @@ export const ImageContent = styled.div`
         height: 180px;
         border-right: 1px solid var(--color-border-gray1);
     }
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+
+        & > .vertical-line {
+            display: none;
+        }
+    }
 `;
 
 export const Content = styled.div`

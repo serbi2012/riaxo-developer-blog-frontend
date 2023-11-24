@@ -41,7 +41,7 @@ const Header: React.FC = () => {
                     </S.MenuTag>
                 ))}
             </S.MenuContainer>
-            {adminMode && <T.Body3>Admin Mode</T.Body3>}
+            {adminMode && <T.Body3 style={{ textAlign: "center" }}>Admin Mode</T.Body3>}
             <Link to="/">
                 <S.LogoImage src={HeaderLogo} />
             </Link>
