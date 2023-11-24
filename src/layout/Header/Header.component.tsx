@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 const PAGE_ITEMS = [
     { title: "Posts", link: "/post/list" },
     { title: "Tags", link: "/tag/list" },
-    { title: "Portfolio", link: "/portfolio/list" },
+    // { title: "Portfolio", link: "/portfolio/list" },
 ];
 
 const Header: React.FC = () => {
