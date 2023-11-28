@@ -2,7 +2,7 @@ import * as S from "./PostCreate.styles";
 import { Autocomplete, Button, Chip, Skeleton, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { TINY_MCE_API_KEY } from "../../constants/API";
+import { BASE_URL, TINY_MCE_API_KEY } from "../../constants/API";
 import { EDIT_TOOLBAR, PLUGINS } from "../../constants/tinyMceOption";
 import { createPost, fetchPostList, updatePost } from "../../api/post.queries";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -17,6 +17,7 @@ import ImageGenerateBox from "./components/ImageGenerateBox/ImageGenerateBox.com
 import { fetchTagList } from "../../api/tag.queries";
 import { useCustomQuery } from "../../hooks/useCustomQuery";
 import { useCustomMutation } from "../../hooks/useCustomMutation";
+import axios from "axios";
 
 const PostCreate: React.FC = () => {
     const editorRef = useRef<any>(null);
@@ -157,7 +158,7 @@ const PostCreate: React.FC = () => {
                 <Editor
                     apiKey={TINY_MCE_API_KEY}
                     onInit={(evt, editor) => (editorRef.current = editor)}
-                    onScriptsLoad={() => {
+                    onGetContent={() => {
                         setIsEditorLoad(true);
                     }}
                     initialValue={pathname === "/post/edit" ? defaultPost?.content : ""}
@@ -168,6 +169,23 @@ const PostCreate: React.FC = () => {
                         plugins: PLUGINS,
                         toolbar: EDIT_TOOLBAR,
                         content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                        images_upload_handler: (blobInfo) =>
+                            new Promise((resolve, reject) => {
+                                axios
+                                    .post(
+                                        `${BASE_URL}/image/upload`,
+                                        { image: blobInfo.blob() },
+                                        {
+                                            headers: { "Content-Type": "multipart/form-data" },
+                                        },
+                                    )
+                                    .then((res: any) => {
+                                        resolve(res?.data?.data?.path);
+                                    })
+                                    .catch((e) => {
+                                        reject(e);
+                                    });
+                            }),
                     }}
                 />
                 {!isEditorLoad && <Skeleton variant="rounded" style={{ height: "300px", width: "100%" }} />}
