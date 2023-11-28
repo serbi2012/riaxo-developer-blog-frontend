@@ -24,6 +24,10 @@ export const GlobalStyle = styled.createGlobalStyle`
         --color-black: #000000;
     }
 
+    hr {
+        width: 100%;
+        border-color: var(--color-border-gray3);
+    }
     p {
         font-family: "Noto Sans KR";
         color: var(--color-font-darknavy);
