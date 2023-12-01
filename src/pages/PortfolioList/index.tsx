@@ -1,6 +1,6 @@
 import { T } from "../../styles/TextGuide.styles";
-import * as S from "./PortfolioList.styles";
-import PostTag from "../../components/@shared/PostTag/PostTag.component";
+import * as S from "./index.styles";
+import PostTag from "../../components/@shared/PostTag";
 import portfolioImage1 from "./../../assets/image/portfolio_img1.jpg";
 import portfolioImage2 from "./../../assets/image/portfolio_img2.jpg";
 import portfolioImage3 from "./../../assets/image/portfolio_img3.jpg";

@@ -1,4 +1,4 @@
-import * as S from "./IntroBox.styles";
+import * as S from "./index.styles";
 import ProfileImage from "../../../../assets/image/profile-image.png";
 import { T } from "../../../../styles/TextGuide.styles";
 import { Link } from "react-router-dom";

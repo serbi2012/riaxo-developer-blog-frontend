@@ -1,12 +1,12 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import Main from "../pages/Main/Main.component";
-import Post from "../pages/Post/Post.component";
-import PostList from "../pages/PostList/PostList.component";
-import PostCreate from "../pages/PostCreate/PostCreate.component";
-import PortfolioList from "../pages/PortfolioList/PortfolioList.component";
-import Login from "../pages/Login/Login.component";
+import Main from "../pages/Main";
+import Post from "../pages/Post";
+import PostList from "../pages/PostList";
+import PostCreate from "../pages/PostCreate";
+import PortfolioList from "../pages/PortfolioList";
+import Login from "../pages/Login";
 import { AdminOnly } from "./AccountChecker";
-import TagList from "../pages/TagList/TagList.component";
+import TagList from "../pages/TagList";
 
 const Router = () => {
     return (

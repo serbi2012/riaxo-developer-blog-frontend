@@ -1,38 +1,45 @@
 import { T } from "../../styles/TextGuide.styles";
-import * as S from "./TagList.styles";
-import { useState } from "react";
+import * as S from "./index.styles";
+import { useCallback, useEffect, useState } from "react";
 import { fetchPostList } from "../../api/post.queries";
-import { IPost } from "../../types/post.types";
 import { getQueryString } from "../../utils/getQueryString";
-import TagListSearchBar from "./components/TagListSearchBar/TagListSearchBar.component";
+import PostListSearchBar from "./components/PostListSearchBar";
 import { formatDateFromAPIToYYYYMMDD } from "../../utils/formatDate";
-import PostTag from "../../components/@shared/PostTag/PostTag.component";
+import PostTag from "../../components/@shared/PostTag";
 import Skeleton from "@mui/material/Skeleton";
+import { debounce } from "lodash";
 import { useCustomQuery } from "../../hooks/useCustomQuery";
 
-const TagList: React.FC = () => {
-    const [selectedTags, setSelectedTags] = useState<string[]>([]);
+const PostList: React.FC = () => {
+    const [searchInput, setSearchInput] = useState<string>("");
+    const [debouncedSearchInput, setDebouncedSearchInput] = useState<string>("");
 
-    const queryString = getQueryString();
-    const tagString = selectedTags.join(",");
+    const { data: postData, isLoading } = useCustomQuery(["posts", debouncedSearchInput], () => {
+        const queryString = getQueryString();
+        const body = debouncedSearchInput ? { ...queryString, title: debouncedSearchInput } : queryString;
+        return fetchPostList(body);
+    });
 
-    const { data: postData, isLoading } = useCustomQuery<IPost[]>(
-        ["postListByTags", selectedTags],
-        () =>
-            fetchPostList({
-                ...queryString,
-                ...(tagString && { tags: tagString }),
-            }),
-        {
-            enabled: selectedTags.length > 0,
-        },
+    const debouncedSearchHandler = useCallback(
+        debounce((newSearchInput) => {
+            setDebouncedSearchInput(newSearchInput);
+        }, 50),
+        [],
     );
+
+    useEffect(() => {
+        debouncedSearchHandler(searchInput);
+
+        return () => {
+            debouncedSearchHandler.cancel();
+        };
+    }, [searchInput, debouncedSearchHandler]);
 
     return (
         <S.MainWrapper>
-            <TagListSearchBar selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
+            <PostListSearchBar setSearchInput={setSearchInput} />
             {postData?.map((item, index) => (
-                <S.TagListWrapper key={index} to={`/post?_id=${item?._id}`}>
+                <S.PostListWrapper key={index} to={`/post?_id=${item?._id}`}>
                     {isLoading ? (
                         <>
                             <Skeleton variant="rounded" style={{ height: "100%", width: "auto", aspectRatio: "1" }} />
@@ -58,10 +65,10 @@ const TagList: React.FC = () => {
                             </S.PostDetail>
                         </>
                     )}
-                </S.TagListWrapper>
+                </S.PostListWrapper>
             ))}
         </S.MainWrapper>
     );
 };
 
-export default TagList;
+export default PostList;

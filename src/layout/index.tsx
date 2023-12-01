@@ -1,7 +1,6 @@
-import * as S from "./Layout.styles";
-import Header from "./Header/Header.component";
-import { IProps } from "./Layout.types";
-import SideBar from "./SideBar/SideBar.component";
+import * as S from "./index.styles";
+import Header from "./Header";
+import SideBar from "./SideBar";
 import { isSideBarOpenState } from "../recoil/atoms/isSideBarOpenState";
 import { isLoadingState } from "../recoil/atoms";
 import { useRecoilState } from "recoil";
@@ -12,6 +11,10 @@ import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRef } from "react";
+
+export interface IProps {
+    children: JSX.Element;
+}
 
 const Layout: React.FC<IProps> = (props: IProps) => {
     const notistackRef = useRef<any>();
