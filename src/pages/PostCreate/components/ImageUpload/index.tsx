@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Cropper, ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import * as S from "./ImageUpload.styles";
-import useImageCompress from "./useImageCompress";
+import * as S from "./index.styles";
+import useImageCompress from "./hooks/useImageCompress";
 import { dataURItoFile } from "../../../../utils/dataURItoFile";
 import { T } from "../../../../styles/TextGuide.styles";
 import { Button } from "@mui/material";

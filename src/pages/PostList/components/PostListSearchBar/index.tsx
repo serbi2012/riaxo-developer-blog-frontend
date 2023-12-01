@@ -1,4 +1,4 @@
-import * as S from "./PostListSearchBar.styles";
+import * as S from "./index.styles";
 import { IconButton, InputBase, Paper } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 

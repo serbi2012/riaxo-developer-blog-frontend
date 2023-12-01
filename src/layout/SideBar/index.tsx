@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
 import { T } from "../../styles/TextGuide.styles";
-import * as S from "./SideBar.styles";
+import * as S from "./index.styles";
 import HeaderLogo from "../../assets/image/riaxo-logo.png";
 import { isSideBarOpenState } from "../../recoil/atoms";
 import { Button } from "@mui/material";

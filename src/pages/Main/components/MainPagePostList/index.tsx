@@ -1,6 +1,6 @@
 import { T } from "../../../../styles/TextGuide.styles";
-import * as S from "./MainPagePostList.styles";
-import { IPost } from "../../../../types/post.types";
+import * as S from "./indexstyles";
+import { IPost } from "../../../../types/post";
 import { getQueryString } from "../../../../utils/getQueryString";
 import { fetchPostList } from "../../../../api/post.queries";
 import { formatDateFromAPIToYYYYMMDD } from "../../../../utils/formatDate";

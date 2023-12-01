@@ -1,9 +1,9 @@
 import { T } from "../../styles/TextGuide.styles";
-import * as S from "./Post.styles";
-import PostTag from "../../components/@shared/PostTag/PostTag.component";
+import * as S from "./index.styles";
+import PostTag from "../../components/@shared/PostTag";
 import { useEffect } from "react";
 import { deletePost, fetchPostList } from "../../api/post.queries";
-import { IPost } from "../../types/post.types";
+import { IPost } from "../../types/post";
 import { Button } from "@mui/material";
 import { getQueryString } from "../../utils/getQueryString";
 import { formatDateFromAPIToYYYYMMDD } from "../../utils/formatDate";

@@ -1,7 +1,7 @@
-import * as S from "./TagListSearchBar.styles";
+import * as S from "./index.styles";
 import { Autocomplete, Button, TextField } from "@mui/material";
 import { useState } from "react";
-import PostTag from "../../../../components/@shared/PostTag/PostTag.component";
+import PostTag from "../../../../components/@shared/PostTag";
 import { fetchTagList } from "../../../../api/tag.queries";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useCustomQuery } from "../../../../hooks/useCustomQuery";

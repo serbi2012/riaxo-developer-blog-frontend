@@ -1,5 +1,5 @@
 import { T } from "../../../styles/TextGuide.styles";
-import * as S from "./PostTag.styles";
+import * as S from "./index.styles";
 export interface IPostTag {
     name?: string;
     size?: "large" | "small";

@@ -1,4 +1,4 @@
-import * as S from "./Header.styles";
+import * as S from "./index.styles";
 import { T } from "../../styles/TextGuide.styles";
 import HeaderLogo from "../../assets/image/riaxo-logo.png";
 import { useRecoilState } from "recoil";

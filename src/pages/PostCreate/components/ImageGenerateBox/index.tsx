@@ -1,4 +1,4 @@
-import * as S from "./ImageGenerateBox.styles";
+import * as S from "./index.styles";
 import { CircularProgress, IconButton, InputBase, Paper } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { useSnackbar } from "notistack";
