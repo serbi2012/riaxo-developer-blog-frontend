@@ -7,6 +7,7 @@ import "dayjs/locale/ko";
 const Main: React.FC = () => {
     return (
         <S.MainWrapper>
+            <div>hello</div>
             <IntroBox />
             <MainPagePostCardList />
             <MainPagePostList />
