@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { T } from "../../../../styles/TextGuide.styles";
+import { InputBase } from "@mui/material";
 
 export const MainWrapper = styled.div`
     display: flex;
@@ -24,6 +25,10 @@ export const GeneratedImageBox = styled.div`
     padding: 10px 0px;
     gap: 10px;
     overflow-x: scroll;
+`;
+
+export const SearchInput = styled(InputBase)`
+    flex: 1;
 `;
 
 export const NoImageText = styled(T.Title1)`

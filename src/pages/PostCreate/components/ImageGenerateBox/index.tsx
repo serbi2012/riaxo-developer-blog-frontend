@@ -1,5 +1,5 @@
 import * as S from "./index.styles";
-import { CircularProgress, IconButton, InputBase, Paper } from "@mui/material";
+import { CircularProgress, IconButton, Paper } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
@@ -44,8 +44,7 @@ const ImageGenerateBox = ({ setImage }: PropsType) => {
                     boxShadow: "none",
                 }}
             >
-                <InputBase
-                    sx={{ ml: 1, flex: 1 }}
+                <S.SearchInput
                     placeholder="검색어를 입력해주세요."
                     value={aiImageInput}
                     onChange={(event) => {
