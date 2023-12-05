@@ -13,3 +13,8 @@ export const fetchUserInfo = async (params?: any) => {
 
     return response.data;
 };
+
+export const fetchRefreshToken = async (params?: any) => {
+    const response = await axios.post(`${BASE_URL}/auth/refresh`, { params });
+    return response.data;
+};
