@@ -1,5 +1,5 @@
 import * as S from "./index.styles";
-import { IconButton, InputBase, Paper } from "@mui/material";
+import { IconButton, Paper } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 interface PropsType {
@@ -20,10 +20,8 @@ const PostListSearchBar = ({ setSearchInput }: PropsType) => {
                     boxShadow: "none",
                 }}
             >
-                <InputBase
-                    sx={{ ml: 1, flex: 1 }}
+                <S.SearchInput
                     placeholder="검색어를 입력해주세요."
-                    inputProps={{ "aria-label": "search google maps" }}
                     onChange={(event: any) => {
                         setSearchInput(event?.target?.value);
                     }}
