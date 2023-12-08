@@ -173,7 +173,7 @@ const PostCreate: React.FC = () => {
                             new Promise((resolve, reject) => {
                                 axios
                                     .post(
-                                        `${BASE_URL}/image/upload`,
+                                        `${BASE_URL}/api/image/upload`,
                                         { image: blobInfo.blob() },
                                         {
                                             headers: { "Content-Type": "multipart/form-data" },
