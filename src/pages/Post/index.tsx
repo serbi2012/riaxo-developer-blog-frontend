@@ -1,7 +1,7 @@
 import { T } from "../../styles/TextGuide.styles";
 import * as S from "./index.styles";
 import PostTag from "../../components/@shared/PostTag";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { deletePost, fetchPostList } from "../../api/post.queries";
 import { IPost } from "../../types/post";
 import { Button } from "@mui/material";
@@ -16,8 +16,13 @@ import { useRecoilState } from "recoil";
 import { useQueryClient } from "react-query";
 import { useCustomQuery } from "../../hooks/useCustomQuery";
 import { useCustomMutation } from "../../hooks/useCustomMutation";
+import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import ReactDOMServer from "react-dom/server";
 
 const Post: React.FC = () => {
+    const contentRef = useRef<any>();
+
     const [adminMode] = useRecoilState(isAdminModeState);
 
     const navigate = useNavigate();
@@ -40,6 +45,30 @@ const Post: React.FC = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    useEffect(() => {
+        if (contentRef.current) {
+            const codeBlocks = contentRef.current.querySelectorAll("pre code");
+
+            codeBlocks.forEach((block: any) => {
+                const rawCode = block.textContent;
+                const language = block.className.replace("language-", "");
+
+                // SyntaxHighlighter를 사용하여 코드 블록을 강조 표시합니다.
+                const highlightedCode = (
+                    <SyntaxHighlighter language={language} style={docco}>
+                        {rawCode}
+                    </SyntaxHighlighter>
+                );
+
+                // React 요소를 생성하기 위해 ReactDOMServer.renderToString을 사용합니다.
+                const renderedCode = ReactDOMServer.renderToString(highlightedCode);
+
+                // 기존 코드 블록을 강조된 코드로 교체합니다.
+                block.parentNode.innerHTML = renderedCode;
+            });
+        }
+    }, [postData]);
 
     return (
         <S.MainWrapper>
@@ -66,7 +95,7 @@ const Post: React.FC = () => {
                             {postData?.[0]?.tags?.map((item: string, index) => <PostTag key={index} name={item} />)}
                         </S.PostTagBox>
                     </S.Header>
-                    <S.Content>
+                    <S.Content ref={contentRef}>
                         <S.TextContent dangerouslySetInnerHTML={{ __html: String(postData?.[0]?.content) }} />
                     </S.Content>
                 </>

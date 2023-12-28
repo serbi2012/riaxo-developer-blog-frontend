@@ -51,11 +51,11 @@ export const MenuContainer = styled.div`
         transition: all ease 0.2s;
 
         &:hover {
-            background-color: var(--color-border-gray2) 80;
+            background-color: var(--color-border-gray3);
         }
 
         &:active {
-            background-color: var(--color-border-gray2);
+            filter: brightness(0.8);
         }
     }
 `;
