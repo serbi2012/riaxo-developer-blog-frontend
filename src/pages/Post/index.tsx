@@ -48,21 +48,25 @@ const Post: React.FC = () => {
 
     useEffect(() => {
         if (contentRef.current) {
-            const codeBlocks = contentRef.current.querySelectorAll("pre code");
+            const codeBlocks = contentRef.current.querySelectorAll("code");
 
             codeBlocks.forEach((block: any) => {
                 const rawCode = block.textContent;
                 const language = block.className.replace("language-", "");
 
-                const highlightedCode = (
-                    <SyntaxHighlighter language={language} style={docco}>
-                        {rawCode}
-                    </SyntaxHighlighter>
-                );
+                if (language) {
+                    const highlightedCode = (
+                        <SyntaxHighlighter language={language} style={docco}>
+                            {rawCode}
+                        </SyntaxHighlighter>
+                    );
 
-                const renderedCode = ReactDOMServer.renderToString(highlightedCode);
+                    const renderedCode = ReactDOMServer.renderToString(highlightedCode);
 
-                block.parentNode.innerHTML = renderedCode;
+                    block.parentNode.innerHTML = renderedCode;
+                } else {
+                    block.classList.add("code-block");
+                }
             });
         }
     }, [postData]);

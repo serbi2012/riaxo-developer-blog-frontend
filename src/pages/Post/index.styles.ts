@@ -33,6 +33,17 @@ export const Content = styled.div`
     flex-direction: column;
     width: 100%;
     gap: 50px;
+
+    .code-block {
+        width: 100%;
+        font-family: "Courier New", Courier, monospace;
+        background-color: #f7f7f7;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        color: #d63384;
+        font-weight: bold;
+    }
 `;
 
 export const TextContent = styled.div`
