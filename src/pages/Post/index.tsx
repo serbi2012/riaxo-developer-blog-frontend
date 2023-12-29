@@ -17,7 +17,7 @@ import { useQueryClient } from "react-query";
 import { useCustomQuery } from "../../hooks/useCustomQuery";
 import { useCustomMutation } from "../../hooks/useCustomMutation";
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
-import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { docco } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import ReactDOMServer from "react-dom/server";
 
 const Post: React.FC = () => {
@@ -54,17 +54,14 @@ const Post: React.FC = () => {
                 const rawCode = block.textContent;
                 const language = block.className.replace("language-", "");
 
-                // SyntaxHighlighter를 사용하여 코드 블록을 강조 표시합니다.
                 const highlightedCode = (
                     <SyntaxHighlighter language={language} style={docco}>
                         {rawCode}
                     </SyntaxHighlighter>
                 );
 
-                // React 요소를 생성하기 위해 ReactDOMServer.renderToString을 사용합니다.
                 const renderedCode = ReactDOMServer.renderToString(highlightedCode);
 
-                // 기존 코드 블록을 강조된 코드로 교체합니다.
                 block.parentNode.innerHTML = renderedCode;
             });
         }
