@@ -17,10 +17,23 @@ import { useQueryClient } from "react-query";
 import { useCustomQuery } from "../../hooks/useCustomQuery";
 import { useCustomMutation } from "../../hooks/useCustomMutation";
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { docco } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import ReactDOMServer from "react-dom/server";
+import jsx from "react-syntax-highlighter/dist/cjs/languages/prism/jsx";
+import javascript from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
+import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
+import typescript from "react-syntax-highlighter/dist/cjs/languages/prism/typescript";
+import json from "react-syntax-highlighter/dist/cjs/languages/prism/json";
+import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
 
 const Post: React.FC = () => {
+    SyntaxHighlighter.registerLanguage("jsx", jsx);
+    SyntaxHighlighter.registerLanguage("javascript", javascript);
+    SyntaxHighlighter.registerLanguage("tsx", tsx);
+    SyntaxHighlighter.registerLanguage("typescript", typescript);
+    SyntaxHighlighter.registerLanguage("json", json);
+    SyntaxHighlighter.registerLanguage("css", css);
+
     const contentRef = useRef<any>();
 
     const [adminMode] = useRecoilState(isAdminModeState);
@@ -56,7 +69,7 @@ const Post: React.FC = () => {
 
                 if (language) {
                     const highlightedCode = (
-                        <SyntaxHighlighter language={language} style={dark}>
+                        <SyntaxHighlighter language={language} style={docco}>
                             {rawCode}
                         </SyntaxHighlighter>
                     );
