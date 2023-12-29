@@ -17,7 +17,7 @@ import { useQueryClient } from "react-query";
 import { useCustomQuery } from "../../hooks/useCustomQuery";
 import { useCustomMutation } from "../../hooks/useCustomMutation";
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
-import { docco } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import ReactDOMServer from "react-dom/server";
 
 const Post: React.FC = () => {
@@ -56,7 +56,7 @@ const Post: React.FC = () => {
 
                 if (language) {
                     const highlightedCode = (
-                        <SyntaxHighlighter language={language} style={docco}>
+                        <SyntaxHighlighter language={language} style={dark}>
                             {rawCode}
                         </SyntaxHighlighter>
                     );
