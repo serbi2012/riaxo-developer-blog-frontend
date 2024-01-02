@@ -49,6 +49,12 @@ export const LargePostCard = styled(Link)`
     & > ${T.Subtitle1} {
         margin-top: 10px;
     }
+
+    & > ${T.Body2} {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 2.7em;
+    }
 `;
 
 export const SmallPostCardWrapper = styled.div`
