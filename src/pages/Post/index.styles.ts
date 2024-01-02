@@ -10,6 +10,8 @@ export const MainWrapper = styled.div`
     width: 100%;
     gap: 100px;
     animation: ${fadeInKeyframes} 0.5s ease forwards;
+    background-color: var(--color-white);
+    z-index: 1;
 `;
 
 export const ThumbNailImage = styled.img`

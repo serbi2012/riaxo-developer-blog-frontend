@@ -1,5 +1,5 @@
 import { T } from "../../../../styles/TextGuide.styles";
-import * as S from "./indexstyles";
+import * as S from "./index.styles";
 import { IPost } from "../../../../types/post";
 import { getQueryString } from "../../../../utils/getQueryString";
 import { fetchPostList } from "../../../../api/post.queries";

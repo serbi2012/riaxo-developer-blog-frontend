@@ -26,7 +26,7 @@ const Header: React.FC = () => {
     }, [location]);
 
     return (
-        <S.MainWrapper>
+        <S.MainWrapper id="main-header">
             <S.MenuContainer>
                 <S.HamburgerButton
                     onClick={() => {
