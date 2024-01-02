@@ -2,11 +2,11 @@ import * as S from "./index.styles";
 import { IconButton, Paper } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-interface PropsType {
+interface IPropsType {
     setSearchInput: (value: any) => void;
 }
 
-const PostListSearchBar = ({ setSearchInput }: PropsType) => {
+const PostListSearchBar = ({ setSearchInput }: IPropsType) => {
     return (
         <S.MainWrapper>
             <Paper
