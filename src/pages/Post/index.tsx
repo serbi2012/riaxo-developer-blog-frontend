@@ -16,10 +16,24 @@ import { useRecoilState } from "recoil";
 import { useQueryClient } from "react-query";
 import { useCustomQuery } from "../../hooks/useCustomQuery";
 import { useCustomMutation } from "../../hooks/useCustomMutation";
-import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
-import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import SideNavBox from "./components/SideNavBox";
 import { createRoot } from "react-dom/client";
+import { isMobile } from "react-device-detect";
+import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
+import typescript from "react-syntax-highlighter/dist/cjs/languages/prism/typescript";
+import jsx from "react-syntax-highlighter/dist/cjs/languages/prism/jsx";
+import javascript from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
+import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
+import json from "react-syntax-highlighter/dist/cjs/languages/prism/json";
+
+SyntaxHighlighter.registerLanguage("tsx", tsx);
+SyntaxHighlighter.registerLanguage("typescript", typescript);
+SyntaxHighlighter.registerLanguage("jsx", jsx);
+SyntaxHighlighter.registerLanguage("javascript", javascript);
+SyntaxHighlighter.registerLanguage("css", css);
+SyntaxHighlighter.registerLanguage("json", json);
 
 const Post: React.FC = () => {
     const contentRef = useRef<any>();
@@ -62,11 +76,18 @@ const Post: React.FC = () => {
 
                 if (language) {
                     const container = document.createElement("div");
+                    container.style.width = "100%";
                     block.parentNode.replaceChild(container, block);
 
                     const root = createRoot(container);
                     root.render(
-                        <SyntaxHighlighter language={language} style={docco}>
+                        <SyntaxHighlighter
+                            language={language}
+                            style={vscDarkPlus}
+                            wrapLines
+                            wrapLongLines
+                            customStyle={{ fontSize: isMobile ? "12px" : "16px" }}
+                        >
                             {rawCode}
                         </SyntaxHighlighter>,
                     );
@@ -113,7 +134,6 @@ const Post: React.FC = () => {
                     <>
                         <S.Header>
                             <S.ThumbNailImage src={postData?.[0]?.thumbnailURL} />
-
                             <T.Title3>{postData?.[0]?.title}</T.Title3>
                             <T.Subtitle2>{formatDateFromAPIToYYYYMMDD(postData?.[0].createdAt)}</T.Subtitle2>
                             <S.PostTagBox>
