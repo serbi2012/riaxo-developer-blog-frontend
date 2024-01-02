@@ -20,7 +20,6 @@ import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import SideNavBox from "./components/SideNavBox";
 import { createRoot } from "react-dom/client";
-import { isMobile } from "react-device-detect";
 import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
 import typescript from "react-syntax-highlighter/dist/cjs/languages/prism/typescript";
 import jsx from "react-syntax-highlighter/dist/cjs/languages/prism/jsx";
@@ -81,13 +80,7 @@ const Post: React.FC = () => {
 
                     const root = createRoot(container);
                     root.render(
-                        <SyntaxHighlighter
-                            language={language}
-                            style={vscDarkPlus}
-                            wrapLines
-                            wrapLongLines
-                            customStyle={{ fontSize: isMobile ? "12px" : "16px" }}
-                        >
+                        <SyntaxHighlighter language={language} style={vscDarkPlus} wrapLines wrapLongLines>
                             {rawCode}
                         </SyntaxHighlighter>,
                     );
