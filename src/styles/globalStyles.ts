@@ -68,6 +68,10 @@ export const GlobalStyle = styled.createGlobalStyle`
         color: var(--color-black);
     }
 
+    li {
+        margin: 5px 0px;
+    }
+
     .center-align {
         display: flex;
         justify-content: flex-start;
