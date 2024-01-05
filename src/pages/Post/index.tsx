@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import Skeleton from "@mui/material/Skeleton";
-import { isAdminModeState } from "../../recoil/atoms/isAdminModeState";
+import { isAdminModeState } from "../../recoil/atoms";
 import { useRecoilState } from "recoil";
 import { useQueryClient } from "react-query";
 import { useCustomQuery } from "../../hooks/useCustomQuery";
@@ -91,11 +91,11 @@ const Post: React.FC = () => {
 
             titleBlocks?.forEach((item: any) => {
                 if (String(item.innerHTML)?.includes("# ")) {
-                    const spanElement = document.createElement("span");
+                    const spanElement: HTMLSpanElement = document.createElement("span");
                     spanElement.innerHTML = item.innerHTML;
-                    const textContent = spanElement.textContent || spanElement.innerText;
+                    const textContent: string = spanElement.textContent || spanElement.innerText;
 
-                    const newId = `nav-title${textContent.trim().replace(/\s+/g, "-").replace("#", "")}`;
+                    const newId: string = `nav-title${textContent.trim().replace(/\s+/g, "-").replace("#", "")}`;
                     item.id = newId;
 
                     titleTemptSet.add(newId);
