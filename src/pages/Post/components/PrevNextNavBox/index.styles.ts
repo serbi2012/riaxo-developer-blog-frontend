@@ -18,11 +18,12 @@ export const ContentBox = styled(Link)<{ isNext?: boolean; backImage?: string }>
     align-items: ${({ isNext }) => (isNext ? "flex-start" : "flex-end")};
     justify-content: flex-end;
     flex-direction: column;
-    padding: 5px 7px;
+    padding: 10px;
     height: 90px;
-    width: 30%;
-    border: 2px solid var(--color-font-darknavy);
-    border-radius: 5px;
+    max-width: 300px;
+    width: 47%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     user-select: none;
     cursor: pointer;
     position: relative;
@@ -40,7 +41,7 @@ export const ContentBox = styled(Link)<{ isNext?: boolean; backImage?: string }>
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        filter: saturate(0.1);
+        filter: saturate(0.1) blur(1px);
         opacity: 0.2;
         transition: all 0.3s ease;
     }
@@ -62,6 +63,10 @@ export const ContentBox = styled(Link)<{ isNext?: boolean; backImage?: string }>
         height: 140px;
     }
 
+    &:active {
+        transform: scale(0.95);
+    }
+
     &:hover::after {
         opacity: 0.6;
         top: -10px;
@@ -73,10 +78,24 @@ export const ContentBox = styled(Link)<{ isNext?: boolean; backImage?: string }>
         opacity: 1;
     }
 
-    ${T.Subtitle2}, ${T.Subtitle1} {
+    ${T.Subtitle2}, ${T.Subtitle1}, svg {
         text-align: ${({ isNext }) => (isNext ? "left" : "right")};
         z-index: 3;
         position: relative;
+
+        @media (max-width: 500px) {
+            zoom: 0.8;
+        }
+
+        @media (max-width: 350px) {
+            zoom: 0.6;
+        }
+    }
+
+    svg > path {
+        color: var(--color-font-darknavy);
+        stroke: var(--color-font-darknavy);
+        stroke-width: 1px;
     }
 `;
 
