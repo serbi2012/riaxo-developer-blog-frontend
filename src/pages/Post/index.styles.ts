@@ -8,7 +8,7 @@ export const MainWrapper = styled.div`
     flex-direction: column;
     padding: 50px 20px;
     width: 100%;
-    gap: 10px;
+    gap: 50px;
     animation: ${fadeInKeyframes} 0.5s ease forwards;
     background-color: var(--color-white);
     z-index: 1;
