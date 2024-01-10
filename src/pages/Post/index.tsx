@@ -48,7 +48,9 @@ const Post: React.FC = () => {
 
     const postQueryKey = ["post", getQueryString()];
 
-    const { data: postData, isLoading } = useCustomQuery<IPost[]>(postQueryKey, () => fetchPostList(getQueryString()));
+    const { data: postData, isLoading } = useCustomQuery<IPost[]>(postQueryKey, () =>
+        fetchPostList({ ...getQueryString(), nextPrevPost: true }),
+    );
     const { mutate: deletePostMutate, isLoading: isDeleting } = useCustomMutation(() => deletePost(getQueryString()), {
         onSuccess: () => {
             navigate("/post/list");
@@ -62,7 +64,8 @@ const Post: React.FC = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, [location]);
+        postData;
+    }, [location, postData]);
 
     useEffect(() => {
         if (contentRef.current) {
@@ -165,7 +168,7 @@ const Post: React.FC = () => {
                             </Button>
                         </S.AdminControlBox>
                     )}
-                    <PrevNextNavBox />
+                    <PrevNextNavBox postData={postData} />
                 </S.Footer>
             </S.MainWrapper>
         </>
