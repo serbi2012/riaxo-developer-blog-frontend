@@ -8,7 +8,7 @@ export const MainWrapper = styled.div`
     flex-direction: column;
     padding: 50px 20px;
     width: 100%;
-    gap: 100px;
+    gap: 10px;
     animation: ${fadeInKeyframes} 0.5s ease forwards;
     background-color: var(--color-white);
     z-index: 1;
@@ -79,7 +79,15 @@ export const Footer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     padding-top: 50px;
+    width: 100%;
+`;
+
+export const AdminControlBox = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 10px;
     width: 100%;
 `;

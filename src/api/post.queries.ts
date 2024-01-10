@@ -8,6 +8,18 @@ export const fetchPostList = async (params?: any): Promise<IPost[]> => {
     return response.data.data;
 };
 
+export const fetchNextPost = async (params?: any): Promise<IPost[]> => {
+    const response = await axios.get(`${BASE_URL}/api/post/next`, { params });
+
+    return response.data.data;
+};
+
+export const fetchPrevPost = async (params?: any): Promise<IPost[]> => {
+    const response = await axios.get(`${BASE_URL}/api/post/prev`, { params });
+
+    return response.data.data;
+};
+
 export const createPost = async (params?: any): Promise<IPost[]> => {
     const response = await axios.post(`${BASE_URL}/api/post/create`, { params });
 
