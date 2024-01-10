@@ -14,16 +14,6 @@ export const GlobalStyle = styled.createGlobalStyle`
         overflow-y: scroll;
     }
 
-    :root {
-        --color-font-darknavy: #333333;
-        --color-font-placeholder-darknavy: #c8c8c8;
-        --color-border-gray1: #00000040;
-        --color-border-gray2: #dadada;
-        --color-border-gray3: #dadada40;
-        --color-white: #ffffff;
-        --color-black: #000000;
-    }
-
     hr {
         width: 100%;
         border-color: var(--color-border-gray3);

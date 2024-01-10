@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import "./styles/colorRoot.css";
 import { BrowserRouter } from "react-router-dom";
 import { GlobalStyle } from "./styles/globalStyles";
 import { RecoilRoot } from "recoil";

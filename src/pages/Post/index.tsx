@@ -7,11 +7,11 @@ import { IPost } from "../../types/post";
 import { Button } from "@mui/material";
 import { getQueryString } from "../../utils/getQueryString";
 import { formatDateFromAPIToYYYYMMDD } from "../../utils/formatDate";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import Skeleton from "@mui/material/Skeleton";
-import { isAdminModeState } from "../../recoil/atoms/isAdminModeState";
+import { isAdminModeState } from "../../recoil/atoms";
 import { useRecoilState } from "recoil";
 import { useQueryClient } from "react-query";
 import { useCustomQuery } from "../../hooks/useCustomQuery";
@@ -26,6 +26,7 @@ import jsx from "react-syntax-highlighter/dist/cjs/languages/prism/jsx";
 import javascript from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
 import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
 import json from "react-syntax-highlighter/dist/cjs/languages/prism/json";
+import PrevNextNavBox from "./components/PrevNextNavBox";
 
 SyntaxHighlighter.registerLanguage("tsx", tsx);
 SyntaxHighlighter.registerLanguage("typescript", typescript);
@@ -42,6 +43,7 @@ const Post: React.FC = () => {
     const [titleArray, setTitleArray] = useState<string[]>([]);
 
     const navigate = useNavigate();
+    const location = useLocation();
     const queryClient = useQueryClient();
 
     const postQueryKey = ["post", getQueryString()];
@@ -60,7 +62,7 @@ const Post: React.FC = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, []);
+    }, [location]);
 
     useEffect(() => {
         if (contentRef.current) {
@@ -91,11 +93,11 @@ const Post: React.FC = () => {
 
             titleBlocks?.forEach((item: any) => {
                 if (String(item.innerHTML)?.includes("# ")) {
-                    const spanElement = document.createElement("span");
+                    const spanElement: HTMLSpanElement = document.createElement("span");
                     spanElement.innerHTML = item.innerHTML;
-                    const textContent = spanElement.textContent || spanElement.innerText;
+                    const textContent: string = spanElement.textContent || spanElement.innerText;
 
-                    const newId = `nav-title${textContent.trim().replace(/\s+/g, "-").replace("#", "")}`;
+                    const newId: string = `nav-title${textContent.trim().replace(/\s+/g, "-").replace("#", "")}`;
                     item.id = newId;
 
                     titleTemptSet.add(newId);
@@ -128,7 +130,7 @@ const Post: React.FC = () => {
                         <S.Header>
                             <S.ThumbNailImage src={postData?.[0]?.thumbnailURL} />
                             <T.Title3>{postData?.[0]?.title}</T.Title3>
-                            <T.Subtitle2>{formatDateFromAPIToYYYYMMDD(postData?.[0].createdAt)}</T.Subtitle2>
+                            <T.Subtitle2>{formatDateFromAPIToYYYYMMDD(postData?.[0]?.createdAt)}</T.Subtitle2>
                             <S.PostTagBox>
                                 {postData?.[0]?.tags?.map((item: string, index) => <PostTag key={index} name={item} />)}
                             </S.PostTagBox>
@@ -141,7 +143,7 @@ const Post: React.FC = () => {
 
                 <S.Footer>
                     {adminMode && (
-                        <>
+                        <S.AdminControlBox>
                             <Button
                                 to={`/post/edit?_id=${postData?.[0]?._id}`}
                                 component={Link}
@@ -161,8 +163,9 @@ const Post: React.FC = () => {
                             >
                                 삭제하기
                             </Button>
-                        </>
+                        </S.AdminControlBox>
                     )}
+                    <PrevNextNavBox />
                 </S.Footer>
             </S.MainWrapper>
         </>
