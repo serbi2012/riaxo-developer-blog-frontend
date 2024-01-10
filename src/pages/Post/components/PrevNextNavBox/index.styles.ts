@@ -16,10 +16,10 @@ export const ContentBox = styled(Link)<{ isNext?: boolean; backImage?: string }>
     display: flex;
     justify-content: flex-start;
     align-items: ${({ isNext }) => (isNext ? "flex-start" : "flex-end")};
-    justify-content: flex-end; /* 글씨가 아래에 위치하도록 조정 */
+    justify-content: flex-end;
     flex-direction: column;
     padding: 5px 7px;
-    height: 90px; /* 초기 높이 */
+    height: 90px;
     width: 30%;
     border: 2px solid var(--color-font-darknavy);
     border-radius: 5px;
@@ -29,7 +29,6 @@ export const ContentBox = styled(Link)<{ isNext?: boolean; backImage?: string }>
     overflow: hidden;
     transition: all 0.3s ease;
 
-    /* 배경 이미지를 위한 ::after 의사 요소 생성 */
     &::after {
         content: "";
         position: absolute;
@@ -43,10 +42,9 @@ export const ContentBox = styled(Link)<{ isNext?: boolean; backImage?: string }>
         background-repeat: no-repeat;
         filter: saturate(0.1);
         opacity: 0.2;
-        transition: all 0.3s ease; /* 모든 속성에 대해 트랜지션 적용 */
+        transition: all 0.3s ease;
     }
 
-    /* 그라데이션 효과를 위한 ::before 의사 요소 생성 */
     &::before {
         content: "";
         position: absolute;
@@ -54,31 +52,30 @@ export const ContentBox = styled(Link)<{ isNext?: boolean; backImage?: string }>
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)); /* 하얀색 그라데이션 */
-        opacity: 0; /* 초기에는 투명하게 설정 */
-        transition: opacity 0.3s ease; /* 트랜지션 적용 */
-        z-index: 2; /* 그라데이션을 위로 올립니다 */
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 2;
     }
 
-    /* 마우스 호버 시 스타일 변경 */
     &:hover {
-        height: 140px; /* 높이 증가 */
+        height: 140px;
     }
 
     &:hover::after {
-        opacity: 0.6; /* 불투명도 증가 */
-        top: -10px; /* 이미지를 위로 이동 */
+        opacity: 0.6;
+        top: -10px;
         filter: saturate(0.8);
-        z-index: 1; /* 배경 이미지를 그라데이션 아래로 설정합니다 */
+        z-index: 1;
     }
 
     &:hover::before {
-        opacity: 1; /* 그라데이션 투명도 증가 */
+        opacity: 1;
     }
 
     ${T.Subtitle2}, ${T.Subtitle1} {
         text-align: ${({ isNext }) => (isNext ? "left" : "right")};
-        z-index: 3; /* 글씨가 그라데이션 위에 나타나도록 z-index 증가 */
+        z-index: 3;
         position: relative;
     }
 `;
