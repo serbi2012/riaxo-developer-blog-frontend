@@ -42,3 +42,35 @@ export const LoadingContainer = styled.div`
     background-color: var(--color-border-gray1);
     z-index: 100000;
 `;
+
+export const EasterEggContainer = styled.div<{ isOpen?: boolean }>`
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    transform: ${({ isOpen }) => (isOpen ? "translateY(0px)" : "translateY(80px)")};
+    transition: all 0.3s ease;
+    user-select: none;
+    cursor: pointer;
+
+    & > svg {
+        transform: ${({ isOpen }) => (isOpen ? "translateX(-80px)" : "translateX(0px)")};
+        height: 30px;
+        width: auto;
+        transition: all 0.3s ease;
+    }
+
+    & > div {
+        & > img {
+            height: 80px;
+            width: auto;
+        }
+    }
+
+    @media (max-width: 1280px) {
+        display: none;
+    }
+`;
