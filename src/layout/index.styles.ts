@@ -67,6 +67,40 @@ export const EasterEggContainer = styled.div<{ isOpen?: boolean }>`
         & > img {
             height: 80px;
             width: auto;
+            border-radius: 10px;
+
+            &:hover {
+                transform: scale(1.1);
+                transition: all 0.3s ease;
+                background-color: var(--color-border-gray2);
+            }
+
+            &:active {
+                transform: scale(1);
+                transition: all 0.3s ease;
+                background-color: var(--color-border-gray3);
+            }
+        }
+
+        & > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+
+            &:hover {
+                transform: scale(1.1);
+                transition: all 0.3s ease;
+                background-color: var(--color-border-gray2);
+            }
+
+            &:active {
+                transform: scale(1);
+                transition: all 0.3s ease;
+                background-color: var(--color-border-gray3);
+            }
         }
     }
 
