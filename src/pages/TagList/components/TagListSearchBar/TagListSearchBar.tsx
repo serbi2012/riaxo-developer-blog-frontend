@@ -3,17 +3,17 @@ import { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Autocomplete, Button, TextField } from "@mui/material";
 
-import { fetchTagList } from "../../../../api/index";
-import { PostTag } from "../../../../components/@shared/index";
-import { useCustomQuery } from "../../../../hooks/index";
+import { fetchTagList } from "../../../../api";
+import { PostTag } from "../../../../components/@shared";
+import { useCustomQuery } from "../../../../hooks";
 import * as S from "./TagListSearchBar.styles";
 
-export interface PropsType {
+export interface IProps {
     selectedTags: string[];
     setSelectedTags: (value: any) => void;
 }
 
-export const TagListSearchBar = ({ selectedTags, setSelectedTags }: PropsType) => {
+export const TagListSearchBar = ({ selectedTags, setSelectedTags }: IProps) => {
     const [tags, setTags] = useState<any[]>([]);
     const [isFoldMode, setIsFoldMode] = useState<boolean>(false);
 

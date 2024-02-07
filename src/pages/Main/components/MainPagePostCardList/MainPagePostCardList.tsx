@@ -1,13 +1,13 @@
 import Skeleton from "@mui/material/Skeleton";
 
-import { fetchPostList } from "../../../../api/index";
-import { useCustomQuery } from "../../../../hooks/index";
+import { fetchPostList } from "../../../../api";
+import { useCustomQuery } from "../../../../hooks";
 import { T } from "../../../../styles/TextGuide.styles";
-import { IPost } from "../../../../types/index";
-import { formatDateFromAPIToYYYYMMDD, getQueryString } from "../../../../utils/index";
+import { IPost } from "../../../../types";
+import { formatDateFromAPIToYYYYMMDD, getQueryString } from "../../../../utils";
 import * as S from "./MainPagePostCardList.styles";
 
-export const MainPagePostCardList: React.FC = () => {
+export const MainPagePostCardList = () => {
     const queryString = getQueryString();
 
     const { data: postsData, isLoading } = useCustomQuery<IPost[]>("mainPagePosts", () => fetchPostList(queryString));

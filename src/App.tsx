@@ -3,11 +3,11 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
-import { fetchLogin, fetchUserInfo } from "./api/index";
-import { useCustomMutation, useCustomQuery, useLogin, useLogout, useRefreshToken } from "./hooks/index";
-import { isAdminModeState, isSideBarOpenState } from "./recoil/atoms/index";
+import { fetchLogin, fetchUserInfo } from "./api";
+import { useCustomMutation, useCustomQuery, useLogin, useLogout, useRefreshToken } from "./hooks";
+import { isAdminModeState, isSideBarOpenState } from "./recoil/atoms";
 import { Router } from "./routes/Router";
-import { getCookie } from "./utils/index";
+import { getCookie } from "./utils";
 
 const App = () => {
     const [, setIsSideBarOpen] = useRecoilState(isSideBarOpenState);

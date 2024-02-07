@@ -2,14 +2,14 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import { T } from "../../../../styles/TextGuide.styles";
-import { IPost } from "../../../../types/index";
+import { IPost } from "../../../../types";
 import * as S from "./PrevNextNavBox.styles";
 
-interface IPrevNextNavBox {
+interface IProps {
     postData?: IPost[];
 }
 
-export const PrevNextNavBox = ({ postData }: IPrevNextNavBox) => {
+export const PrevNextNavBox = ({ postData }: IProps) => {
     return (
         <S.MainWrapper>
             {postData?.[0]?.nextPost ? (

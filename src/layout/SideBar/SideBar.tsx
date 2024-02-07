@@ -5,14 +5,14 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import { Button } from "@mui/material";
 
-import { riaxoLogo } from "../../assets/image/index";
+import { riaxoLogo } from "../../assets/image";
 import { GITHUB_CLIENT_ID } from "../../constants/API";
-import { useLogout } from "../../hooks/index";
-import { isAdminModeState, isSideBarOpenState } from "../../recoil/atoms/index";
+import { useLogout } from "../../hooks";
+import { isAdminModeState, isSideBarOpenState } from "../../recoil/atoms";
 import { T } from "../../styles/TextGuide.styles";
 import * as S from "./SideBar.styles";
 
-export const SideBar: React.FC = () => {
+export const SideBar = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useRecoilState(isSideBarOpenState);
     const [adminMode] = useRecoilState(isAdminModeState);
 

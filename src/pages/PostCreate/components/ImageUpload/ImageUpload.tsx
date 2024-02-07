@@ -1,13 +1,13 @@
 import "cropperjs/dist/cropper.css";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Cropper, ReactCropperElement } from "react-cropper";
 
 import { Button } from "@mui/material";
 
 import { T } from "../../../../styles/TextGuide.styles";
-import { dataURItoFile } from "../../../../utils/index";
+import { dataURItoFile } from "../../../../utils";
 import { useImageCompress } from "./hooks/useImageCompress";
 import * as S from "./ImageUpload.styles";
 
@@ -17,7 +17,7 @@ interface PropsType {
     defaultImage?: any;
 }
 
-export const ProfileImgUpload: React.FC<PropsType> = ({ aspectRatio = 1, setImage, defaultImage }: PropsType) => {
+export const ProfileImgUpload = ({ aspectRatio = 1, setImage, defaultImage }: PropsType) => {
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
     const [uploadImage, setUploadImage] = useState<string | null>(null);
     const [compressedImage, setCompressedImage] = useState<string | null>(null);
