@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import LaunchIcon from "@mui/icons-material/Launch";
 
-import { profileImage } from "../../../../assets/image/index";
+import { profileImage } from "../../../../assets/image";
 import { T } from "../../../../styles/TextGuide.styles";
 import * as S from "./IntroBox.styles";
 
@@ -22,7 +22,7 @@ const DETAILS_ARRAY = [
     },
 ];
 
-export const IntroBox: React.FC = () => {
+export const IntroBox = () => {
     return (
         <S.MainWrapper>
             <S.ProfileImageBox>

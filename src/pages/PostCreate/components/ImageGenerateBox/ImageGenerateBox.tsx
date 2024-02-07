@@ -5,7 +5,7 @@ import { useSnackbar } from "notistack";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { CircularProgress, IconButton, Paper } from "@mui/material";
 
-import { createAiImage } from "../../../../api/index";
+import { createAiImage } from "../../../../api";
 import * as S from "./ImageGenerateBox.styles";
 
 interface PropsType {

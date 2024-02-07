@@ -1,6 +1,6 @@
 import Skeleton from "@mui/material/Skeleton";
 
-import { portfolioImg1, portfolioImg2, portfolioImg3 } from "../../assets/image/index";
+import { portfolioImg1, portfolioImg2, portfolioImg3 } from "../../assets/image";
 import { PostTag } from "../../components/@shared/PostTag/PostTag";
 import { T } from "../../styles/TextGuide.styles";
 import * as S from "../PortfolioList/PortfolioList.styles";
@@ -32,7 +32,7 @@ const PORTFOLIO_ITEMS = [
     },
 ];
 
-export const PortfolioList: React.FC = () => {
+export const PortfolioList = () => {
     return (
         <S.MainWrapper>
             {PORTFOLIO_ITEMS?.map((item, index) => (

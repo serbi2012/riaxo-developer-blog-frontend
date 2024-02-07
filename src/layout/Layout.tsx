@@ -9,7 +9,7 @@ import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined
 import ThumbUpOffAltOutlinedIcon from "@mui/icons-material/ThumbUpOffAltOutlined";
 import { CircularProgress, IconButton } from "@mui/material";
 
-import { isLoadingState, isSideBarOpenState } from "../recoil/atoms/index";
+import { isLoadingState, isSideBarOpenState } from "../recoil/atoms";
 import { EasterEgg } from "./EasterEgg/EasterEgg";
 import { Header } from "./Header/Header";
 import * as S from "./Layout.styles";
@@ -19,7 +19,7 @@ export interface IProps {
     children: JSX.Element;
 }
 
-export const Layout: React.FC<IProps> = (props: IProps) => {
+export const Layout = (props: IProps) => {
     const notistackRef = useRef<any>();
 
     const [isSideBarOpen, setIsSideBarOpen] = useRecoilState(isSideBarOpenState);

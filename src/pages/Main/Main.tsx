@@ -1,7 +1,7 @@
-import { IntroBox, MainPagePostCardList, MainPagePostList } from "./components/index";
+import { IntroBox, MainPagePostCardList, MainPagePostList } from "./components";
 import * as S from "./Main.styles";
 
-export const Main: React.FC = () => {
+export const Main = () => {
     return (
         <S.MainWrapper>
             <IntroBox />

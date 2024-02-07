@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { T } from "../../../../styles/TextGuide.styles";
 import * as S from "./SideNavBox.styles";
 
-interface IPropsType {
+interface IProps {
     titleArray?: string[];
 }
 
-export const SideNavBox = ({ titleArray }: IPropsType) => {
+export const SideNavBox = ({ titleArray }: IProps) => {
     const [activeId, setActiveId] = useState<string | null>(null);
 
     const handleScrollToElement = (id: string) => {

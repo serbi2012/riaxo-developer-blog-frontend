@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
-import { riaxoLogo } from "../../assets/image/index";
-import { isAdminModeState, isSideBarOpenState } from "../../recoil/atoms/index";
+import { riaxoLogo } from "../../assets/image";
+import { isAdminModeState, isSideBarOpenState } from "../../recoil/atoms";
 import { T } from "../../styles/TextGuide.styles";
 import * as S from "./Header.styles";
 
@@ -14,7 +14,7 @@ const PAGE_ITEMS = [
     // { title: "Portfolio", link: "/portfolio/list" },
 ];
 
-export const Header: React.FC = () => {
+export const Header = () => {
     const [, setIsSideBarOpen] = useRecoilState(isSideBarOpenState);
     const [adminMode] = useRecoilState(isAdminModeState);
 

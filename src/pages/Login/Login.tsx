@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import { getQueryString } from "../../utils/getQueryString";
 
-export const Login: React.FC = () => {
+export const Login = () => {
     const location = useLocation();
 
     useEffect(() => {

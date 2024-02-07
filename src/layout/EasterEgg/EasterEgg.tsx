@@ -4,11 +4,11 @@ import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 
-import { toothlessDancingSong } from "../../assets/audio/index";
-import { toothlessDancing } from "../../assets/image/index";
+import { toothlessDancingSong } from "../../assets/audio";
+import { toothlessDancing } from "../../assets/image";
 import * as S from "./EasterEgg.styles";
 
-export const EasterEgg: React.FC = () => {
+export const EasterEgg = () => {
     const audioRef = useRef<HTMLAudioElement>(null); // 오디오 요소를 위한 ref
 
     const [isEasterEggOpen, setIsEasterEggOpen] = useState(false);

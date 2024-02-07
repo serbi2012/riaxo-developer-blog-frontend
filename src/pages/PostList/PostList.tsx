@@ -4,15 +4,15 @@ import { debounce } from "lodash";
 
 import Skeleton from "@mui/material/Skeleton";
 
-import { fetchPostList } from "../../api/index";
-import { PostTag } from "../../components/@shared/index";
-import { useCustomQuery } from "../../hooks/index";
+import { fetchPostList } from "../../api";
+import { PostTag } from "../../components/@shared";
+import { useCustomQuery } from "../../hooks";
 import { T } from "../../styles/TextGuide.styles";
-import { formatDateFromAPIToYYYYMMDD, getQueryString } from "../../utils/index";
-import { PostListSearchBar } from "./components/index";
+import { formatDateFromAPIToYYYYMMDD, getQueryString } from "../../utils";
+import { PostListSearchBar } from "./components";
 import * as S from "./PostList.styles";
 
-export const PostList: React.FC = () => {
+export const PostList = () => {
     const [searchInput, setSearchInput] = useState<string>("");
     const [debouncedSearchInput, setDebouncedSearchInput] = useState<string>("");
 

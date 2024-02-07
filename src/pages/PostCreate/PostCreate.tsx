@@ -6,15 +6,15 @@ import { useRecoilState } from "recoil";
 
 import { Autocomplete, Button, Chip, TextField } from "@mui/material";
 
-import { createImageUpload, createPost, fetchPostList, fetchTagList, updatePost } from "../../api/index";
-import { useCustomMutation, useCustomQuery } from "../../hooks/index";
-import { isLoadingState } from "../../recoil/atoms/index";
-import { IPost } from "../../types/index";
-import { getQueryString } from "../../utils/index";
-import { ImageGenerateBox, PostEditor, ProfileImgUpload } from "./components/index";
+import { createImageUpload, createPost, fetchPostList, fetchTagList, updatePost } from "../../api";
+import { useCustomMutation, useCustomQuery } from "../../hooks";
+import { isLoadingState } from "../../recoil/atoms";
+import { IPost } from "../../types";
+import { getQueryString } from "../../utils";
+import { ImageGenerateBox, PostEditor, ProfileImgUpload } from "./components";
 import * as S from "./PostCreate.styles";
 
-export const PostCreate: React.FC = () => {
+export const PostCreate = () => {
     const editorRef = useRef<any>(null);
 
     const [, setIsLoading] = useRecoilState<boolean>(isLoadingState);

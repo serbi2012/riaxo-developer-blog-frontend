@@ -18,14 +18,14 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 import { Button } from "@mui/material";
 import Skeleton from "@mui/material/Skeleton";
 
-import { deletePost, fetchPostList } from "../../api/index";
-import { PostTag } from "../../components/@shared/index";
-import { useCustomMutation, useCustomQuery } from "../../hooks/index";
-import { isAdminModeState } from "../../recoil/atoms/index";
+import { deletePost, fetchPostList } from "../../api";
+import { PostTag } from "../../components/@shared";
+import { useCustomMutation, useCustomQuery } from "../../hooks";
+import { isAdminModeState } from "../../recoil/atoms";
 import { T } from "../../styles/TextGuide.styles";
-import { IPost } from "../../types/index";
-import { formatDateFromAPIToYYYYMMDD, getQueryString } from "../../utils/index";
-import { PrevNextNavBox, SideNavBox } from "./components/index";
+import { IPost } from "../../types";
+import { formatDateFromAPIToYYYYMMDD, getQueryString } from "../../utils";
+import { PrevNextNavBox, SideNavBox } from "./components";
 import * as S from "./Post.styles";
 
 SyntaxHighlighter.registerLanguage("tsx", tsx);
@@ -35,7 +35,7 @@ SyntaxHighlighter.registerLanguage("javascript", javascript);
 SyntaxHighlighter.registerLanguage("css", css);
 SyntaxHighlighter.registerLanguage("json", json);
 
-export const Post: React.FC = () => {
+export const Post = () => {
     const contentRef = useRef<any>();
 
     const [adminMode] = useRecoilState(isAdminModeState);

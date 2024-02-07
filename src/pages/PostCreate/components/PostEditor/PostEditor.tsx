@@ -5,7 +5,7 @@ import axios from "axios";
 import { Skeleton } from "@mui/material";
 import { Editor } from "@tinymce/tinymce-react";
 
-import { BASE_URL, EDIT_TOOLBAR, PLUGINS, TINY_MCE_API_KEY } from "../../../../constants/index";
+import { BASE_URL, EDIT_TOOLBAR, PLUGINS, TINY_MCE_API_KEY } from "../../../../constants";
 
 interface IPostEditorType {
     editorRef: React.MutableRefObject<any>;
