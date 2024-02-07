@@ -1,12 +1,12 @@
-import * as S from "./index.styles";
+import * as S from "./PostListSearchBar.styles";
 import { IconButton, Paper } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-interface IPropsType {
+export interface IPropsType {
     setSearchInput: (value: any) => void;
 }
 
-const PostListSearchBar = ({ setSearchInput }: IPropsType) => {
+export const PostListSearchBar = ({ setSearchInput }: IPropsType) => {
     return (
         <S.MainWrapper>
             <Paper
@@ -33,5 +33,3 @@ const PostListSearchBar = ({ setSearchInput }: IPropsType) => {
         </S.MainWrapper>
     );
 };
-
-export default PostListSearchBar;

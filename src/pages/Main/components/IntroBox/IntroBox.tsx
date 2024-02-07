@@ -1,4 +1,4 @@
-import * as S from "./index.styles";
+import * as S from "./IntroBox.styles";
 import ProfileImage from "../../../../assets/image/profile-image.png";
 import { T } from "../../../../styles/TextGuide.styles";
 import { Link } from "react-router-dom";
@@ -20,7 +20,7 @@ const DETAILS_ARRAY = [
     },
 ];
 
-const IntroBox: React.FC = () => {
+export const IntroBox: React.FC = () => {
     return (
         <S.MainWrapper>
             <S.ProfileImageBox>
@@ -47,5 +47,3 @@ const IntroBox: React.FC = () => {
         </S.MainWrapper>
     );
 };
-
-export default IntroBox;

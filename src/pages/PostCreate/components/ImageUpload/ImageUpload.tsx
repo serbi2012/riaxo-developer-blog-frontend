@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Cropper, ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import * as S from "./index.styles";
-import useImageCompress from "./hooks/useImageCompress";
+import * as S from "./ImageUpload.styles";
+import { useImageCompress } from "./hooks/useImageCompress";
 import { dataURItoFile } from "../../../../utils/dataURItoFile";
 import { T } from "../../../../styles/TextGuide.styles";
 import { Button } from "@mui/material";
@@ -13,7 +13,7 @@ interface PropsType {
     defaultImage?: any;
 }
 
-const ProfileImgUpload: React.FC<PropsType> = ({ aspectRatio = 1, setImage, defaultImage }: PropsType) => {
+export const ProfileImgUpload: React.FC<PropsType> = ({ aspectRatio = 1, setImage, defaultImage }: PropsType) => {
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
     const [uploadImage, setUploadImage] = useState<string | null>(null);
     const [compressedImage, setCompressedImage] = useState<string | null>(null);
@@ -162,5 +162,3 @@ const ProfileImgUpload: React.FC<PropsType> = ({ aspectRatio = 1, setImage, defa
         </S.MainWrapper>
     );
 };
-
-export default ProfileImgUpload;

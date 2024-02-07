@@ -1,6 +1,6 @@
 import { T } from "../../../../styles/TextGuide.styles";
 import { IPost } from "../../../../types/post";
-import * as S from "./index.styles";
+import * as S from "./PrevNextNavBox.styles";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
@@ -8,7 +8,7 @@ interface IPrevNextNavBox {
     postData?: IPost[];
 }
 
-const PrevNextNavBox = ({ postData }: IPrevNextNavBox) => {
+export const PrevNextNavBox = ({ postData }: IPrevNextNavBox) => {
     return (
         <S.MainWrapper>
             {postData?.[0]?.nextPost ? (
@@ -46,5 +46,3 @@ const PrevNextNavBox = ({ postData }: IPrevNextNavBox) => {
         </S.MainWrapper>
     );
 };
-
-export default PrevNextNavBox;

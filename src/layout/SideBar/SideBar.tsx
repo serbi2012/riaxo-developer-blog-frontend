@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
 import { T } from "../../styles/TextGuide.styles";
-import * as S from "./index.styles";
+import * as S from "./SideBar.styles";
 import HeaderLogo from "../../assets/image/riaxo-logo.png";
 import { isSideBarOpenState } from "../../recoil/atoms";
 import { Button } from "@mui/material";
@@ -11,7 +11,7 @@ import { isAdminModeState } from "../../recoil/atoms/isAdminModeState";
 import { useLogout } from "../../hooks/useAuth";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
-const SideBar: React.FC = () => {
+export const SideBar: React.FC = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useRecoilState(isSideBarOpenState);
     const [adminMode] = useRecoilState(isAdminModeState);
 
@@ -70,5 +70,3 @@ const SideBar: React.FC = () => {
         </S.MainWrapper>
     );
 };
-
-export default SideBar;

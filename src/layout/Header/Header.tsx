@@ -1,4 +1,4 @@
-import * as S from "./index.styles";
+import * as S from "./Header.styles";
 import { T } from "../../styles/TextGuide.styles";
 import HeaderLogo from "../../assets/image/riaxo-logo.png";
 import { useRecoilState } from "recoil";
@@ -13,7 +13,7 @@ const PAGE_ITEMS = [
     // { title: "Portfolio", link: "/portfolio/list" },
 ];
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
     const [, setIsSideBarOpen] = useRecoilState(isSideBarOpenState);
     const [adminMode] = useRecoilState(isAdminModeState);
 
@@ -48,5 +48,3 @@ const Header: React.FC = () => {
         </S.MainWrapper>
     );
 };
-
-export default Header;

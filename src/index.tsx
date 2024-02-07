@@ -4,7 +4,7 @@ import "./styles/colorRoot.css";
 import { BrowserRouter } from "react-router-dom";
 import { GlobalStyle } from "./styles/globalStyles";
 import { RecoilRoot } from "recoil";
-import Layout from "./layout";
+import { Layout } from "./layout/Layout";
 import { globalTheme } from "./styles/theme.styles";
 import { ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "react-query";

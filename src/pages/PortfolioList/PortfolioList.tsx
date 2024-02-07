@@ -1,6 +1,6 @@
 import { T } from "../../styles/TextGuide.styles";
-import * as S from "./index.styles";
-import PostTag from "../../components/@shared/PostTag";
+import * as S from "../PortfolioList/PortfolioList.styles";
+import { PostTag } from "../../components/@shared/PostTag";
 import portfolioImage1 from "./../../assets/image/portfolio_img1.jpg";
 import portfolioImage2 from "./../../assets/image/portfolio_img2.jpg";
 import portfolioImage3 from "./../../assets/image/portfolio_img3.jpg";
@@ -33,7 +33,7 @@ const PORTFOLIO_ITEMS = [
     },
 ];
 
-const PortfolioList: React.FC = () => {
+export const PortfolioList: React.FC = () => {
     return (
         <S.MainWrapper>
             {PORTFOLIO_ITEMS?.map((item, index) => (
@@ -56,5 +56,3 @@ const PortfolioList: React.FC = () => {
         </S.MainWrapper>
     );
 };
-
-export default PortfolioList;

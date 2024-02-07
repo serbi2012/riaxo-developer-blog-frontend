@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import Router from "./routes/Router";
+import { Router } from "./routes/Router";
 import { useEffect } from "react";
 import { isSideBarOpenState } from "./recoil/atoms";
 import { useRecoilState } from "recoil";

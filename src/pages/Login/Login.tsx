@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { getQueryString } from "../../utils/getQueryString";
 
-const Login: React.FC = () => {
+export const Login: React.FC = () => {
     const location = useLocation();
 
     useEffect(() => {
@@ -22,5 +22,3 @@ const Login: React.FC = () => {
         </div>
     );
 };
-
-export default Login;

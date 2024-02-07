@@ -1,5 +1,5 @@
 import { T } from "../../../../styles/TextGuide.styles";
-import * as S from "./index.styles";
+import * as S from "./MainPagePostCardList.styles";
 import { IPost } from "../../../../types/post";
 import { getQueryString } from "../../../../utils/getQueryString";
 import { fetchPostList } from "../../../../api/post.queries";
@@ -7,7 +7,7 @@ import { formatDateFromAPIToYYYYMMDD } from "../../../../utils/formatDate";
 import Skeleton from "@mui/material/Skeleton";
 import { useCustomQuery } from "../../../../hooks/useCustomQuery";
 
-const MainPagePostCardList: React.FC = () => {
+export const MainPagePostCardList: React.FC = () => {
     const queryString = getQueryString();
 
     const { data: postsData, isLoading } = useCustomQuery<IPost[]>("mainPagePosts", () => fetchPostList(queryString));
@@ -61,5 +61,3 @@ const MainPagePostCardList: React.FC = () => {
         </S.MainWrapper>
     );
 };
-
-export default MainPagePostCardList;

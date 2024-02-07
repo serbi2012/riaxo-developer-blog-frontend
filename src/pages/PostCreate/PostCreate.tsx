@@ -1,4 +1,4 @@
-import * as S from "./index.styles";
+import * as S from "./PostCreate.styles";
 import { Autocomplete, Button, Chip, Skeleton, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
@@ -8,18 +8,18 @@ import { createPost, fetchPostList, updatePost } from "../../api/post.queries";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IPost } from "../../types/post";
 import { getQueryString } from "../../utils/getQueryString";
-import ProfileImgUpload from "./components/ImageUpload";
+import { ProfileImgUpload } from "./components/ImageUpload/ImageUpload";
 import { createImageUpload } from "../../api/resource.queries";
 import { useRecoilState } from "recoil";
 import { isLoadingState } from "../../recoil/atoms";
 import { useSnackbar } from "notistack";
-import ImageGenerateBox from "./components/ImageGenerateBox";
+import { ImageGenerateBox } from "./components/ImageGenerateBox/ImageGenerateBox";
 import { fetchTagList } from "../../api/tag.queries";
 import { useCustomQuery } from "../../hooks/useCustomQuery";
 import { useCustomMutation } from "../../hooks/useCustomMutation";
 import axios from "axios";
 
-const PostCreate: React.FC = () => {
+export const PostCreate: React.FC = () => {
     const editorRef = useRef<any>(null);
 
     const [, setIsLoading] = useRecoilState<boolean>(isLoadingState);
@@ -208,5 +208,3 @@ const PostCreate: React.FC = () => {
         </S.MainWrapper>
     );
 };
-
-export default PostCreate;

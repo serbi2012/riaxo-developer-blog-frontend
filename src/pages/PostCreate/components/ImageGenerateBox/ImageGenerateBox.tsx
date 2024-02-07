@@ -1,4 +1,4 @@
-import * as S from "./index.styles";
+import * as S from "./ImageGenerateBox.styles";
 import { CircularProgress, IconButton, Paper } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { useSnackbar } from "notistack";
@@ -9,7 +9,7 @@ interface PropsType {
     setImage: (value: any) => void;
 }
 
-const ImageGenerateBox = ({ setImage }: PropsType) => {
+export const ImageGenerateBox = ({ setImage }: PropsType) => {
     const [aiImages, setAiImages] = useState<any[]>([]);
     const [aiImageInput, setAiImageInput] = useState<string>("");
     const [isAiLoading, setIsAiLoading] = useState<boolean>(false);
@@ -82,5 +82,3 @@ const ImageGenerateBox = ({ setImage }: PropsType) => {
         </S.MainWrapper>
     );
 };
-
-export default ImageGenerateBox;

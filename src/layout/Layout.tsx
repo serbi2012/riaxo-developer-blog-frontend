@@ -1,6 +1,5 @@
-import * as S from "./index.styles";
-import Header from "./Header";
-import SideBar from "./SideBar";
+import * as S from "./Layout.styles";
+import { Header } from "./Header/Header";
 import { isSideBarOpenState } from "../recoil/atoms/isSideBarOpenState";
 import { isLoadingState } from "../recoil/atoms";
 import { useRecoilState } from "recoil";
@@ -10,26 +9,19 @@ import ThumbUpOffAltOutlinedIcon from "@mui/icons-material/ThumbUpOffAltOutlined
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined";
 import CloseIcon from "@mui/icons-material/Close";
-import { useRef, useState } from "react";
-import toothlessDancing from "./../assets/image/toothless-dancing.gif";
-import LiveHelpIcon from "@mui/icons-material/LiveHelp";
-import toothlessDancingSong from "./../assets/image/toothless-dancing.mp4";
-import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import { useRef } from "react";
+import { EasterEgg } from "./EasterEgg/EasterEgg";
+import { SideBar } from "./SideBar/SideBar";
 
 export interface IProps {
     children: JSX.Element;
 }
 
-const Layout: React.FC<IProps> = (props: IProps) => {
+export const Layout: React.FC<IProps> = (props: IProps) => {
     const notistackRef = useRef<any>();
-    const audioRef = useRef<HTMLAudioElement>(null); // 오디오 요소를 위한 ref
 
     const [isSideBarOpen, setIsSideBarOpen] = useRecoilState(isSideBarOpenState);
     const [isLoading] = useRecoilState(isLoadingState);
-
-    const [isEasterEggOpen, setIsEasterEggOpen] = useState(false);
-    const [isVolumeOn, setIsVolumeOn] = useState(false);
 
     const action = (key: any) => (
         <IconButton
@@ -43,21 +35,6 @@ const Layout: React.FC<IProps> = (props: IProps) => {
             <CloseIcon fontSize="small" />
         </IconButton>
     );
-
-    const toggleVolume = () => {
-        setIsVolumeOn((prev) => !prev);
-
-        if (audioRef.current) {
-            if (isVolumeOn) {
-                audioRef.current.muted = true;
-            } else {
-                if (audioRef.current.paused) {
-                    audioRef.current.play(); // 오디오 재생 시도
-                }
-                audioRef.current.muted = false;
-            }
-        }
-    };
 
     return (
         <SnackbarProvider
@@ -98,33 +75,8 @@ const Layout: React.FC<IProps> = (props: IProps) => {
                 </S.ContentWrapper>
 
                 {/* NOTE - 이스터 에그 */}
-                <S.EasterEggContainer isOpen={isEasterEggOpen}>
-                    <LiveHelpIcon
-                        onClick={() => {
-                            setIsEasterEggOpen(true);
-                        }}
-                    />
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}
-                    >
-                        <img
-                            src={toothlessDancing}
-                            onClick={() => {
-                                setIsEasterEggOpen(false);
-                            }}
-                            alt="Dancing Toothless"
-                        />
-                        <div onClick={toggleVolume}>{isVolumeOn ? <VolumeUpIcon /> : <VolumeOffIcon />}</div>
-                        <audio ref={audioRef} src={toothlessDancingSong} autoPlay loop muted={!isVolumeOn} />
-                    </div>
-                </S.EasterEggContainer>
+                <EasterEgg />
             </S.MainWrapper>
         </SnackbarProvider>
     );
 };
-
-export default Layout;

@@ -1,17 +1,17 @@
-import * as S from "./index.styles";
+import * as S from "./TagListSearchBar.styles";
 import { Autocomplete, Button, TextField } from "@mui/material";
 import { useState } from "react";
-import PostTag from "../../../../components/@shared/PostTag";
+import { PostTag } from "../../../../components/@shared/PostTag";
 import { fetchTagList } from "../../../../api/tag.queries";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useCustomQuery } from "../../../../hooks/useCustomQuery";
 
-interface PropsType {
+export interface PropsType {
     selectedTags: string[];
     setSelectedTags: (value: any) => void;
 }
 
-const PostListSearchBar = ({ selectedTags, setSelectedTags }: PropsType) => {
+export const TagListSearchBar = ({ selectedTags, setSelectedTags }: PropsType) => {
     const [tags, setTags] = useState<any[]>([]);
     const [isFoldMode, setIsFoldMode] = useState<boolean>(false);
 
@@ -84,5 +84,3 @@ const PostListSearchBar = ({ selectedTags, setSelectedTags }: PropsType) => {
         </S.MainWrapper>
     );
 };
-
-export default PostListSearchBar;
