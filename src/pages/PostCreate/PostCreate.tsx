@@ -1,20 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 
-import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
-import { Autocomplete, Button, Chip, Skeleton, TextField } from "@mui/material";
-import { Editor } from "@tinymce/tinymce-react";
+import { Autocomplete, Button, Chip, TextField } from "@mui/material";
 
 import { createImageUpload, createPost, fetchPostList, fetchTagList, updatePost } from "../../api/index";
-import { BASE_URL, EDIT_TOOLBAR, PLUGINS, TINY_MCE_API_KEY } from "../../constants/index";
 import { useCustomMutation, useCustomQuery } from "../../hooks/index";
 import { isLoadingState } from "../../recoil/atoms/index";
 import { IPost } from "../../types/index";
 import { getQueryString } from "../../utils/index";
-import { ImageGenerateBox, ProfileImgUpload } from "./components/index";
+import { ImageGenerateBox, PostEditor, ProfileImgUpload } from "./components/index";
 import * as S from "./PostCreate.styles";
 
 export const PostCreate: React.FC = () => {
@@ -22,7 +19,6 @@ export const PostCreate: React.FC = () => {
 
     const [, setIsLoading] = useRecoilState<boolean>(isLoadingState);
 
-    const [isEditorLoad, setIsEditorLoad] = useState<boolean>(false);
     const [image, setImage] = useState<string>("");
     const [pathname, setPathname] = useState<string>("");
     const [defaultPost, setDefaultPost] = useState<IPost>({});
@@ -153,40 +149,7 @@ export const PostCreate: React.FC = () => {
                 <ImageGenerateBox setImage={setImage} />
             </S.ImageContent>
             <S.Content>
-                <Editor
-                    apiKey={TINY_MCE_API_KEY}
-                    onInit={(evt, editor) => (editorRef.current = editor)}
-                    onGetContent={() => {
-                        setIsEditorLoad(true);
-                    }}
-                    initialValue={pathname === "/post/edit" ? defaultPost?.content : ""}
-                    init={{
-                        height: 500,
-                        width: "100%",
-                        menubar: false,
-                        plugins: PLUGINS,
-                        toolbar: EDIT_TOOLBAR,
-                        content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-                        images_upload_handler: (blobInfo) =>
-                            new Promise((resolve, reject) => {
-                                axios
-                                    .post(
-                                        `${BASE_URL}/api/image/upload`,
-                                        { image: blobInfo.blob() },
-                                        {
-                                            headers: { "Content-Type": "multipart/form-data" },
-                                        },
-                                    )
-                                    .then((res: any) => {
-                                        resolve(res?.data?.data?.path);
-                                    })
-                                    .catch((e) => {
-                                        reject(e);
-                                    });
-                            }),
-                    }}
-                />
-                {!isEditorLoad && <Skeleton variant="rounded" style={{ height: "300px", width: "100%" }} />}
+                <PostEditor defaultPost={defaultPost} editorRef={editorRef} pathname={pathname} />
             </S.Content>
             <S.Footer>
                 <Button
