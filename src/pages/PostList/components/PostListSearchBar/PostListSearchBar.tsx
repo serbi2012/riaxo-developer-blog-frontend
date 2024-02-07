@@ -13,7 +13,7 @@ export const PostListSearchBar = ({ setSearchInput }: IPropsType) => {
             <Paper
                 component="form"
                 sx={{
-                    p: "2px 4px",
+                    p: "5px 12px",
                     display: "flex",
                     alignItems: "center",
                     width: "100%",
