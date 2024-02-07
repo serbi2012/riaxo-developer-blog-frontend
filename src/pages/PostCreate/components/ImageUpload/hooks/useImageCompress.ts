@@ -1,7 +1,8 @@
 import { useState } from "react";
+
 import imageCompression from "browser-image-compression";
 
-const useImageCompress = () => {
+export const useImageCompress = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const compressImage = async (imageFile: File) => {
@@ -28,5 +29,3 @@ const useImageCompress = () => {
 
     return { compressImage, isLoading };
 };
-
-export default useImageCompress;

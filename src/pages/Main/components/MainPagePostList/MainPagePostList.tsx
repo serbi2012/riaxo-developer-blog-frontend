@@ -1,12 +1,11 @@
+import { fetchPostList } from "../../../../api/index";
+import { useCustomQuery } from "../../../../hooks/index";
 import { T } from "../../../../styles/TextGuide.styles";
-import * as S from "./index.styles";
-import { IPost } from "../../../../types/post";
-import { getQueryString } from "../../../../utils/getQueryString";
-import { fetchPostList } from "../../../../api/post.queries";
-import { formatDateFromAPIToYYYYMMDD } from "../../../../utils/formatDate";
-import { useCustomQuery } from "../../../../hooks/useCustomQuery";
+import { IPost } from "../../../../types/index";
+import { formatDateFromAPIToYYYYMMDD, getQueryString } from "../../../../utils/index";
+import * as S from "./MainPagePostList.styles";
 
-const MainPagePostList: React.FC = () => {
+export const MainPagePostList: React.FC = () => {
     const queryString = getQueryString();
     const postListQueryKey = ["mainPagePostList", queryString];
 
@@ -29,5 +28,3 @@ const MainPagePostList: React.FC = () => {
         </S.MainWrapper>
     );
 };
-
-export default MainPagePostList;

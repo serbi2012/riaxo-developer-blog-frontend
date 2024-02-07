@@ -1,14 +1,9 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import Main from "../pages/Main";
-import Post from "../pages/Post";
-import PostList from "../pages/PostList";
-import PostCreate from "../pages/PostCreate";
-import PortfolioList from "../pages/PortfolioList";
-import Login from "../pages/Login";
-import { AdminOnly } from "./AccountChecker";
-import TagList from "../pages/TagList";
 
-const Router = () => {
+import { Login, Main, PortfolioList, Post, PostCreate, PostList, TagList } from "../pages";
+import { AdminOnly } from "./AccountChecker";
+
+export const Router = () => {
     return (
         <Routes>
             <Route path={"/"} element={<Main />} />
@@ -34,5 +29,3 @@ const Router = () => {
         </Routes>
     );
 };
-
-export default Router;

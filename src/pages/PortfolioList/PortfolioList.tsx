@@ -1,15 +1,14 @@
-import { T } from "../../styles/TextGuide.styles";
-import * as S from "./index.styles";
-import PostTag from "../../components/@shared/PostTag";
-import portfolioImage1 from "./../../assets/image/portfolio_img1.jpg";
-import portfolioImage2 from "./../../assets/image/portfolio_img2.jpg";
-import portfolioImage3 from "./../../assets/image/portfolio_img3.jpg";
 import Skeleton from "@mui/material/Skeleton";
+
+import { portfolioImg1, portfolioImg2, portfolioImg3 } from "../../assets/image/index";
+import { PostTag } from "../../components/@shared/PostTag/PostTag";
+import { T } from "../../styles/TextGuide.styles";
+import * as S from "../PortfolioList/PortfolioList.styles";
 
 const PORTFOLIO_ITEMS = [
     {
         id: 1,
-        image: portfolioImage1,
+        image: portfolioImg1,
         title: "Tic Tac Toe",
         contents: "간단한 Tic Tac Toe게임. 하지만 색다른 룰을 적용함.",
         tags: ["Javascript"],
@@ -17,7 +16,7 @@ const PORTFOLIO_ITEMS = [
     },
     {
         id: 2,
-        image: portfolioImage2,
+        image: portfolioImg2,
         title: "2048 Game",
         contents: "간단한 규칙의 2048 게임.",
         tags: ["Javascript"],
@@ -25,7 +24,7 @@ const PORTFOLIO_ITEMS = [
     },
     {
         id: 3,
-        image: portfolioImage3,
+        image: portfolioImg3,
         title: "Typing Test",
         contents: "간편하게 타건을 테스트할 수 있는 애플리케이션입니다.",
         tags: ["Javascript", "React"],
@@ -33,7 +32,7 @@ const PORTFOLIO_ITEMS = [
     },
 ];
 
-const PortfolioList: React.FC = () => {
+export const PortfolioList: React.FC = () => {
     return (
         <S.MainWrapper>
             {PORTFOLIO_ITEMS?.map((item, index) => (
@@ -56,5 +55,3 @@ const PortfolioList: React.FC = () => {
         </S.MainWrapper>
     );
 };
-
-export default PortfolioList;

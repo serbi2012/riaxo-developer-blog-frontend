@@ -1,16 +1,18 @@
-import { T } from "../../styles/TextGuide.styles";
-import * as S from "./index.styles";
 import { useCallback, useEffect, useState } from "react";
-import { fetchPostList } from "../../api/post.queries";
-import { getQueryString } from "../../utils/getQueryString";
-import PostListSearchBar from "./components/PostListSearchBar";
-import { formatDateFromAPIToYYYYMMDD } from "../../utils/formatDate";
-import PostTag from "../../components/@shared/PostTag";
-import Skeleton from "@mui/material/Skeleton";
-import { debounce } from "lodash";
-import { useCustomQuery } from "../../hooks/useCustomQuery";
 
-const PostList: React.FC = () => {
+import { debounce } from "lodash";
+
+import Skeleton from "@mui/material/Skeleton";
+
+import { fetchPostList } from "../../api/index";
+import { PostTag } from "../../components/@shared/index";
+import { useCustomQuery } from "../../hooks/index";
+import { T } from "../../styles/TextGuide.styles";
+import { formatDateFromAPIToYYYYMMDD, getQueryString } from "../../utils/index";
+import { PostListSearchBar } from "./components/index";
+import * as S from "./PostList.styles";
+
+export const PostList: React.FC = () => {
     const [searchInput, setSearchInput] = useState<string>("");
     const [debouncedSearchInput, setDebouncedSearchInput] = useState<string>("");
 
@@ -70,5 +72,3 @@ const PostList: React.FC = () => {
         </S.MainWrapper>
     );
 };
-
-export default PostList;
