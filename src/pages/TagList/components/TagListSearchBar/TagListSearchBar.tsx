@@ -1,10 +1,12 @@
-import * as S from "./TagListSearchBar.styles";
-import { Autocomplete, Button, TextField } from "@mui/material";
 import { useState } from "react";
-import { PostTag } from "../../../../components/@shared/PostTag";
-import { fetchTagList } from "../../../../api/tag.queries";
+
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { useCustomQuery } from "../../../../hooks/useCustomQuery";
+import { Autocomplete, Button, TextField } from "@mui/material";
+
+import { fetchTagList } from "../../../../api/index";
+import { PostTag } from "../../../../components/@shared/index";
+import { useCustomQuery } from "../../../../hooks/index";
+import * as S from "./TagListSearchBar.styles";
 
 export interface PropsType {
     selectedTags: string[];

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+
 import { Outlet, useNavigate } from "react-router-dom";
-import { getCookie } from "../utils/cookieUtils";
-import { useAlert } from "../hooks/useAlert";
-import { fetchUserInfo } from "../api/login.queries";
-import { isAdminModeState } from "../recoil/atoms/isAdminModeState";
 import { useRecoilState } from "recoil";
+
+import { fetchUserInfo } from "../api/login.queries";
+import { useAlert } from "../hooks/useAlert";
+import { isAdminModeState } from "../recoil/atoms/isAdminModeState";
+import { getCookie } from "../utils/cookieUtils";
 
 export const AdminOnly = () => {
     const [adminMode] = useRecoilState(isAdminModeState);

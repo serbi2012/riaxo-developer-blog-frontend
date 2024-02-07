@@ -1,8 +1,10 @@
-import * as S from "./IntroBox.styles";
-import ProfileImage from "../../../../assets/image/profile-image.png";
-import { T } from "../../../../styles/TextGuide.styles";
 import { Link } from "react-router-dom";
+
 import LaunchIcon from "@mui/icons-material/Launch";
+
+import { profileImage } from "../../../../assets/image/index";
+import { T } from "../../../../styles/TextGuide.styles";
+import * as S from "./IntroBox.styles";
 
 const DETAILS_ARRAY = [
     {
@@ -24,7 +26,7 @@ export const IntroBox: React.FC = () => {
     return (
         <S.MainWrapper>
             <S.ProfileImageBox>
-                <img src={ProfileImage} />
+                <img src={profileImage} />
             </S.ProfileImageBox>
             <S.ContentWrapper>
                 <T.Title1>RiAXO</T.Title1>

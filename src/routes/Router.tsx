@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { AdminOnly } from "./AccountChecker";
+
 import { Login, Main, PortfolioList, Post, PostCreate, PostList, TagList } from "../pages";
+import { AdminOnly } from "./AccountChecker";
 
 export const Router = () => {
     return (

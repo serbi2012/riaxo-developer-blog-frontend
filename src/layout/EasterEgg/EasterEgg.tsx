@@ -1,10 +1,12 @@
-import * as S from "./EasterEgg.styles";
 import { useRef, useState } from "react";
-import toothlessDancing from "./../../assets/image/toothless-dancing.gif";
+
 import LiveHelpIcon from "@mui/icons-material/LiveHelp";
-import toothlessDancingSong from "./../../assets/image/toothless-dancing.mp4";
-import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+
+import { toothlessDancingSong } from "../../assets/audio/index";
+import { toothlessDancing } from "../../assets/image/index";
+import * as S from "./EasterEgg.styles";
 
 export const EasterEgg: React.FC = () => {
     const audioRef = useRef<HTMLAudioElement>(null); // 오디오 요소를 위한 ref

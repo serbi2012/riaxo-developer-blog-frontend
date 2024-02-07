@@ -1,11 +1,12 @@
-import * as S from "./Header.styles";
-import { T } from "../../styles/TextGuide.styles";
-import HeaderLogo from "../../assets/image/riaxo-logo.png";
-import { useRecoilState } from "recoil";
-import { isSideBarOpenState } from "../../recoil/atoms";
-import { Link, useLocation } from "react-router-dom";
-import { isAdminModeState } from "../../recoil/atoms/isAdminModeState";
 import { useEffect, useState } from "react";
+
+import { Link, useLocation } from "react-router-dom";
+import { useRecoilState } from "recoil";
+
+import { riaxoLogo } from "../../assets/image/index";
+import { isAdminModeState, isSideBarOpenState } from "../../recoil/atoms/index";
+import { T } from "../../styles/TextGuide.styles";
+import * as S from "./Header.styles";
 
 const PAGE_ITEMS = [
     { title: "Posts", link: "/post/list" },
@@ -43,7 +44,7 @@ export const Header: React.FC = () => {
             </S.MenuContainer>
             {adminMode && <T.Body3 style={{ textAlign: "center" }}>Admin Mode</T.Body3>}
             <Link to="/">
-                <S.LogoImage src={HeaderLogo} />
+                <S.LogoImage src={riaxoLogo} />
             </Link>
         </S.MainWrapper>
     );

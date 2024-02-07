@@ -1,14 +1,15 @@
-import { T } from "../../styles/TextGuide.styles";
-import * as S from "./TagList.styles";
 import { useState } from "react";
-import { fetchPostList } from "../../api/post.queries";
-import { IPost } from "../../types/post";
-import { getQueryString } from "../../utils/getQueryString";
-import { formatDateFromAPIToYYYYMMDD } from "../../utils/formatDate";
-import { PostTag } from "../../components/@shared/PostTag";
+
 import Skeleton from "@mui/material/Skeleton";
-import { useCustomQuery } from "../../hooks/useCustomQuery";
-import { TagListSearchBar } from "./components/TagListSearchBar/TagListSearchBar";
+
+import { fetchPostList } from "../../api/index";
+import { PostTag } from "../../components/@shared/index";
+import { useCustomQuery } from "../../hooks/index";
+import { T } from "../../styles/TextGuide.styles";
+import { IPost } from "../../types/index";
+import { formatDateFromAPIToYYYYMMDD, getQueryString } from "../../utils/index";
+import { TagListSearchBar } from "./components/index";
+import * as S from "./TagList.styles";
 
 export const TagList: React.FC = () => {
     const [selectedTags, setSelectedTags] = useState<string[]>([]);

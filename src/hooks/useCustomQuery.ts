@@ -1,5 +1,5 @@
-import { useQuery, UseQueryOptions } from "react-query";
 import { useSnackbar } from "notistack";
+import { useQuery, UseQueryOptions } from "react-query";
 
 /**
  * react-query 라이브러리의 useQuery 훅을 감싸는 커스텀 React 훅.

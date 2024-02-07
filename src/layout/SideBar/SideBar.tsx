@@ -1,15 +1,16 @@
+import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
+
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
+import { Button } from "@mui/material";
+
+import { riaxoLogo } from "../../assets/image/index";
+import { GITHUB_CLIENT_ID } from "../../constants/API";
+import { useLogout } from "../../hooks/index";
+import { isAdminModeState, isSideBarOpenState } from "../../recoil/atoms/index";
 import { T } from "../../styles/TextGuide.styles";
 import * as S from "./SideBar.styles";
-import HeaderLogo from "../../assets/image/riaxo-logo.png";
-import { isSideBarOpenState } from "../../recoil/atoms";
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
-import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
-import { GITHUB_CLIENT_ID } from "../../constants/API";
-import { isAdminModeState } from "../../recoil/atoms/isAdminModeState";
-import { useLogout } from "../../hooks/useAuth";
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 export const SideBar: React.FC = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useRecoilState(isSideBarOpenState);
@@ -21,7 +22,7 @@ export const SideBar: React.FC = () => {
         <S.MainWrapper isSideBarOpen={isSideBarOpen}>
             <Link to="/">
                 <S.Header>
-                    <img src={HeaderLogo} />
+                    <img src={riaxoLogo} />
                     <T.Body4>개발자 김태섭</T.Body4>
                 </S.Header>
             </Link>

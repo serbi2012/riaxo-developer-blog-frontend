@@ -1,32 +1,32 @@
-import { T } from "../../styles/TextGuide.styles";
-import * as S from "./Post.styles";
-import { PostTag } from "../../components/@shared/PostTag";
 import { useEffect, useRef, useState } from "react";
-import { deletePost, fetchPostList } from "../../api/post.queries";
-import { IPost } from "../../types/post";
-import { Button } from "@mui/material";
-import { getQueryString } from "../../utils/getQueryString";
-import { formatDateFromAPIToYYYYMMDD } from "../../utils/formatDate";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditNoteIcon from "@mui/icons-material/EditNote";
-import Skeleton from "@mui/material/Skeleton";
-import { isAdminModeState } from "../../recoil/atoms";
-import { useRecoilState } from "recoil";
-import { useQueryClient } from "react-query";
-import { useCustomQuery } from "../../hooks/useCustomQuery";
-import { useCustomMutation } from "../../hooks/useCustomMutation";
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { SideNavBox } from "./components/SideNavBox/SideNavBox";
+
 import { createRoot } from "react-dom/client";
+import { useQueryClient } from "react-query";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
+import javascript from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
+import json from "react-syntax-highlighter/dist/cjs/languages/prism/json";
+import jsx from "react-syntax-highlighter/dist/cjs/languages/prism/jsx";
 import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
 import typescript from "react-syntax-highlighter/dist/cjs/languages/prism/typescript";
-import jsx from "react-syntax-highlighter/dist/cjs/languages/prism/jsx";
-import javascript from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
-import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
-import json from "react-syntax-highlighter/dist/cjs/languages/prism/json";
-import { PrevNextNavBox } from "./components/PrevNextNavBox/PrevNextNavBox";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { useRecoilState } from "recoil";
+
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import { Button } from "@mui/material";
+import Skeleton from "@mui/material/Skeleton";
+
+import { deletePost, fetchPostList } from "../../api/index";
+import { PostTag } from "../../components/@shared/index";
+import { useCustomMutation, useCustomQuery } from "../../hooks/index";
+import { isAdminModeState } from "../../recoil/atoms/index";
+import { T } from "../../styles/TextGuide.styles";
+import { IPost } from "../../types/index";
+import { formatDateFromAPIToYYYYMMDD, getQueryString } from "../../utils/index";
+import { PrevNextNavBox, SideNavBox } from "./components/index";
+import * as S from "./Post.styles";
 
 SyntaxHighlighter.registerLanguage("tsx", tsx);
 SyntaxHighlighter.registerLanguage("typescript", typescript);

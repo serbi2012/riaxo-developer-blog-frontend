@@ -1,11 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Cropper, ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import * as S from "./ImageUpload.styles";
-import { useImageCompress } from "./hooks/useImageCompress";
-import { dataURItoFile } from "../../../../utils/dataURItoFile";
-import { T } from "../../../../styles/TextGuide.styles";
+
+import React, { useEffect, useRef, useState } from "react";
+
+import { Cropper, ReactCropperElement } from "react-cropper";
+
 import { Button } from "@mui/material";
+
+import { T } from "../../../../styles/TextGuide.styles";
+import { dataURItoFile } from "../../../../utils/index";
+import { useImageCompress } from "./hooks/useImageCompress";
+import * as S from "./ImageUpload.styles";
 
 interface PropsType {
     aspectRatio?: number;

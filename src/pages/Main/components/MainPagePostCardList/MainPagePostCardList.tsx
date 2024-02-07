@@ -1,11 +1,11 @@
-import { T } from "../../../../styles/TextGuide.styles";
-import * as S from "./MainPagePostCardList.styles";
-import { IPost } from "../../../../types/post";
-import { getQueryString } from "../../../../utils/getQueryString";
-import { fetchPostList } from "../../../../api/post.queries";
-import { formatDateFromAPIToYYYYMMDD } from "../../../../utils/formatDate";
 import Skeleton from "@mui/material/Skeleton";
-import { useCustomQuery } from "../../../../hooks/useCustomQuery";
+
+import { fetchPostList } from "../../../../api/index";
+import { useCustomQuery } from "../../../../hooks/index";
+import { T } from "../../../../styles/TextGuide.styles";
+import { IPost } from "../../../../types/index";
+import { formatDateFromAPIToYYYYMMDD, getQueryString } from "../../../../utils/index";
+import * as S from "./MainPagePostCardList.styles";
 
 export const MainPagePostCardList: React.FC = () => {
     const queryString = getQueryString();

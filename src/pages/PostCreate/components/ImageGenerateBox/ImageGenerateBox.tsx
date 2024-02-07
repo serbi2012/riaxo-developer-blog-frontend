@@ -1,9 +1,12 @@
-import * as S from "./ImageGenerateBox.styles";
-import { CircularProgress, IconButton, Paper } from "@mui/material";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import { useSnackbar } from "notistack";
 import { useState } from "react";
-import { createAiImage } from "../../../../api/resource.queries";
+
+import { useSnackbar } from "notistack";
+
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import { CircularProgress, IconButton, Paper } from "@mui/material";
+
+import { createAiImage } from "../../../../api/index";
+import * as S from "./ImageGenerateBox.styles";
 
 interface PropsType {
     setImage: (value: any) => void;

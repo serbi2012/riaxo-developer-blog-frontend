@@ -40,6 +40,7 @@ export const GridButtonWrapper = styled.div`
     display: flex;
     align-items: center;
     padding-right: 10px;
+
     & > button {
         margin-left: 10px;
     }

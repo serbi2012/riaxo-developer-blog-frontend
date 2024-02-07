@@ -1,6 +1,7 @@
-import * as S from "./PostListSearchBar.styles";
-import { IconButton, Paper } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { IconButton, Paper } from "@mui/material";
+
+import * as S from "./PostListSearchBar.styles";
 
 export interface IPropsType {
     setSearchInput: (value: any) => void;

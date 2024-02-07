@@ -1,16 +1,18 @@
-import * as S from "./Layout.styles";
-import { Header } from "./Header/Header";
-import { isSideBarOpenState } from "../recoil/atoms/isSideBarOpenState";
-import { isLoadingState } from "../recoil/atoms";
-import { useRecoilState } from "recoil";
-import { CircularProgress, IconButton } from "@mui/material";
+import { useRef } from "react";
+
 import { SnackbarProvider } from "notistack";
-import ThumbUpOffAltOutlinedIcon from "@mui/icons-material/ThumbUpOffAltOutlined";
+import { useRecoilState } from "recoil";
+
+import CloseIcon from "@mui/icons-material/Close";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined";
-import CloseIcon from "@mui/icons-material/Close";
-import { useRef } from "react";
+import ThumbUpOffAltOutlinedIcon from "@mui/icons-material/ThumbUpOffAltOutlined";
+import { CircularProgress, IconButton } from "@mui/material";
+
+import { isLoadingState, isSideBarOpenState } from "../recoil/atoms/index";
 import { EasterEgg } from "./EasterEgg/EasterEgg";
+import { Header } from "./Header/Header";
+import * as S from "./Layout.styles";
 import { SideBar } from "./SideBar/SideBar";
 
 export interface IProps {

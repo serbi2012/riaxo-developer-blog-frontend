@@ -1,8 +1,9 @@
-import { useRecoilState } from "recoil";
-import { getCookie, removeCookie, setCookie } from "../utils/cookieUtils";
-import { isAdminModeState } from "../recoil/atoms/isAdminModeState";
 import { useSnackbar } from "notistack";
+import { useRecoilState } from "recoil";
+
 import { fetchRefreshToken } from "../api/login.queries";
+import { isAdminModeState } from "../recoil/atoms/isAdminModeState";
+import { getCookie, removeCookie, setCookie } from "../utils/cookieUtils";
 
 export const useLogout = () => {
     const [, setAdminMode] = useRecoilState(isAdminModeState);
