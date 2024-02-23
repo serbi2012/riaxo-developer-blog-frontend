@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { debounce } from "lodash";
+import { useLocation } from "react-router-dom";
 
 import Skeleton from "@mui/material/Skeleton";
 
 import { fetchPostList } from "../../api";
 import { PostTag } from "../../components/@shared";
+import { HEADER_CONTENT } from "../../constants";
 import { useCustomQuery } from "../../hooks";
 import { T } from "../../styles/TextGuide.styles";
 import { formatDateFromAPIToYYYYMMDD, getQueryString } from "../../utils";
@@ -16,7 +18,9 @@ export const PostList = () => {
     const [searchInput, setSearchInput] = useState<string>("");
     const [debouncedSearchInput, setDebouncedSearchInput] = useState<string>("");
 
-    const { data: postData, isLoading } = useCustomQuery(["posts", debouncedSearchInput], () => {
+    const location = useLocation();
+
+    const { data: postData, isLoading } = useCustomQuery(["posts", debouncedSearchInput, location], () => {
         const queryString = getQueryString();
         const body = debouncedSearchInput ? { ...queryString, title: debouncedSearchInput } : queryString;
         return fetchPostList(body);
@@ -39,6 +43,22 @@ export const PostList = () => {
 
     return (
         <S.MainWrapper>
+            {location.search && (
+                <S.Header>
+                    <T.Title3>
+                        {String(HEADER_CONTENT?.find((item) => location.search?.includes(item.title))?.title)
+                            ?.charAt(0)
+                            .toUpperCase() +
+                            String(HEADER_CONTENT?.find((item) => location.search?.includes(item.title))?.title)?.slice(
+                                1,
+                            )}
+                    </T.Title3>
+                    <T.Subtitle1>
+                        {HEADER_CONTENT?.find((item) => location.search?.includes(item.title))?.subtitle ||
+                            HEADER_CONTENT[0].subtitle}
+                    </T.Subtitle1>
+                </S.Header>
+            )}
             <PostListSearchBar setSearchInput={setSearchInput} />
             {postData?.map((item, index) => (
                 <S.PostListWrapper key={index} to={`/post?_id=${item?._id}`}>

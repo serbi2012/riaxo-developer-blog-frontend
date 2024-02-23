@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+
 import { fadeInKeyframes } from "../../styles/animationStyles";
 
 export const MainWrapper = styled.div`
@@ -10,6 +11,21 @@ export const MainWrapper = styled.div`
     padding: 50px 20px;
     width: 100%;
     gap: 10px;
+
+    @media (max-width: 768px) {
+        align-items: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+`;
+
+export const Header = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 50px;
+    width: 100%;
 
     @media (max-width: 768px) {
         align-items: flex-start;

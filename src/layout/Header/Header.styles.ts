@@ -1,18 +1,20 @@
-import { styled } from "styled-components";
-import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
+import { styled } from "styled-components";
+
+import MenuIcon from "@mui/icons-material/Menu";
 
 export const MainWrapper = styled.div`
     position: fixed;
     top: 0;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 0px 10px;
-    height: 60px;
+    align-items: flex-start;
+    padding: 10px 10px;
+    height: 80px;
     width: 100%;
     max-width: 1024px;
     background-color: var(--color-white);
+    /* background-color: red; */
     z-index: 100;
 
     & > a {
@@ -24,7 +26,7 @@ export const MainWrapper = styled.div`
 `;
 
 export const LogoImage = styled.img`
-    height: 100%;
+    height: 60px;
     user-select: none;
     cursor: pointer;
 
@@ -38,11 +40,30 @@ export const LogoImage = styled.img`
 export const MenuContainer = styled.div`
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     height: 80%;
     flex: 1;
     gap: 10px;
     transition: all 0.1s ease;
+`;
+
+export const TagContainer = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+`;
+
+export const SubTagContainer = styled.div<{ isVisible: boolean }>`
+    position: absolute;
+    display: flex;
+    visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+    justify-content: flex-start;
+    align-items: center;
+    transform: ${({ isVisible }) => (isVisible ? "translateY(40px)" : "translateY(-50px)")};
+    gap: 5px;
+    transition: all 0.2s ease;
 `;
 
 export const MenuTag = styled(Link)<{ isActive?: boolean }>`
