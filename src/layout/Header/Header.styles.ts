@@ -47,23 +47,36 @@ export const MenuContainer = styled.div`
     transition: all 0.1s ease;
 `;
 
+export const SubTagContainer = styled.div<{ isVisible: boolean }>`
+    position: absolute;
+    display: flex;
+    visibility: hidden;
+    justify-content: flex-start;
+    align-items: center;
+    transform: translateY(-50px);
+    padding-top: 7px;
+    gap: 5px;
+    transition: all 0.2s ease;
+
+    ${({ isVisible }) =>
+        isVisible &&
+        `
+        visibility: visible; 
+        transform: translateY(40px); 
+    `}
+`;
+
 export const TagContainer = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
     gap: 5px;
-`;
 
-export const SubTagContainer = styled.div<{ isVisible: boolean }>`
-    position: absolute;
-    display: flex;
-    visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
-    justify-content: flex-start;
-    align-items: center;
-    transform: ${({ isVisible }) => (isVisible ? "translateY(40px)" : "translateY(-50px)")};
-    gap: 5px;
-    transition: all 0.2s ease;
+    &:hover ${SubTagContainer} {
+        visibility: visible;
+        transform: translateY(33px);
+    }
 `;
 
 export const MenuTag = styled(Link)<{ isActive?: boolean }>`
