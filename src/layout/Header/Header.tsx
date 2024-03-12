@@ -41,7 +41,7 @@ export const Header = () => {
                                         to={`${item.link}${subItem !== "All" ? `?tags=${subItem}` : ""}`}
                                         isActive={
                                             subItem === "All"
-                                                ? location.search === ""
+                                                ? location.search === "" && location.pathname.includes(item.link)
                                                 : location.search.includes(subItem)
                                         }
                                     >
