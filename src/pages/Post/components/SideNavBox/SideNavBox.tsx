@@ -57,7 +57,7 @@ export const SideNavBox = ({ titleArray }: IProps) => {
                     onClick={() => handleScrollToElement(item)}
                     style={{ fontWeight: item === activeId ? "bold" : "normal" }} // Highlight the active id
                 >
-                    {index + 1}. {String(item).replace("nav-title-", "").replaceAll("-", " ")}
+                    {String(item).replace("nav-title-", "").replaceAll("-", " ")}
                 </T.Subtitle2>
             ))}
         </S.MainWrapper>

@@ -3,7 +3,7 @@ import Skeleton from "@mui/material/Skeleton";
 import { portfolioImg1, portfolioImg2, portfolioImg3 } from "../../assets/image";
 import { PostTag } from "../../components/@shared/PostTag/PostTag";
 import { T } from "../../styles/TextGuide.styles";
-import * as S from "../PortfolioList/PortfolioList.styles";
+import * as S from "./PortfolioList.styles";
 
 const PORTFOLIO_ITEMS = [
     {
