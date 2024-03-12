@@ -62,7 +62,7 @@ export const SubTagContainer = styled.div<{ isVisible: boolean }>`
         isVisible &&
         `
         visibility: visible; 
-        transform: translateY(40px); 
+        transform: translateY(33px); 
     `}
 `;
 

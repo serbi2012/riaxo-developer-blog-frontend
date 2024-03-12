@@ -20,6 +20,7 @@ export const PLUGINS = [
     "help",
     "wordcount",
     "save",
+    "media",
 ];
 export const EDIT_TOOLBAR =
     "formatselect fontselect fontsizeselect fontsize |" +
@@ -28,4 +29,4 @@ export const EDIT_TOOLBAR =
     " alignjustify alignleft aligncenter alignright |" +
     " bullist numlist |" +
     " table tabledelete |" +
-    " link image ";
+    " link image media";
