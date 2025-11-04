@@ -9,7 +9,7 @@
 
 **현대적인 개발자 블로그 플랫폼의 프론트엔드**
 
-[🌐 Live Demo](https://riaxo-developer-blog-frontend-fsrxuitvq.vercel.app) | [📖 Backend Repo](https://github.com/serbi2012/riaxo-developer-blog-backend) | [🐛 Report Bug](https://github.com/serbi2012/riaxo-developer-blog-frontend/issues)
+[🌐 Live Demo](https://riaxo-developer-blog-frontend.vercel.app) | [📖 Backend Repo](https://github.com/serbi2012/riaxo-developer-blog-backend) | [🐛 Report Bug](https://github.com/serbi2012/riaxo-developer-blog-frontend/issues)
 
 </div>
 
