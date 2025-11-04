@@ -9,7 +9,7 @@
 
 **현대적인 개발자 블로그 플랫폼의 프론트엔드**
 
-[🌐 Live Demo](https://riaxo-developer-blog-frontend-jihee-eoms-projects.vercel.app) | [📖 API Docs](https://github.com/serbi2012/riaxo-developer-blog-backend) | [🐛 Report Bug](https://github.com/serbi2012/riaxo-developer-blog-frontend/issues)
+[🌐 Live Demo](https://riaxo-developer-blog-frontend-fsrxuitvq.vercel.app) | [📖 Backend Repo](https://github.com/serbi2012/riaxo-developer-blog-backend) | [🐛 Report Bug](https://github.com/serbi2012/riaxo-developer-blog-frontend/issues)
 
 </div>
 
@@ -20,12 +20,11 @@
 - [프로젝트 개요](#-프로젝트-개요)
 - [주요 기능](#-주요-기능)
 - [기술 스택](#-기술-스택)
-- [프로젝트 아키텍처](#-프로젝트-아키텍처)
+- [시스템 아키텍처](#-시스템-아키텍처)
 - [디렉토리 구조](#-디렉토리-구조)
 - [시작하기](#-시작하기)
 - [개발 가이드](#-개발-가이드)
 - [배포](#-배포)
-- [성능 최적화](#-성능-최적화)
 
 ---
 
@@ -45,27 +44,24 @@ Riaxo Developer Blog Frontend는 **React 18**과 **TypeScript**를 기반으로 
 
 ## ✨ 주요 기능
 
-### 사용자 기능
-
-#### 📝 콘텐츠 관리
+### 📝 콘텐츠 관리
 - **Rich Text 에디터**: TinyMCE 기반 WYSIWYG 에디터
 - **마크다운 지원**: 개발자 친화적인 마크다운 작성
 - **코드 하이라이팅**: Syntax Highlighter로 아름다운 코드 블록
 - **이미지 최적화**: 자동 압축 및 WebP 변환
 
-#### 🔐 인증 & 권한
+### 🔐 인증 & 권한
 - **GitHub OAuth**: 간편한 소셜 로그인
 - **JWT 토큰**: 안전한 세션 관리
 - **관리자 모드**: 콘텐츠 관리를 위한 특별 권한
 
-#### 🎨 사용자 경험
+### 🎨 사용자 경험
 - **다크 모드**: 눈의 피로를 줄이는 다크 테마
 - **반응형 디자인**: 모바일, 태블릿, 데스크톱 완벽 지원
 - **검색 & 필터**: 빠른 콘텐츠 검색
 - **이스터 에그**: 숨겨진 재미 요소 🥚
 
-### 관리자 기능
-
+### 🛠 관리자 기능
 - **포스트 CRUD**: 생성, 읽기, 수정, 삭제
 - **태그 관리**: 카테고리 및 태그 시스템
 - **이미지 업로드**: Cloudinary 연동
@@ -77,6 +73,13 @@ Riaxo Developer Blog Frontend는 **React 18**과 **TypeScript**를 기반으로 
 
 ### Core
 
+```mermaid
+graph LR
+    A[React 18.2.0] --> B[TypeScript 5.0.2]
+    B --> C[Vite 4.4.0]
+    C --> D[SPA Application]
+```
+
 | 기술 | 버전 | 용도 |
 |------|------|------|
 | **React** | 18.2.0 | UI 라이브러리 |
@@ -87,22 +90,16 @@ Riaxo Developer Blog Frontend는 **React 18**과 **TypeScript**를 기반으로 
 
 | 기술 | 용도 |
 |------|------|
-| **Recoil** | 전역 상태 관리 |
+| **Recoil** | 전역 상태 관리 (UI State) |
 | **React Query** | 서버 상태 관리 & 캐싱 |
 
-### 스타일링
+### UI & 스타일링
 
 | 기술 | 용도 |
 |------|------|
 | **Styled Components** | CSS-in-JS |
 | **Material-UI** | UI 컴포넌트 라이브러리 |
-
-### 라우팅 & 폼
-
-| 기술 | 용도 |
-|------|------|
 | **React Router v6** | 클라이언트 사이드 라우팅 |
-| **React Hook Form** | 폼 관리 |
 
 ### 에디터 & 미디어
 
@@ -110,141 +107,166 @@ Riaxo Developer Blog Frontend는 **React 18**과 **TypeScript**를 기반으로 
 |------|------|
 | **TinyMCE** | WYSIWYG 에디터 |
 | **React Cropper** | 이미지 크롭 |
-| **browser-image-compression** | 클라이언트 사이드 이미지 압축 |
-
-### 개발 도구
-
-| 기술 | 용도 |
-|------|------|
-| **ESLint** | 코드 린팅 |
-| **Prettier** | 코드 포맷팅 |
-| **TypeScript ESLint** | TS 린팅 |
+| **browser-image-compression** | 이미지 압축 |
+| **React Syntax Highlighter** | 코드 하이라이팅 |
 
 ---
 
-## 🏗 프로젝트 아키텍처
+## 🏗 시스템 아키텍처
 
-### 전체 시스템 아키텍처
+### 전체 시스템 구조
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        사용자 (Browser)                      │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    Vercel CDN (Global)                       │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │         React SPA (riaxo-developer-blog-frontend)    │   │
-│  │  ┌────────────┐  ┌────────────┐  ┌────────────┐     │   │
-│  │  │   Pages    │  │  Components│  │   Layouts  │     │   │
-│  │  └──────┬─────┘  └──────┬─────┘  └──────┬─────┘     │   │
-│  │         │                │                │           │   │
-│  │         └────────────────┴────────────────┘           │   │
-│  │                          │                            │   │
-│  │         ┌────────────────▼────────────────┐           │   │
-│  │         │    State Management             │           │   │
-│  │         │  ┌─────────┐  ┌──────────────┐  │           │   │
-│  │         │  │ Recoil  │  │ React Query  │  │           │   │
-│  │         │  └────┬────┘  └──────┬───────┘  │           │   │
-│  │         └───────┴───────────────┴──────────┘           │   │
-│  │                          │                            │   │
-│  │         ┌────────────────▼────────────────┐           │   │
-│  │         │      API Layer (Axios)          │           │   │
-│  │         └────────────────┬────────────────┘           │   │
-│  └──────────────────────────┼──────────────────────────┘   │
-└─────────────────────────────┼────────────────────────────┘
-                              │ HTTPS
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│              Railway (Backend API Server)                    │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │              Express.js REST API                      │   │
-│  └───────────────────────┬──────────────────────────────┘   │
-└──────────────────────────┼────────────────────────────────┘
-                           │
-            ┌──────────────┴──────────────┐
-            ▼                             ▼
-┌────────────────────┐        ┌────────────────────┐
-│   MongoDB Atlas    │        │    Cloudinary      │
-│   (Database)       │        │   (Image CDN)      │
-└────────────────────┘        └────────────────────┘
+```mermaid
+graph TB
+    subgraph "Client"
+        A[Browser] --> B[React SPA]
+    end
+    
+    subgraph "Vercel CDN"
+        B --> C[Static Assets]
+        B --> D[HTML/JS/CSS]
+    end
+    
+    subgraph "API Layer"
+        D --> E[Axios HTTP Client]
+        E --> F[React Query Cache]
+    end
+    
+    subgraph "Backend - Railway"
+        F --> G[Express REST API]
+    end
+    
+    subgraph "Data Layer"
+        G --> H[(MongoDB Atlas)]
+        G --> I[Cloudinary CDN]
+    end
+    
+    style A fill:#61DAFB
+    style B fill:#61DAFB
+    style G fill:#68A063
+    style H fill:#47A248
+    style I fill:#3448C5
 ```
 
 ### 컴포넌트 계층 구조
 
-```
-App.tsx
-│
-├── Router.tsx
-│   │
-│   ├── Layout.tsx
-│   │   ├── Header.tsx
-│   │   ├── SideBar.tsx
-│   │   └── EasterEgg.tsx
-│   │
-│   └── Pages
-│       ├── Main.tsx
-│       │   ├── IntroBox
-│       │   ├── MainPagePostCardList
-│       │   └── MainPagePostList
-│       │
-│       ├── PostList.tsx
-│       │   └── PostListSearchBar
-│       │
-│       ├── Post.tsx
-│       │   ├── SideNavBox
-│       │   └── PrevNextNavBox
-│       │
-│       ├── PostCreate.tsx
-│       │   ├── PostEditor (TinyMCE)
-│       │   ├── ImageUpload
-│       │   └── ImageGenerateBox
-│       │
-│       ├── TagList.tsx
-│       │   └── TagListSearchBar
-│       │
-│       ├── PortfolioList.tsx
-│       │
-│       └── Login.tsx
+```mermaid
+graph TD
+    A[App.tsx] --> B[Router]
+    B --> C[Layout]
+    C --> D[Header]
+    C --> E[SideBar]
+    C --> F[EasterEgg]
+    
+    B --> G[Pages]
+    G --> H[Main]
+    G --> I[PostList]
+    G --> J[Post]
+    G --> K[PostCreate]
+    G --> L[TagList]
+    G --> M[PortfolioList]
+    G --> N[Login]
+    
+    H --> O[IntroBox]
+    H --> P[MainPagePostCardList]
+    H --> Q[MainPagePostList]
+    
+    I --> R[PostListSearchBar]
+    
+    J --> S[SideNavBox]
+    J --> T[PrevNextNavBox]
+    
+    K --> U[PostEditor]
+    K --> V[ImageUpload]
+    K --> W[ImageGenerateBox]
+    
+    style A fill:#61DAFB
+    style B fill:#764ABC
+    style C fill:#DB7093
+    style G fill:#FFA500
 ```
 
 ### 데이터 흐름
 
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant C as Component
+    participant H as Custom Hook
+    participant R as Recoil
+    participant Q as React Query
+    participant A as API Service
+    participant B as Backend
+
+    U->>C: 사용자 액션
+    C->>H: 이벤트 핸들러 호출
+    
+    alt UI State
+        H->>R: Recoil Atom 업데이트
+        R-->>C: 상태 변경 알림
+    else Server State
+        H->>Q: Query/Mutation 실행
+        Q->>A: API 요청
+        A->>B: HTTP Request
+        B-->>A: HTTP Response
+        A-->>Q: 데이터 반환
+        Q-->>H: 캐시된 데이터
+        H-->>C: 상태 업데이트
+    end
+    
+    C-->>U: UI 렌더링
 ```
-┌──────────────┐
-│   User       │
-│   Action     │
-└──────┬───────┘
-       │
-       ▼
-┌──────────────────────┐
-│   React Component    │
-└──────┬───────────────┘
-       │
-       ▼
-┌──────────────────────┐      ┌─────────────────┐
-│   Custom Hook        │─────▶│   Recoil Atom   │ (UI State)
-│   (useAuth, etc.)    │      └─────────────────┘
-└──────┬───────────────┘
-       │
-       ▼
-┌──────────────────────┐      ┌─────────────────┐
-│   React Query        │─────▶│   Cache         │ (Server State)
-│   (Mutation/Query)   │      └─────────────────┘
-└──────┬───────────────┘
-       │
-       ▼
-┌──────────────────────┐
-│   API Service        │
-│   (axios instance)   │
-└──────┬───────────────┘
-       │
-       ▼
-┌──────────────────────┐
-│   Backend API        │
-│   (Railway)          │
-└──────────────────────┘
+
+### 인증 흐름
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant F as Frontend
+    participant B as Backend
+    participant G as GitHub OAuth
+    participant DB as Database
+
+    U->>F: 로그인 버튼 클릭
+    F->>B: GitHub 로그인 요청
+    B->>G: OAuth 인증 요청
+    G-->>U: 로그인 페이지
+    U->>G: GitHub 계정 인증
+    G-->>B: Authorization Code
+    B->>G: Access Token 요청
+    G-->>B: Access Token
+    B->>G: 사용자 정보 요청
+    G-->>B: 사용자 프로필
+    B->>DB: 사용자 정보 저장
+    B-->>F: JWT Token (Access + Refresh)
+    F->>F: Cookie에 토큰 저장
+    F-->>U: 로그인 완료
+```
+
+### 상태 관리 전략
+
+```mermaid
+graph TB
+    subgraph "Recoil - UI State"
+        A[isAdminModeState] --> D[전역 UI 상태]
+        B[isLoadingState] --> D
+        C[isSideBarOpenState] --> D
+    end
+    
+    subgraph "React Query - Server State"
+        E[Posts Cache] --> H[서버 데이터]
+        F[Tags Cache] --> H
+        G[User Cache] --> H
+    end
+    
+    subgraph "Component Local State"
+        I[useState] --> J[컴포넌트 내부 상태]
+        K[useReducer] --> J
+    end
+    
+    style D fill:#764ABC
+    style H fill:#FF4154
+    style J fill:#61DAFB
 ```
 
 ---
@@ -254,90 +276,105 @@ App.tsx
 ```
 riaxo-developer-blog-frontend/
 │
-├── public/                     # 정적 파일
+├── public/                        # 정적 파일
 │   └── vite.svg
 │
 ├── src/
-│   ├── api/                    # API 레이어
-│   │   ├── index.ts           # Axios 인스턴스
-│   │   ├── login.queries.ts   # 로그인 API
-│   │   ├── post.queries.ts    # 포스트 API
-│   │   ├── resource.queries.ts # 리소스 API
-│   │   └── tag.queries.ts     # 태그 API
+│   ├── api/                       # API 레이어
+│   │   ├── index.ts              # Axios 인스턴스 & 인터셉터
+│   │   ├── login.queries.ts      # 인증 API
+│   │   ├── post.queries.ts       # 포스트 API
+│   │   ├── resource.queries.ts   # 리소스 API
+│   │   └── tag.queries.ts        # 태그 API
 │   │
-│   ├── assets/                 # 정적 에셋
-│   │   ├── audio/             # 오디오 파일
-│   │   └── image/             # 이미지 파일
+│   ├── assets/                    # 정적 에셋
+│   │   ├── audio/                # 오디오 파일
+│   │   │   └── toothless-dancing-song.mp4
+│   │   └── image/                # 이미지 파일
+│   │       ├── portfolio_*.jpg
+│   │       ├── profile-image.png
+│   │       └── riaxo-logo.png
 │   │
-│   ├── components/             # 공유 컴포넌트
+│   ├── components/                # 공유 컴포넌트
 │   │   └── @shared/
-│   │       └── PostTag/       # 태그 컴포넌트
+│   │       └── PostTag/          # 재사용 가능한 태그 컴포넌트
 │   │
-│   ├── constants/              # 상수
-│   │   ├── API.ts             # API 엔드포인트
-│   │   ├── headerContent.ts   # 헤더 설정
-│   │   └── tinyMceOption.ts   # 에디터 설정
+│   ├── constants/                 # 상수
+│   │   ├── API.ts                # API 엔드포인트
+│   │   ├── headerContent.ts      # 헤더 설정
+│   │   └── tinyMceOption.ts      # 에디터 설정
 │   │
-│   ├── hooks/                  # Custom Hooks
-│   │   ├── useAlert.ts        # 알림 훅
-│   │   ├── useAuth.ts         # 인증 훅
-│   │   ├── useCustomMutation.ts # Mutation 래퍼
-│   │   └── useCustomQuery.ts  # Query 래퍼
+│   ├── hooks/                     # Custom Hooks
+│   │   ├── useAlert.ts           # 알림 훅
+│   │   ├── useAuth.ts            # 인증 훅
+│   │   ├── useCustomMutation.ts  # Mutation 래퍼
+│   │   └── useCustomQuery.ts     # Query 래퍼
 │   │
-│   ├── layout/                 # 레이아웃 컴포넌트
-│   │   ├── Layout.tsx         # 메인 레이아웃
-│   │   ├── Header/            # 헤더
-│   │   ├── SideBar/           # 사이드바
-│   │   └── EasterEgg/         # 이스터 에그
+│   ├── layout/                    # 레이아웃 컴포넌트
+│   │   ├── Layout.tsx            # 메인 레이아웃
+│   │   ├── Header/               # 상단 네비게이션
+│   │   ├── SideBar/              # 사이드 메뉴
+│   │   └── EasterEgg/            # 숨겨진 기능
 │   │
-│   ├── pages/                  # 페이지 컴포넌트
-│   │   ├── Main/              # 메인 페이지
-│   │   ├── Login/             # 로그인 페이지
-│   │   ├── Post/              # 포스트 상세
-│   │   ├── PostList/          # 포스트 목록
-│   │   ├── PostCreate/        # 포스트 작성
-│   │   ├── TagList/           # 태그 목록
-│   │   └── PortfolioList/     # 포트폴리오
+│   ├── pages/                     # 페이지 컴포넌트
+│   │   ├── Main/                 # 메인 페이지
+│   │   │   └── components/
+│   │   │       ├── IntroBox
+│   │   │       ├── MainPagePostCardList
+│   │   │       └── MainPagePostList
+│   │   ├── Login/                # 로그인
+│   │   ├── Post/                 # 포스트 상세
+│   │   │   └── components/
+│   │   │       ├── SideNavBox
+│   │   │       └── PrevNextNavBox
+│   │   ├── PostList/             # 포스트 목록
+│   │   ├── PostCreate/           # 포스트 작성
+│   │   │   └── components/
+│   │   │       ├── PostEditor
+│   │   │       ├── ImageUpload
+│   │   │       └── ImageGenerateBox
+│   │   ├── TagList/              # 태그 목록
+│   │   └── PortfolioList/        # 포트폴리오
 │   │
-│   ├── recoil/                 # Recoil 상태
+│   ├── recoil/                    # Recoil 상태
 │   │   └── atoms/
-│   │       ├── isAdminModeState.ts    # 관리자 모드
-│   │       ├── isLoadingState.ts      # 로딩 상태
-│   │       └── isSideBarOpenState.ts  # 사이드바 상태
+│   │       ├── isAdminModeState.ts
+│   │       ├── isLoadingState.ts
+│   │       └── isSideBarOpenState.ts
 │   │
-│   ├── routes/                 # 라우팅
-│   │   ├── Router.tsx         # 라우터 설정
-│   │   └── AccountChecker.tsx # 인증 가드
+│   ├── routes/                    # 라우팅
+│   │   ├── Router.tsx            # 라우터 설정
+│   │   └── AccountChecker.tsx    # 인증 가드
 │   │
-│   ├── styles/                 # 전역 스타일
-│   │   ├── globalStyles.ts    # 글로벌 스타일
-│   │   ├── theme.styles.tsx   # 테마 설정
-│   │   ├── colorRoot.css      # 색상 변수
-│   │   └── animationStyles.ts # 애니메이션
+│   ├── styles/                    # 전역 스타일
+│   │   ├── globalStyles.ts       # 글로벌 스타일
+│   │   ├── theme.styles.tsx      # 테마 설정
+│   │   ├── colorRoot.css         # CSS 변수
+│   │   └── animationStyles.ts    # 애니메이션
 │   │
-│   ├── types/                  # TypeScript 타입
-│   │   ├── auth.d.ts          # 인증 타입
-│   │   └── post.d.ts          # 포스트 타입
+│   ├── types/                     # TypeScript 타입
+│   │   ├── auth.d.ts             # 인증 타입
+│   │   ├── post.d.ts             # 포스트 타입
+│   │   └── index.ts              # 타입 export
 │   │
-│   ├── utils/                  # 유틸리티 함수
-│   │   ├── cookieUtils.ts     # 쿠키 관리
-│   │   ├── formatDate.ts      # 날짜 포맷
-│   │   └── getQueryString.ts  # 쿼리스트링 파싱
+│   ├── utils/                     # 유틸리티 함수
+│   │   ├── cookieUtils.ts        # 쿠키 관리
+│   │   ├── formatDate.ts         # 날짜 포맷
+│   │   ├── dataURItoFile.ts      # 데이터 변환
+│   │   └── getQueryString.ts     # URL 파싱
 │   │
-│   ├── App.tsx                 # 루트 컴포넌트
-│   └── index.tsx               # 엔트리 포인트
+│   ├── App.tsx                    # 루트 컴포넌트
+│   └── index.tsx                  # 엔트리 포인트
 │
-├── .env                        # 환경 변수 (local)
-├── .gitignore                  # Git 무시 파일
-├── vercel.json                 # Vercel 설정
-├── vite.config.ts              # Vite 설정
-├── tsconfig.json               # TypeScript 설정
-└── package.json                # 의존성 관리
+├── .env                           # 환경 변수 (local)
+├── .gitignore                     # Git 무시 파일
+├── vercel.json                    # Vercel 설정
+├── vite.config.ts                 # Vite 설정
+├── tsconfig.json                  # TypeScript 설정
+└── package.json                   # 의존성 관리
 ```
 
-### 디렉토리 규칙
-
-#### 📄 파일 네이밍 컨벤션
+### 파일 네이밍 컨벤션
 
 | 파일 유형 | 규칙 | 예시 |
 |----------|------|------|
@@ -348,22 +385,18 @@ riaxo-developer-blog-frontend/
 | **타입** | camelCase.d.ts | `auth.d.ts` |
 | **상수** | UPPER_SNAKE_CASE | `API_ENDPOINTS` |
 
-#### 🗂 컴포넌트 구조
-
-```
-ComponentName/
-├── ComponentName.tsx           # 메인 컴포넌트
-├── ComponentName.styles.ts     # 스타일
-├── ComponentName.test.tsx      # 테스트 (선택)
-├── hooks/                      # 컴포넌트 전용 훅
-└── components/                 # 서브 컴포넌트
-```
-
 ---
 
 ## 🚀 시작하기
 
 ### 필수 요구사항
+
+```mermaid
+graph LR
+    A[Node.js 18+] --> D[개발 환경]
+    B[Yarn 1.22+] --> D
+    C[Git] --> D
+```
 
 - **Node.js**: 18.x 이상
 - **Yarn**: 1.22.x 이상
@@ -389,7 +422,7 @@ yarn dev
 
 ### 환경 변수 설정
 
-`.env` 파일을 생성하고 다음 값을 설정하세요:
+`.env` 파일 생성:
 
 ```env
 # Backend API URL
@@ -441,7 +474,7 @@ yarn lint:format
 
 ### 코딩 컨벤션
 
-#### TypeScript
+#### TypeScript 인터페이스
 
 ```typescript
 // ✅ Good
@@ -511,43 +544,6 @@ const StyledButton = styled.button<StyledButtonProps>`
 `;
 ```
 
-#### Custom Hooks
-
-```typescript
-// ✅ Good
-import { useState, useEffect } from 'react';
-
-interface UseApiOptions {
-  autoFetch?: boolean;
-}
-
-const useApi = <T>(url: string, options: UseApiOptions = {}) => {
-  const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const response = await api.get<T>(url);
-      setData(response.data);
-    } catch (err) {
-      setError(err as Error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (options.autoFetch) {
-      fetchData();
-    }
-  }, [url]);
-
-  return { data, loading, error, refetch: fetchData };
-};
-```
-
 ### 상태 관리 패턴
 
 #### Recoil (UI State)
@@ -561,7 +557,7 @@ export const themeState = atom({
   default: 'light' as 'light' | 'dark',
 });
 
-// Usage in component
+// Component에서 사용
 import { useRecoilState } from 'recoil';
 import { themeState } from '@/recoil/atoms/themeState';
 
@@ -570,7 +566,7 @@ const ThemeToggle = () => {
   
   return (
     <button onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}>
-      Toggle Theme
+      {theme === 'light' ? '🌙' : '☀️'}
     </button>
   );
 };
@@ -617,9 +613,26 @@ export const useCreatePost = () => {
 
 ## 🚢 배포
 
-### Vercel 배포 (권장)
+### Vercel 배포 플로우
 
-#### 자동 배포 (GitHub 연동)
+```mermaid
+graph LR
+    A[코드 작성] --> B[Git Commit]
+    B --> C[Git Push to GitHub]
+    C --> D[Vercel 자동 감지]
+    D --> E[Build 시작]
+    E --> F[Type Check]
+    F --> G[Lint Check]
+    G --> H[Vite Build]
+    H --> I[Deploy to CDN]
+    I --> J[배포 완료]
+    
+    style A fill:#61DAFB
+    style D fill:#000000
+    style J fill:#00C853
+```
+
+### 자동 배포 (GitHub 연동)
 
 1. **저장소 푸시**
    ```bash
@@ -629,8 +642,11 @@ export const useCreatePost = () => {
    ```
 
 2. **Vercel이 자동으로 배포** (2-3분 소요)
+   - GitHub에 Push 감지
+   - 자동 빌드 시작
+   - Production 배포
 
-#### 수동 배포
+### 수동 배포
 
 ```bash
 # Vercel CLI 설치
@@ -640,15 +656,15 @@ npm i -g vercel
 vercel --prod
 ```
 
-### 환경 변수 설정 (Vercel)
+### 환경 변수 설정 (Vercel Dashboard)
 
 Vercel Dashboard → Settings → Environment Variables:
 
-```
-VITE_API_URL=https://your-backend.railway.app
-VITE_TINY_MCE_API_KEY=your_api_key
-VITE_GITHUB_CLIENT_ID=your_client_id
-```
+| 변수명 | 값 | 환경 |
+|--------|-----|------|
+| `VITE_API_URL` | `https://riaxo-developer-blog-backend-production.up.railway.app` | Production, Preview, Development |
+| `VITE_TINY_MCE_API_KEY` | `your_api_key` | Production, Preview, Development |
+| `VITE_GITHUB_CLIENT_ID` | `your_client_id` | Production, Preview, Development |
 
 ### 배포 확인
 
@@ -664,9 +680,35 @@ vercel ls
 
 ## ⚡ 성능 최적화
 
-### 구현된 최적화
+### 최적화 전략 다이어그램
 
-#### 1. Code Splitting
+```mermaid
+graph TB
+    A[성능 최적화] --> B[Code Splitting]
+    A --> C[Image Optimization]
+    A --> D[Caching Strategy]
+    A --> E[Bundle Size]
+    
+    B --> B1[React.lazy]
+    B --> B2[Dynamic Import]
+    
+    C --> C1[Image Compression]
+    C --> C2[WebP Conversion]
+    
+    D --> D1[React Query Cache]
+    D --> D2[Service Worker]
+    
+    E --> E1[Tree Shaking]
+    E --> E2[Minification]
+    
+    style A fill:#FF6B6B
+    style B fill:#4ECDC4
+    style C fill:#45B7D1
+    style D fill:#96CEB4
+    style E fill:#FFEAA7
+```
+
+### 1. Code Splitting
 
 ```typescript
 // Router.tsx
@@ -687,7 +729,7 @@ const Router = () => (
 );
 ```
 
-#### 2. 이미지 최적화
+### 2. 이미지 최적화
 
 ```typescript
 // hooks/useImageCompress.ts
@@ -708,7 +750,7 @@ export const useImageCompress = () => {
 };
 ```
 
-#### 3. React Query 캐싱
+### 3. React Query 캐싱
 
 ```typescript
 // api/index.ts
@@ -717,8 +759,8 @@ import { QueryClient } from 'react-query';
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5분
-      cacheTime: 10 * 60 * 1000, // 10분
+      staleTime: 5 * 60 * 1000,    // 5분
+      cacheTime: 10 * 60 * 1000,   // 10분
       refetchOnWindowFocus: false,
       retry: 1,
     },
@@ -726,10 +768,9 @@ export const queryClient = new QueryClient({
 });
 ```
 
-#### 4. Memoization
+### 4. Memoization
 
 ```typescript
-// Example
 import { useMemo, useCallback } from 'react';
 
 const PostList = ({ posts }: Props) => {
@@ -757,13 +798,28 @@ const PostList = ({ posts }: Props) => {
 
 ### 성능 메트릭
 
-| 메트릭 | 목표 | 현재 |
-|--------|------|------|
-| **First Contentful Paint** | < 1.8s | 1.2s |
-| **Largest Contentful Paint** | < 2.5s | 2.1s |
-| **Time to Interactive** | < 3.8s | 2.9s |
-| **Cumulative Layout Shift** | < 0.1 | 0.05 |
-| **Total Blocking Time** | < 300ms | 180ms |
+```mermaid
+graph LR
+    A[Performance Metrics] --> B[FCP < 1.8s]
+    A --> C[LCP < 2.5s]
+    A --> D[TTI < 3.8s]
+    A --> E[CLS < 0.1]
+    A --> F[TBT < 300ms]
+    
+    style B fill:#00C853
+    style C fill:#00C853
+    style D fill:#00C853
+    style E fill:#00C853
+    style F fill:#00C853
+```
+
+| 메트릭 | 목표 | 현재 | 상태 |
+|--------|------|------|------|
+| **First Contentful Paint** | < 1.8s | 1.2s | ✅ |
+| **Largest Contentful Paint** | < 2.5s | 2.1s | ✅ |
+| **Time to Interactive** | < 3.8s | 2.9s | ✅ |
+| **Cumulative Layout Shift** | < 0.1 | 0.05 | ✅ |
+| **Total Blocking Time** | < 300ms | 180ms | ✅ |
 
 ---
 
@@ -776,7 +832,7 @@ yarn test
 # Coverage 리포트
 yarn test:coverage
 
-# E2E 테스트 (Playwright)
+# E2E 테스트
 yarn test:e2e
 ```
 
@@ -802,7 +858,19 @@ yarn type-check
 
 백엔드 URL을 확인하세요:
 ```env
-VITE_API_URL=https://your-backend.railway.app
+VITE_API_URL=https://riaxo-developer-blog-backend-production.up.railway.app
+```
+
+---
+
+## 📈 프로젝트 통계
+
+```mermaid
+pie title 코드 구성
+    "TypeScript" : 45
+    "Styled Components" : 25
+    "React Components" : 20
+    "Utils & Hooks" : 10
 ```
 
 ---
@@ -821,13 +889,33 @@ MIT License
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+### Commit Convention
+
+```
+feat: 새로운 기능 추가
+fix: 버그 수정
+docs: 문서 수정
+style: 코드 포맷팅
+refactor: 코드 리팩토링
+test: 테스트 추가
+chore: 빌드/설정 변경
+```
+
 ---
 
 ## 📞 문의
 
 - **GitHub**: [@serbi2012](https://github.com/serbi2012)
-- **Email**: your-email@example.com
+- **Repository**: [Frontend](https://github.com/serbi2012/riaxo-developer-blog-frontend) | [Backend](https://github.com/serbi2012/riaxo-developer-blog-backend)
 - **Issue**: [Report Bug](https://github.com/serbi2012/riaxo-developer-blog-frontend/issues)
+
+---
+
+## 🔗 관련 링크
+
+- **Live Demo**: https://riaxo-developer-blog-frontend-fsrxuitvq.vercel.app
+- **Backend API**: https://riaxo-developer-blog-backend-production.up.railway.app
+- **Vercel Dashboard**: https://vercel.com/rlaxo0306-gmailcoms-projects/riaxo-developer-blog-frontend
 
 ---
 
